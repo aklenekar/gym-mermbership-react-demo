@@ -19,7 +19,7 @@ export default function DashboardContent() {
   useEffect(() => {
     setIsLoading(true);
     async function fetchDashboard() {
-      const response = await fetch("http://localhost:8080/api/dashboard", {
+      const response = await fetch("https://gym-membership-java-demo-production.up.railway.app/api/dashboard", {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,

@@ -13,7 +13,7 @@ export async function action({ request }) {
     password: data.get("password"),
   };
 
-  const response = await fetch("http://localhost:8080/api/auth/login", {
+  const response = await fetch("https://gym-membership-java-demo-production.up.railway.app/api/auth/login", {
     method: "POST",
     headers: {
       "content-type": "application/json",
