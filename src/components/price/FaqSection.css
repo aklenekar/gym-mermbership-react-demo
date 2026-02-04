@@ -1,0 +1,29 @@
+.faq-section {
+  padding: var(--spacing-xl) 0;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.faq-item {
+  background: var(--mid-gray);
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary);
+}
+
+.faq-item h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.faq-item p {
+  color: var(--light-gray);
+  line-height: 1.7;
+}

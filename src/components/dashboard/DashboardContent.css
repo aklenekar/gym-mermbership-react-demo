@@ -1,0 +1,9 @@
+.dashboard-content {
+    padding: var(--spacing-lg) 0 var(--spacing-xl);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
