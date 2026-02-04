@@ -9,6 +9,7 @@ import UpcomingClassesCard from "./progresscards/UpcomingClassesCard";
 import ErrorPage from "../../routes/ErrorPage";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import { getAuthToken } from "../../util/auth";
+import { API_BASE_URL } from "../../util/constants";
 
 export default function DashboardContent() {
   const token = getAuthToken();
@@ -19,7 +20,7 @@ export default function DashboardContent() {
   useEffect(() => {
     setIsLoading(true);
     async function fetchDashboard() {
-      const response = await fetch("https://gym-membership-java-demo-production.up.railway.app/api/dashboard", {
+      const response = await fetch(`${API_BASE_URL}/dashboard`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,

@@ -3,6 +3,7 @@ import { getAuthToken } from "../../util/auth";
 import "./DashboardHeader.css";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import ErrorPage from "../../routes/ErrorPage";
+import { API_BASE_URL } from "../../util/constants";
 
 export default function DashboardHeader() {
   const token = getAuthToken();
@@ -13,7 +14,7 @@ export default function DashboardHeader() {
   useEffect(() => {
     setIsLoading(true);
     async function fetchUserDetails() {
-      const response = await fetch("https://gym-membership-java-demo-production.up.railway.app/api/user", {
+      const response = await fetch(`${API_BASE_URL}/user`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,

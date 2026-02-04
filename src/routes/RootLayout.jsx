@@ -1,8 +1,8 @@
 import { Outlet, ScrollRestoration, useLoaderData, useSubmit } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import Footer from "../components/footer/Footer";
 import { useEffect } from "react";
 import { getTokenDudation } from "../util/auth.js";
+import Navbar from "../components/navigation/Navbar.jsx";
 
 export default function RootLayout() {
   const token = useLoaderData();

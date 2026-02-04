@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     min-height: 100vh;
+    padding-top: 90px;
 }
 
 /* Left Side - Branding */
@@ -12,7 +13,7 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 3rem;
+    padding: 1rem;
 }
 
 .branding-content {

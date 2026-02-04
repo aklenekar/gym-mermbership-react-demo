@@ -1,5 +1,6 @@
 import { redirect } from "react-router-dom";
 import LoginSection from "../components/authentication/LoginSection";
+import { API_BASE_URL } from "../util/constants";
 
 export default function LoginPage() {
   return <LoginSection />;
@@ -13,7 +14,7 @@ export async function action({ request }) {
     password: data.get("password"),
   };
 
-  const response = await fetch("https://gym-membership-java-demo-production.up.railway.app/api/auth/login", {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
