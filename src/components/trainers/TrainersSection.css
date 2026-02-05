@@ -2,13 +2,6 @@
    TRAINERS PAGE
 ============================================ */
 
-/* Trainers Header */
-.trainers-header {
-    padding: 150px 0 80px;
-    text-align: center;
-    background: var(--dark-gray);
-}
-
 /* Lead Trainers Section */
 .lead-trainers-section {
     padding: var(--spacing-xl) 0;

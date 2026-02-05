@@ -12,7 +12,7 @@ import LoginPage, { action as authAction } from "./routes/LoginPage.jsx";
 import { tokenLoader, checkAuthLoader } from "./util/auth.js";
 import { action as logoutAction } from "./routes/Logout.js";
 import FeaturesPage from "./routes/Features.jsx";
-import TrainersPage from "./routes/TrainersPage.jsx";
+import TrainersPage, { trainersLoader } from "./routes/TrainersPage.jsx";
 import ClassesPage from "./routes/ClassesPage.jsx";
 
 const router = createBrowserRouter([
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       { path: "/features", element: <FeaturesPage />},
       { path: "/price", element: <PricePage /> },
-      { path: "/trainers", element: <TrainersPage /> },
+      { path: "/trainers", element: <TrainersPage />, loader: trainersLoader },
       { path: "/contact", element: <ContactPage /> },
       { path: "logout", action: logoutAction },
       { path: "/classes", element: <ClassesPage />}
