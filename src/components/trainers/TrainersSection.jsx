@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import HeadCoaches from "./HeadCoaches";
 import "./TrainersSection.css";

@@ -1,19 +1,19 @@
-export default function ClassesCard() {
+export default function ClassesCard({ fitnessClass }) {
   return (
     <div className="class-card">
       <div className="class-header">
-        <div className="class-category">HIIT</div>
-        <div className="class-spots">12/20 spots</div>
+        <div className="class-category">{fitnessClass.category}</div>
+        <div className="class-spots">{fitnessClass.spotsInfo}</div>
       </div>
-      <h3 className="class-name">HIIT Bootcamp</h3>
+      <h3 className="class-name">{fitnessClass.name}</h3>
       <div className="class-info">
         <div className="info-item">
           <span className="info-icon">👤</span>
-          <span>Coach Sarah</span>
+          <span>{fitnessClass.instructor}</span>
         </div>
         <div className="info-item">
           <span className="info-icon">📍</span>
-          <span>Studio A</span>
+          <span>{fitnessClass.location}</span>
         </div>
         <div className="info-item">
           <span className="info-icon">📅</span>
@@ -21,10 +21,16 @@ export default function ClassesCard() {
         </div>
         <div className="info-item">
           <span className="info-icon">⏱️</span>
-          <span>60 min</span>
+          <span>{fitnessClass.durationMin} min</span>
         </div>
       </div>
-      <button className="btn-book">Book Class</button>
+      {fitnessClass.booked == 1 ? (
+        <button className="btn-booked" disabled>
+          ✓ Booked
+        </button>
+      ) : (
+        <button className="btn-book">Book Class</button>
+      )}
     </div>
   );
 }

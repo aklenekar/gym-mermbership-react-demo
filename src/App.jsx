@@ -14,6 +14,8 @@ import { action as logoutAction } from "./routes/Logout.js";
 import FeaturesPage from "./routes/Features.jsx";
 import TrainersPage, { trainersLoader } from "./routes/TrainersPage.jsx";
 import ClassesPage from "./routes/ClassesPage.jsx";
+import WorkoutsPage from "./routes/WorkoutsPage.jsx";
+import ProgressPage from "./routes/ProgressPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,12 +31,14 @@ const router = createBrowserRouter([
         element: <UserDashboard />,
         loader: checkAuthLoader,
       },
-      { path: "/features", element: <FeaturesPage />},
+      { path: "/features", element: <FeaturesPage /> },
       { path: "/price", element: <PricePage /> },
       { path: "/trainers", element: <TrainersPage />, loader: trainersLoader },
       { path: "/contact", element: <ContactPage /> },
       { path: "logout", action: logoutAction },
-      { path: "/classes", element: <ClassesPage />}
+      { path: "/classes", element: <ClassesPage /> },
+      { path: "/workouts", element: <WorkoutsPage /> },
+      { path: "/progress", element: <ProgressPage /> },
     ],
   },
 ]);

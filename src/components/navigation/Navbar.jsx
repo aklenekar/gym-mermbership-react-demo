@@ -2,7 +2,6 @@ import {
   Form,
   NavLink,
   useLoaderData,
-  useRouteLoaderData,
 } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "../ui/Logo";
@@ -41,11 +40,11 @@ const userNavBar = [
   },
   {
     name: "My Workouts",
-    link: "/",
+    link: "/workouts",
   },
   {
     name: "Progress",
-    link: "/",
+    link: "/progress",
   },
 ];
 
@@ -59,7 +58,7 @@ export default function Navbar() {
       <NavLink to="/profile" className="btn-secondary">
         Profile
       </NavLink>
-      <Form action="/logout" method="post">
+      <Form action="/logout" method="post" className="inline-form">
         <button className="btn-primary">Logout</button>
       </Form>
     </>

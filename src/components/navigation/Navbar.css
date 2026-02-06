@@ -1,124 +1,129 @@
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    animation: slideDown 0.6s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideDown 0.6s ease-out;
 }
 
 @keyframes slideDown {
-    from {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .nav-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .menu {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
 }
 
 .link {
-    color: var(--light-gray);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    transition: var(--transition);
+  color: var(--light-gray);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: var(--transition);
 }
 
 .link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: var(--transition);
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: var(--transition);
 }
 
 .link:hover,
 .link.active {
-    color: var(--white);
+  color: var(--white);
 }
 
 .link:hover::after,
 .link.active::after {
-    width: 100%;
+  width: 100%;
 }
 
 .cta {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.inline-form {
+  display: inline-block;
+  margin: 0;
 }
 
 .btn-primary,
 .btn-secondary {
-    padding: 0.75rem 1.75rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: var(--transition);
-    border: none;
-    cursor: pointer;
+  padding: 0.75rem 1.75rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
 }
 
 .btn-primary {
-    background: var(--primary);
-    color: var(--white);
+  background: var(--primary);
+  color: var(--white);
 }
 
 .btn-primary:hover {
-    background: var(--primary-light);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(255, 77, 0, 0.4);
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 77, 0, 0.4);
 }
 
 .btn-secondary {
-    background: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
 }
 
 .btn-secondary:hover {
-    background: var(--white);
-    color: var(--dark);
+  background: var(--white);
+  color: var(--dark);
 }
 
 .mobileMenuToggle {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
 }
 
 .mobile-menu-toggle span {
-    width: 25px;
-    height: 2px;
-    background: var(--white);
-    transition: var(--transition);
+  width: 25px;
+  height: 2px;
+  background: var(--white);
+  transition: var(--transition);
 }
