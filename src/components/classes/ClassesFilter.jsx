@@ -1,6 +1,6 @@
-export default function ClassesFilter({ filters }) {
+export default function ClassesFilter({ name, filters, handleFilterChange }) {
   return (
-    <select className="filter-select">
+    <select name={name} className="filter-select" onChange={handleFilterChange}>
       {filters.map((filter) => {
         return <option value={filter.value}>{filter.name}</option>;
       })}

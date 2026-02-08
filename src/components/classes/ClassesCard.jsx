@@ -24,7 +24,7 @@ export default function ClassesCard({ fitnessClass }) {
           <span>{fitnessClass.durationMin} min</span>
         </div>
       </div>
-      {fitnessClass.booked == 1 ? (
+      {fitnessClass.isBooked ? (
         <button className="btn-booked" disabled>
           ✓ Booked
         </button>

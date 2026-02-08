@@ -37,15 +37,15 @@ const instructors = [
   },
   {
     name: "Coach Sarah",
-    value: "sarah",
+    value: "Coach Sarah",
   },
   {
     name: "Coach Mike",
-    value: "mike",
+    value: "Coach Mike",
   },
   {
     name: "Coach Tom",
-    value: "tom",
+    value: "Coach Tom",
   },
 ];
 const days = [
@@ -73,10 +73,18 @@ export default function Classes() {
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  const [filters, setFilters] = useState({
+    category: "",
+    instructor: "",
+    day: "",
+  });
+
   useEffect(() => {
     setIsLoading(true);
     async function fetchClasses() {
-      const response = await fetch(`${API_BASE_URL}/classes`, {
+      const queryParams = new URLSearchParams(filters).toString();
+
+      const response = await fetch(`${API_BASE_URL}/classes?${queryParams}`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,
@@ -104,7 +112,7 @@ export default function Classes() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [filters]);
 
   let content;
 
@@ -116,17 +124,29 @@ export default function Classes() {
     content = <ErrorPage />;
   }
 
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  if (data?.length === 0) {
+    content = (
+      <div>No records found</div>
+    )
+  }
+
   if (data) {
     content = (
-      <section className="classes-content">
-        <div className="container">
-          <div className="classes-grid">
-            {data.map((fitnessClass) => {
-              return <ClassesCard key={fitnessClass.id} fitnessClass={fitnessClass} />;
-            })}
-          </div>
-        </div>
-      </section>
+      <div className="classes-grid">
+        {data.map((fitnessClass) => {
+          return (
+            <ClassesCard key={fitnessClass.id} fitnessClass={fitnessClass} />
+          );
+        })}
+      </div>
     );
   }
 
@@ -141,15 +161,29 @@ export default function Classes() {
       <section className="classes-filter">
         <div className="container">
           <div className="filter-bar">
-            <ClassesFilter filters={categories} />
-            <ClassesFilter filters={instructors} />
-            <ClassesFilter filters={days} />
+            <ClassesFilter
+              name="category"
+              filters={categories}
+              handleFilterChange={handleFilterChange}
+            />
+            <ClassesFilter
+              name="instructor"
+              filters={instructors}
+              handleFilterChange={handleFilterChange}
+            />
+            <ClassesFilter
+              name="day"
+              filters={days}
+              handleFilterChange={handleFilterChange}
+            />
           </div>
         </div>
       </section>
 
       {/* Classes Grid */}
-      {content}
+      <section className="classes-content">
+        <div className="container">{content}</div>
+      </section>
     </>
   );
 }
