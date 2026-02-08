@@ -1,4 +1,4 @@
-export default function ClassesCard({ fitnessClass }) {
+export default function ClassesCard({ fitnessClass, bookClass }) {
   return (
     <div className="class-card">
       <div className="class-header">
@@ -29,7 +29,9 @@ export default function ClassesCard({ fitnessClass }) {
           ✓ Booked
         </button>
       ) : (
-        <button className="btn-book">Book Class</button>
+        <button className="btn-book" onClick={() => bookClass(fitnessClass.id)}>
+          Book Class
+        </button>
       )}
     </div>
   );

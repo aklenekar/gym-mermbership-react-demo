@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./Classes.css";
 import ClassesFilter from "./ClassesFilter";
@@ -79,9 +79,8 @@ export default function Classes() {
     day: "",
   });
 
-  useEffect(() => {
-    setIsLoading(true);
-    async function fetchClasses() {
+  const fetchClasses = useCallback(async (filters) => {
+    try {
       const queryParams = new URLSearchParams(filters).toString();
 
       const response = await fetch(`${API_BASE_URL}/classes?${queryParams}`, {
@@ -99,20 +98,46 @@ export default function Classes() {
       }
 
       const details = await response.json();
-      return details;
+      setData(details);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
     }
+  }, []);
 
-    fetchClasses()
-      .then((details) => {
-        setData(details);
-      })
-      .catch((error) => {
-        setError(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
+  useEffect(() => {
+    setIsLoading(true);
+    fetchClasses(filters);
+  }, [filters, fetchClasses]);
+
+  const handleBookAppointment = async (classId) => {
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/class/book/${classId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
       });
-  }, [filters]);
+
+      if (!response.ok) {
+        const error = new Error("An error occurred while fetching the events");
+        error.code = response.status;
+        error.info = await response.json();
+        throw error;
+      }
+
+      const details = await response.json();
+      fetchClasses();
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   let content;
 
@@ -133,9 +158,7 @@ export default function Classes() {
   };
 
   if (data?.length === 0) {
-    content = (
-      <div>No records found</div>
-    )
+    content = <div>No records found</div>;
   }
 
   if (data) {
@@ -143,7 +166,11 @@ export default function Classes() {
       <div className="classes-grid">
         {data.map((fitnessClass) => {
           return (
-            <ClassesCard key={fitnessClass.id} fitnessClass={fitnessClass} />
+            <ClassesCard
+              key={fitnessClass.id}
+              fitnessClass={fitnessClass}
+              bookClass={handleBookAppointment}
+            />
           );
         })}
       </div>

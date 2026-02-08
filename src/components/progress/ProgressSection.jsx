@@ -1,7 +1,59 @@
+import { useEffect, useState } from "react";
+import { getAuthToken } from "../../util/auth";
 import PageHeader from "../pageHeader/PageHeader";
 import "./ProgressSection.css";
+import { API_BASE_URL } from "../../util/constants";
+import LoadingIndicator from "../ui/LoadingIndicator";
+import ErrorPage from "../../routes/ErrorPage";
 
 export default function ProgressSection() {
+  const token = getAuthToken();
+  const [data, setData] = useState();
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    async function fetchProgress() {
+      const response = await fetch(`${API_BASE_URL}/progress`, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      if (!response.ok) {
+        const error = new Error("An error occurred while fetching the events");
+        error.code = response.status;
+        error.info = await response.json();
+        throw error;
+      }
+
+      const details = await response.json();
+      return details;
+    }
+
+    fetchProgress()
+      .then((details) => {
+        setData(details);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  let content;
+
+  if (isLoading) {
+    content = <LoadingIndicator />;
+  }
+
+  if (error) {
+    content = <ErrorPage />;
+  }
   return (
     <>
       <PageHeader title="MY PROGRESS" subTitle="Track your fitness journey" />

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./QuickActionCard.css";
 
 export default function QuickActionCard() {
@@ -8,10 +9,10 @@ export default function QuickActionCard() {
       </div>
       <div className="dash-card-body">
         <div className="actions-grid">
-          <a href="#" className="action-btn">
+          <Link to="/classes" className="action-btn">
             <span className="action-icon">📅</span>
             <span className="action-text">Book Class</span>
-          </a>
+          </Link>
           <a href="#" className="action-btn">
             <span className="action-icon">🎟️</span>
             <span className="action-text">Guest Pass</span>
@@ -20,10 +21,10 @@ export default function QuickActionCard() {
             <span className="action-icon">💬</span>
             <span className="action-text">Message Trainer</span>
           </a>
-          <a href="#" className="action-btn">
+          <Link to="/progress" className="action-btn">
             <span className="action-icon">🏆</span>
             <span className="action-text">View Progress</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

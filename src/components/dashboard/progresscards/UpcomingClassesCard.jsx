@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./UpcomingClassesCard.css";
 
 export default function UpcomingClassesCard({ upcomingClasses }) {
@@ -5,9 +6,9 @@ export default function UpcomingClassesCard({ upcomingClasses }) {
     <div className="dash-card classes-card">
       <div className="dash-card-header">
         <h3>Upcoming Classes</h3>
-        <a href="#" className="header-link">
+        <Link to="/classes" className="header-link">
           View All
-        </a>
+        </Link>
       </div>
       <div className="dash-card-body">
         <div className="class-list">
