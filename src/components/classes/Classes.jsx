@@ -1,12 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./Classes.css";
 import ClassesFilter from "./ClassesFilter";
-import { getAuthToken } from "../../util/auth";
-import { API_BASE_URL } from "../../util/constants";
 import ClassesCard from "./ClassesCard";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import ErrorPage from "../../routes/ErrorPage";
+import { classesService } from "../services/Services";
 
 const categories = [
   {
@@ -68,7 +67,6 @@ const days = [
 ];
 
 export default function Classes() {
-  const token = getAuthToken();
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -79,64 +77,35 @@ export default function Classes() {
     day: "",
   });
 
-  const fetchClasses = useCallback(async (filters) => {
-    try {
-      const queryParams = new URLSearchParams(filters).toString();
-
-      const response = await fetch(`${API_BASE_URL}/classes?${queryParams}`, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-
-      if (!response.ok) {
-        const error = new Error("An error occurred while fetching the events");
-        error.code = response.status;
-        error.info = await response.json();
-        throw error;
-      }
-
-      const details = await response.json();
-      setData(details);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  function fetchClasses() {
+    classesService
+      .fetchClasses(filters)
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => setError(error))
+      .finally(setIsLoading(false));
+  }
 
   useEffect(() => {
     setIsLoading(true);
-    fetchClasses(filters);
-  }, [filters, fetchClasses]);
+    fetchClasses();
+  }, [filters]);
 
-  const handleBookAppointment = async (classId) => {
+  const handleBookAppointment = (classId) => {
     setIsLoading(true);
+    classesService
+      .bookClass(classId)
+      .then(fetchClasses)
+      .finally(setIsLoading(false));
+  };
 
-    try {
-      const response = await fetch(`${API_BASE_URL}/class/book/${classId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
-
-      if (!response.ok) {
-        const error = new Error("An error occurred while fetching the events");
-        error.code = response.status;
-        error.info = await response.json();
-        throw error;
-      }
-
-      const details = await response.json();
-      fetchClasses();
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleCancelAppointment = (bookingId) => {
+    setIsLoading(true);
+    classesService
+      .cancelClass(bookingId)
+      .then(fetchClasses)
+      .finally(setIsLoading(false));
   };
 
   let content;
@@ -170,6 +139,7 @@ export default function Classes() {
               key={fitnessClass.id}
               fitnessClass={fitnessClass}
               bookClass={handleBookAppointment}
+              cancelClass={handleCancelAppointment}
             />
           );
         })}

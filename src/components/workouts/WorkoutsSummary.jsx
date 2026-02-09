@@ -18,7 +18,7 @@ export default function WorkoutsSummary({summary}) {
       <div className="summary-card">
         <div className="summary-icon">⚡</div>
         <div className="summary-content">
-          <div className="summary-value">8,100</div>
+          <div className="summary-value">{summary.caloriesBurned}</div>
           <div className="summary-label">Calories Burned</div>
         </div>
       </div>

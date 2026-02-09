@@ -10,45 +10,43 @@ import ErrorPage from "../../routes/ErrorPage";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import { getAuthToken } from "../../util/auth";
 import { API_BASE_URL } from "../../util/constants";
+import { classesService, dashboardService } from "../services/Services";
 
 export default function DashboardContent() {
-  const token = getAuthToken();
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  function fetchDashboard() {
+    dashboardService
+      .fetchDashboard()
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => setError(error))
+      .finally(setIsLoading(false));
+  }
+
   useEffect(() => {
     setIsLoading(true);
-    async function fetchDashboard() {
-      const response = await fetch(`${API_BASE_URL}/dashboard`, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-
-      if (!response.ok) {
-        const error = new Error("An error occurred while fetching the events");
-        error.code = response.status;
-        error.info = await response.json();
-        throw error;
-      }
-
-      const details = await response.json();
-      return details;
-    }
-
-    fetchDashboard()
-      .then((details) => {
-        setData(details);
-      })
-      .catch((error) => {
-        setError(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    fetchDashboard();
   }, []);
+
+  const handleBookAppointment = (classId) => {
+    setIsLoading(true);
+    classesService
+      .bookClass(classId)
+      .then(fetchDashboard)
+      .finally(setIsLoading(false));
+  };
+
+  const handleCancelAppointment = (bookingId) => {
+    setIsLoading(true);
+    classesService
+      .cancelClass(bookingId)
+      .then(fetchDashboard)
+      .finally(setIsLoading(false));
+  };
 
   let content;
 
@@ -65,7 +63,11 @@ export default function DashboardContent() {
       <div className="dashboard-grid">
         <MembershipCard memebership={data.membership} />
         <StatsCard stats={data.stats} />
-        <UpcomingClassesCard upcomingClasses={data.upcomingClasses} />
+        <UpcomingClassesCard
+          upcomingClasses={data.upcomingClasses}
+          bookClass={handleBookAppointment}
+          cancelClass={handleCancelAppointment}
+        />
         <QuickActionCard />
         <RecentActivityCard recentActivities={data.recentActivities} />
         <GoalProgressCard goals={data.goals} />

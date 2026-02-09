@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./UpcomingClassesCard.css";
 
-export default function UpcomingClassesCard({ upcomingClasses }) {
+export default function UpcomingClassesCard({ upcomingClasses, bookClass, cancelClass }) {
   return (
     <div className="dash-card classes-card">
       <div className="dash-card-header">
@@ -29,7 +29,7 @@ export default function UpcomingClassesCard({ upcomingClasses }) {
                   {upcomingClass.isBooked ? (
                     <button className="btn-sm btn-booked">Booked</button>
                   ) : (
-                    <button className="btn-sm btn-book">Book</button>
+                    <button className="btn-sm btn-book" onClick={() => bookClass(upcomingClass.id)}>Book</button>
                   )}
                 </div>
               </div>

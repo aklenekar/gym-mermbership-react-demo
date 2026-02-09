@@ -5,7 +5,7 @@ export default function Workout({ workout }) {
     <div className="workout-card">
       <div className="workout-header">
         <div className="workout-type">
-          <span className="type-badge strength">Strength</span>
+          <span className="type-badge strength">{workout.category}</span>
           <h3>{workout.workoutType}</h3>
         </div>
         <div className="workout-date">{formatDate(workout.startTime)}</div>
