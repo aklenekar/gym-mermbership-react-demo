@@ -46,11 +46,12 @@
 }
 
 main {
-  transform: scale(0.9);
-  transform-origin: top center; 
-  width: 111.11%; 
-  margin-left: -5.55%;
-  overflow-x: hidden;
+  /* transform: scale(0.9); */
+  transform-origin: top center;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
 }
 
 body {
@@ -62,9 +63,9 @@ body {
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0;
 }
 
 .logo {
@@ -83,6 +84,10 @@ body {
 .logo-gym {
   color: var(--white);
 }
+
+/* ============================================
+   RESPONSIVE DESIGN
+============================================ */
 
 @media (max-width: 1024px) {
   .footer-grid {

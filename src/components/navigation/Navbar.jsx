@@ -1,10 +1,7 @@
-import {
-  Form,
-  NavLink,
-  useLoaderData,
-} from "react-router-dom";
+import { Form, NavLink, useLoaderData } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "../ui/Logo";
+import { useState } from "react";
 
 const guestNavBar = [
   {
@@ -49,46 +46,88 @@ const userNavBar = [
 ];
 
 export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const token = useLoaderData();
 
   const navBar = token ? userNavBar : guestNavBar;
-
-  const ctas = token ? (
-    <>
-      <NavLink to="/profile" className="btn-secondary">
-        Profile
-      </NavLink>
-      <Form action="/logout" method="post" className="inline-form">
-        <button className="btn-primary">Logout</button>
-      </Form>
-    </>
-  ) : (
-    <>
-      <NavLink to="/auth" className="btn-secondary">
-        Login
-      </NavLink>
-      <NavLink to="/signup" className="btn-primary">
-        Join Now
-      </NavLink>
-    </>
-  );
 
   return (
     <nav className="navbar">
       <div className="nav-container">
         <Logo />
-        <ul className="menu">
+        <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
           {navBar.map((item) => {
             return (
               <li key={item.name}>
-                <NavLink to={item.link} className="link">
+                <NavLink
+                  to={item.link}
+                  className="nav-link"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
                   {item.name}
                 </NavLink>
               </li>
             );
           })}
+
+          {token ? (
+            <>
+              <li className="mobile-cta">
+                <NavLink to="/profile" className="btn-secondary" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  Profile
+                </NavLink>
+              </li>
+              <li className="mobile-cta">
+                <Form action="/logout" method="post" className="inline-form" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  <button className="btn-primary">Logout</button>
+                </Form>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="mobile-cta">
+                <NavLink to="/auth" className="btn-secondary" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  Login
+                </NavLink>
+              </li>
+              <li className="mobile-cta">
+                <NavLink to="/signup" className="btn-primary" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  Join Now
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
-        <div className="cta">{ctas}</div>
+        <div className="desktop-cta">
+          {token ? (
+            <>
+              <NavLink to="/profile" className="btn-secondary">
+                Profile
+              </NavLink>
+              <Form action="/logout" method="post" className="inline-form">
+                <button className="btn-primary">Logout</button>
+              </Form>
+            </>
+          ) : (
+            <>
+              <NavLink to="/auth" className="btn-secondary">
+                Login
+              </NavLink>
+              <NavLink to="/signup" className="btn-primary">
+                Join Now
+              </NavLink>
+            </>
+          )}
+        </div>
+        <div
+          class="mobile-menu-toggle"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </nav>
   );

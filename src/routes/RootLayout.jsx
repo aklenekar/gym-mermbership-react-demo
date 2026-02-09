@@ -1,4 +1,9 @@
-import { Outlet, ScrollRestoration, useLoaderData, useSubmit } from "react-router-dom";
+import {
+  Outlet,
+  ScrollRestoration,
+  useLoaderData,
+  useSubmit,
+} from "react-router-dom";
 import Footer from "../components/footer/Footer";
 import { useEffect } from "react";
 import { getTokenDudation } from "../util/auth.js";
