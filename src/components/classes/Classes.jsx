@@ -5,7 +5,7 @@ import ClassesFilter from "./ClassesFilter";
 import ClassesCard from "./ClassesCard";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import ErrorPage from "../../routes/ErrorPage";
-import { classesService } from "../services/Services";
+import { classesService } from "../../services/Services";
 
 const categories = [
   {

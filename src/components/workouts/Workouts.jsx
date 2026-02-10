@@ -7,7 +7,7 @@ import WorkoutList from "./WorkoutList";
 import WorkoutsSummary from "./WorkoutsSummary";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import ErrorPage from "../../routes/ErrorPage";
-import { API_BASE_URL } from "../../util/constants";
+import { workoutService } from "../../services/Services";
 
 export default function Workouts() {
   const token = getAuthToken();
@@ -15,38 +15,33 @@ export default function Workouts() {
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  const [filters, setFilters] = useState({
+    workout: "",
+    day: "",
+  });
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  function fetchWorkouts() {
+    workoutService
+      .fetchWorkouts(filters)
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => setError(error))
+      .finally(setIsLoading(false));
+  }
+
   useEffect(() => {
     setIsLoading(true);
-    async function fetchWorkouts() {
-      const response = await fetch(`${API_BASE_URL}/workouts`, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-
-      if (!response.ok) {
-        const error = new Error("An error occurred while fetching the events");
-        error.code = response.status;
-        error.info = await response.json();
-        throw error;
-      }
-
-      const details = await response.json();
-      return details;
-    }
-
-    fetchWorkouts()
-      .then((details) => {
-        setData(details);
-      })
-      .catch((error) => {
-        setError(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+    fetchWorkouts(filters);
+  }, [filters]);
 
   let content;
 
@@ -69,8 +64,8 @@ export default function Workouts() {
 
         <section className="workouts-content">
           <div className="container">
-            <WorkoutActions />
-            <WorkoutList workouts={data.workouts}/>
+            <WorkoutActions handleFilterChange={handleFilterChange} />
+            <WorkoutList workouts={data.workouts} />
           </div>
         </section>
       </>

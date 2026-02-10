@@ -8,9 +8,7 @@ import StatsCard from "./progresscards/StatsCard";
 import UpcomingClassesCard from "./progresscards/UpcomingClassesCard";
 import ErrorPage from "../../routes/ErrorPage";
 import LoadingIndicator from "../ui/LoadingIndicator";
-import { getAuthToken } from "../../util/auth";
-import { API_BASE_URL } from "../../util/constants";
-import { classesService, dashboardService } from "../services/Services";
+import { classesService, dashboardService } from "../../services/Services";
 
 export default function DashboardContent() {
   const [data, setData] = useState();

@@ -1,5 +1,5 @@
-import { getAuthToken } from "../../util/auth";
-import { API_BASE_URL } from "../../util/constants";
+import { getAuthToken } from "../util/auth";
+import { API_BASE_URL } from "../util/constants";
 
 export const dashboardService = {
   fetchDashboard: async () => {
@@ -64,6 +64,27 @@ export const classesService = {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    if (!response.ok) {
+      const error = new Error("An error occurred while fetching the events");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
+};
+
+export const workoutService = {
+  fetchWorkouts: async (filters) => {
+    const token = getAuthToken();
+    const queryParams = new URLSearchParams(filters).toString();
+
+    const response = await fetch(`${API_BASE_URL}/workouts?${queryParams}`, {
+      method: "GET",
+      headers: {
         Authorization: "Bearer " + token,
       },
     });
