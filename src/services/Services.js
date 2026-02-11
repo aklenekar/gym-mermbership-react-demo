@@ -96,4 +96,23 @@ export const workoutService = {
     }
     return response.json();
   },
+
+  submitWorkout: async (payload) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/workouts`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "Application/JSON",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      const error = new Error("An error occurred while submitting the workout");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
 };

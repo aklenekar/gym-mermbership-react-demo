@@ -8,7 +8,7 @@ export default function Workout({ workout }) {
           <span className="type-badge strength">{workout.category}</span>
           <h3>{workout.workoutType}</h3>
         </div>
-        <div className="workout-date">{formatDate(workout.startTime)}</div>
+        <div className="workout-date">{workout.startTime}</div>
       </div>
       <div className="workout-details">
         <div className="detail-item">
@@ -25,7 +25,7 @@ export default function Workout({ workout }) {
         </div>
       </div>
       <div className="workout-notes">
-        <p>Great session! Increased bench press by 10 lbs. Form felt solid.</p>
+        <p>{workout.notes}</p>
       </div>
       <div className="workout-actions">
         <button className="btn-view">View Details</button>

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { getAuthToken } from "../../util/auth";
+import { useEffect, useRef, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./Workout.css";
 import WorkoutActions from "./WorkoutActions";
@@ -10,7 +9,6 @@ import ErrorPage from "../../routes/ErrorPage";
 import { workoutService } from "../../services/Services";
 
 export default function Workouts() {
-  const token = getAuthToken();
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -43,6 +41,35 @@ export default function Workouts() {
     fetchWorkouts(filters);
   }, [filters]);
 
+  const dialogRef = useRef(null);
+
+  const openModal = () => dialogRef.current.showModal();
+  const closeModal = () => dialogRef.current.close();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(event.currentTarget);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      await workoutService.submitWorkout(payload);
+
+      // --- SUCCESS LOGIC ---
+      event.target.reset();
+      fetchWorkouts();
+      closeModal();
+    } catch (error) {
+      console.error("Failed to log workout:", error);
+      alert("Could not save workout. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   let content;
 
   if (isLoading) {
@@ -64,7 +91,14 @@ export default function Workouts() {
 
         <section className="workouts-content">
           <div className="container">
-            <WorkoutActions handleFilterChange={handleFilterChange} />
+            <WorkoutActions
+              handleFilterChange={handleFilterChange}
+              dialogRef={dialogRef}
+              openModal={openModal}
+              closeModal={closeModal}
+              handleSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+            />
             <WorkoutList workouts={data.workouts} />
           </div>
         </section>
