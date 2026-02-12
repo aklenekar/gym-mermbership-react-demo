@@ -2,55 +2,26 @@ import { Form, NavLink, useLoaderData } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "../ui/Logo";
 import { useState } from "react";
-
-const guestNavBar = [
-  {
-    name: "Home",
-    link: "/",
-  },
-  {
-    name: "Features",
-    link: "/features",
-  },
-  {
-    name: "Pricing",
-    link: "/price",
-  },
-  {
-    name: "Trainers",
-    link: "/trainers",
-  },
-  {
-    name: "Contact",
-    link: "/contact",
-  },
-];
-
-const userNavBar = [
-  {
-    name: "Dashboard",
-    link: "/dashboard",
-  },
-  {
-    name: "Classes",
-    link: "/classes",
-  },
-  {
-    name: "My Workouts",
-    link: "/workouts",
-  },
-  {
-    name: "Progress",
-    link: "/progress",
-  },
-];
+import {
+  adminNavBar,
+  guestNavBar,
+  userNavBar,
+} from "../../services/Navigations";
+import { getUserRole } from "../../util/auth";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const token = useLoaderData();
+  const role = getUserRole();
 
-  const navBar = token ? userNavBar : guestNavBar;
+  const navBar = token
+    ? role === "ADMIN"
+      ? adminNavBar
+      : role === "USER"
+        ? userNavBar
+        : guestNavBar
+    : guestNavBar;
 
   return (
     <nav className="navbar">
@@ -74,12 +45,21 @@ export default function Navbar() {
           {token ? (
             <>
               <li className="mobile-cta">
-                <NavLink to="/profile" className="btn-secondary" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <NavLink
+                  to="/profile"
+                  className="btn-secondary"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
                   Profile
                 </NavLink>
               </li>
               <li className="mobile-cta">
-                <Form action="/logout" method="post" className="inline-form" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <Form
+                  action="/logout"
+                  method="post"
+                  className="inline-form"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
                   <button className="btn-primary">Logout</button>
                 </Form>
               </li>
@@ -87,12 +67,20 @@ export default function Navbar() {
           ) : (
             <>
               <li className="mobile-cta">
-                <NavLink to="/auth" className="btn-secondary" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <NavLink
+                  to="/auth"
+                  className="btn-secondary"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
                   Login
                 </NavLink>
               </li>
               <li className="mobile-cta">
-                <NavLink to="/signup" className="btn-primary" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <NavLink
+                  to="/signup"
+                  className="btn-primary"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
                   Join Now
                 </NavLink>
               </li>
@@ -121,7 +109,7 @@ export default function Navbar() {
           )}
         </div>
         <div
-          class="mobile-menu-toggle"
+          className="mobile-menu-toggle"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <span></span>

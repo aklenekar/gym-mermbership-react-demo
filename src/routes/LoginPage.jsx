@@ -7,7 +7,6 @@ export default function LoginPage() {
 }
 
 export async function action({ request }) {
-
   const data = await request.formData();
   const authData = {
     email: data.get("email"),
@@ -35,10 +34,14 @@ export async function action({ request }) {
 
   const responseData = await response.json();
   const token = responseData.token;
+  const role = responseData.role;
 
   localStorage.setItem("token", token);
+  localStorage.setItem("role", role);
   const expirationDate = new Date();
   expirationDate.setHours(expirationDate.getHours() + 1);
   localStorage.setItem("expiration", expirationDate.toISOString());
-  return redirect("/dashboard");
+  return role === "ADMIN"
+    ? redirect("/adminDashboard")
+    : redirect("/dashboard");
 }

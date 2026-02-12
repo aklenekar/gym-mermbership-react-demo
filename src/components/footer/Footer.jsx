@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import { checkRoleLoader, getUserRole } from "../../util/auth";
 
 export default function Footer() {
+  const role = getUserRole();
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -39,7 +41,9 @@ export default function Footer() {
                 <Link to="/price">Pricing</Link>
               </li>
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to={role === "ADMIN" ? "/adminDashboard" : "/dashboard"}>
+                  Dashboard
+                </Link>
               </li>
               <li>
                 <Link to="/contact">Contact</Link>

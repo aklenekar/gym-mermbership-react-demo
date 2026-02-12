@@ -24,11 +24,15 @@ export function getAuthToken() {
   return token;
 }
 
+export function getUserRole() {
+  return localStorage.getItem("role");
+}
+
 export function tokenLoader() {
   return getAuthToken();
 }
 
-export function checkAuthLoader() {
+export function checkUserAuthLoader() {
   const token = getAuthToken();
 
   if (!token) {
@@ -36,4 +40,23 @@ export function checkAuthLoader() {
   }
 
   return null;
+}
+
+export function checkRoleLoader(requiredRole) {
+  return () => {
+    const token = getAuthToken();
+    const role = getUserRole();
+
+    // 1. Check if logged in
+    if (!token || token === "EXPIRED") {
+      return redirect("/auth");
+    }
+
+    // 2. Check if role matches
+    if (role !== requiredRole) {
+      return redirect("/"); // Redirect unauthorized users to home
+    }
+
+    return null;
+  };
 }
