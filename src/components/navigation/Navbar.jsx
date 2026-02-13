@@ -102,7 +102,7 @@ export default function Navbar() {
               <NavLink to="/auth" className="btn-secondary">
                 Login
               </NavLink>
-              <NavLink to="/signup" className="btn-primary">
+              <NavLink to="/signUp" className="btn-primary">
                 Join Now
               </NavLink>
             </>

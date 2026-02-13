@@ -10,10 +10,7 @@ import PricePage from "./routes/PricePage.jsx";
 import ContactPage from "./routes/ContactPage.jsx";
 import ErrorPage from "./routes/ErrorPage.jsx";
 import LoginPage, { action as authAction } from "./routes/LoginPage.jsx";
-import {
-  tokenLoader,
-  checkRoleLoader,
-} from "./util/auth.js";
+import { tokenLoader, checkRoleLoader } from "./util/auth.js";
 import { action as logoutAction } from "./routes/Logout.js";
 import FeaturesPage from "./routes/Features.jsx";
 import TrainersPage, { trainersLoader } from "./routes/TrainersPage.jsx";
@@ -26,6 +23,8 @@ import ManageTrainersPage from "./routes/ManageTrainersPage.jsx";
 import ManageClassesPage from "./routes/ManageClassesPage.jsx";
 import ManageSettingsPage from "./routes/ManageSettingsPage.jsx";
 import ManageMemebersPage from "./routes/ManageMembersPage.jsx";
+import SignUpPage from "./routes/SignUpPage.jsx";
+import UserProfilePage from "./routes/UserProfilePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +43,7 @@ const router = createBrowserRouter([
           { path: "/classes", element: <ClassesPage /> },
           { path: "/workouts", element: <WorkoutsPage /> },
           { path: "/progress", element: <ProgressPage /> },
+          { path: '/profile', element: <UserProfilePage />}
         ],
       },
       {
@@ -62,6 +62,7 @@ const router = createBrowserRouter([
       { path: "/price", element: <PricePage /> },
       { path: "/trainers", element: <TrainersPage />, loader: trainersLoader },
       { path: "/contact", element: <ContactPage /> },
+      { path: "/signUp", element: <SignUpPage /> },
       { path: "logout", action: logoutAction },
     ],
   },
