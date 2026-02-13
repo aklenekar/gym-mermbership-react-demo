@@ -1,0 +1,283 @@
+/* ============================================
+   ADMIN admin-classes MANAGEMENT
+============================================ */
+
+.admin-classes-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.admin-classes-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.schedule-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  padding: 1rem 2rem;
+  background: var(--mid-gray);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tab-btn:hover {
+  border-color: var(--primary);
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.admin-classes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-class-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: var(--mid-gray);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
+}
+
+.admin-class-card:hover {
+  border-color: var(--primary);
+}
+
+.admin-class-time-badge {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  min-width: 100px;
+  text-align: center;
+}
+
+.admin-class-details {
+  flex: 1;
+}
+
+.admin-class-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.admin-class-name {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-class-category {
+  padding: 0.3rem 0.75rem;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.admin-class-status {
+  padding: 0.4rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-class-status.available {
+  background: var(--success);
+  color: var(--dark);
+}
+
+.admin-class-status.full {
+  background: var(--danger);
+  color: var(--white);
+}
+
+.admin-class-status.almost-full {
+  background: #ffd600;
+  color: var(--dark);
+}
+
+.admin-class-info-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--light-gray);
+  font-size: 0.95rem;
+}
+
+.info-icon {
+  font-size: 1.1rem;
+}
+
+.capacity-full {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.capacity-high {
+  color: #ffd600;
+  font-weight: 700;
+}
+
+.admin-class-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 120px;
+}
+
+.btn-action {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-action:not(.cancel) {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btn-action:not(.cancel):hover {
+  background: var(--primary-light);
+}
+
+.btn-action.cancel {
+  background: transparent;
+  color: var(--danger);
+  border: 2px solid var(--danger);
+}
+
+.btn-action.cancel:hover {
+  background: var(--danger);
+  color: var(--white);
+}
+
+.btn-add-class {
+  padding: 1rem 2rem;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-add-class:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+  .admin-classes-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .admin-class-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-class-time-badge {
+    width: 100%;
+    text-align: left;
+  }
+
+  .admin-class-actions {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .btn-action {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-classes-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .search-bar {
+    max-width: 100%;
+  }
+
+  .filters {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .filter-select,
+  .btn-add-class {
+    width: 100%;
+  }
+
+  .admin-classes-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    flex: 1;
+    min-width: calc(50% - 0.5rem);
+  }
+
+  .admin-class-info-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .admin-class-actions {
+    flex-direction: column;
+  }
+}

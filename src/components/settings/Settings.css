@@ -1,0 +1,430 @@
+/* ============================================
+   ADMIN SETTINGS
+============================================ */
+
+.settings-nav {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    overflow-x: auto;
+}
+
+.settings-tab {
+    padding: 1rem 2rem;
+    background: transparent;
+    border: none;
+    color: var(--light-gray);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.settings-tab:hover {
+    color: var(--primary);
+}
+
+.settings-tab.active {
+    color: var(--primary);
+}
+
+.settings-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary);
+}
+
+.settings-content {
+    background: var(--mid-gray);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.settings-section {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.settings-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.setting-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.setting-label {
+    color: var(--light-gray);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.setting-input,
+.price-input,
+.time-input {
+    padding: 1rem;
+    background: var(--dark-gray);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.setting-input:focus,
+.price-input:focus,
+.time-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.hours-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hours-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--dark-gray);
+    border-radius: 8px;
+}
+
+.day-label {
+    font-weight: 600;
+    color: var(--white);
+    min-width: 150px;
+}
+
+.time-inputs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.time-input {
+    width: 120px;
+}
+
+.time-separator {
+    color: var(--light-gray);
+}
+
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.plan-setting {
+    background: var(--dark-gray);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.plan-name {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.plan-status {
+    padding: 0.3rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.plan-status.active {
+    background: var(--success);
+    color: var(--dark);
+}
+
+.price-input-group {
+    display: flex;
+    align-items: center;
+    background: var(--mid-gray);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.price-input-group:focus-within {
+    border-color: var(--primary);
+}
+
+.currency {
+    padding: 0 1rem;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.price-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 1rem 1rem 1rem 0;
+}
+
+.toggles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.toggle-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--dark-gray);
+    border-radius: 8px;
+}
+
+.toggle-info {
+    flex: 1;
+}
+
+.toggle-label {
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+}
+
+.toggle-description {
+    font-size: 0.85rem;
+    color: var(--light-gray);
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    transition: var(--transition);
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background: var(--white);
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background: var(--primary);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(30px);
+}
+
+.security-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.security-btn {
+    padding: 1rem 2rem;
+    background: var(--dark-gray);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.security-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.security-btn.danger {
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.security-btn.danger:hover {
+    background: var(--danger);
+    color: var(--white);
+}
+
+.settings-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-cancel,
+.btn-save {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-cancel {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.btn-cancel:hover {
+    background: var(--white);
+    color: var(--dark);
+}
+
+.btn-save {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.btn-save:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .security-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-nav {
+        gap: 0.5rem;
+    }
+
+    .settings-tab {
+        padding: 0.875rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .settings-content {
+        padding: 1.5rem;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .setting-item.full-width {
+        grid-column: 1;
+    }
+
+    .hours-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .time-inputs {
+        width: 100%;
+    }
+
+    .time-input {
+        flex: 1;
+    }
+
+    .toggle-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .settings-actions {
+        flex-direction: column;
+    }
+
+    .btn-cancel,
+    .btn-save {
+        width: 100%;
+    }
+}

@@ -1,0 +1,371 @@
+/* ============================================
+   ADMIN REPORTS & ANALYTICS
+============================================ */
+
+.reports-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.period-selector {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.period-btn {
+    padding: 0.875rem 1.5rem;
+    background: var(--mid-gray);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.period-btn:hover {
+    border-color: var(--primary);
+}
+
+.period-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.date-range {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.date-input {
+    padding: 0.875rem 1rem;
+    background: var(--mid-gray);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.date-separator {
+    color: var(--light-gray);
+}
+
+.btn-export {
+    padding: 0.875rem 1.5rem;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-export:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.report-card {
+    background: var(--mid-gray);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.report-card.full-width {
+    grid-column: 1 / -1;
+}
+
+.chart-period {
+    padding: 0.5rem 1rem;
+    background: var(--dark-gray);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.revenue-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.revenue-stat {
+    text-align: center;
+}
+
+.stat-label {
+    color: var(--light-gray);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+}
+
+.stat-value.large {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.stat-change {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.stat-change.positive {
+    color: var(--success);
+}
+
+.stat-change.negative {
+    color: var(--danger);
+}
+
+.chart-container {
+    margin-top: 2rem;
+}
+
+.revenue-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    height: 300px;
+    padding: 1rem 0;
+}
+
+.chart-bar {
+    flex: 1;
+    background: linear-gradient(to top, var(--primary), var(--primary-light));
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.bar-value {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.bar-label {
+    position: absolute;
+    bottom: -30px;
+    color: var(--light-gray);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--dark-gray);
+    border-radius: 6px;
+}
+
+.metric-label {
+    color: var(--light-gray);
+    font-size: 0.9rem;
+}
+
+.metric-value {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.metric-change {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--dark-gray);
+    border-radius: 6px;
+}
+
+.rank {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.ranking-details {
+    flex: 1;
+}
+
+.ranking-name {
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+}
+
+.ranking-stats {
+    font-size: 0.85rem;
+    color: var(--light-gray);
+}
+
+.ranking-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ranking-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    border-radius: 4px;
+}
+
+.peak-hours-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.75rem;
+    height: 250px;
+    padding: 2rem 1rem;
+}
+
+.hour-bar {
+    flex: 1;
+    background: linear-gradient(to top, var(--primary), var(--primary-light));
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    min-height: 30px;
+}
+
+.hour-label {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--light-gray);
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+    .revenue-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .report-card.full-width {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .reports-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .period-selector {
+        flex-wrap: wrap;
+    }
+
+    .period-btn {
+        flex: 1;
+        min-width: calc(33.33% - 0.5rem);
+    }
+
+    .date-range {
+        flex-wrap: wrap;
+    }
+
+    .date-input,
+    .btn-export {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .revenue-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .revenue-chart {
+        height: 200px;
+    }
+
+    .peak-hours-chart {
+        height: 180px;
+        gap: 0.5rem;
+    }
+
+    .hour-label {
+        font-size: 0.65rem;
+    }
+}
