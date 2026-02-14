@@ -1,6 +1,63 @@
 import { getAuthToken } from "../util/auth";
 import { API_BASE_URL } from "../util/constants";
 
+export const profileService = {
+  fetchProfile: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/profile`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    if (!response.ok) {
+      const error = new Error("An error occurred while fetching the events");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
+
+  updateProfile: async (profile) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/profile`, {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "Application/JSON",
+      },
+      body: JSON.stringify(profile),
+    });
+    if (!response.ok) {
+      const error = new Error("An error occurred while submitting the workout");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
+
+  /** CREATE a brand‑new profile (sign‑up) */
+  createProfile: async (profile) => {
+    const response = await fetch(`${API_BASE_URL}/profile`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(profile),
+    });
+
+    if (!response.ok) {
+      const error = new Error("Failed to create profile");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
+};
+
 export const dashboardService = {
   fetchDashboard: async () => {
     const token = getAuthToken();

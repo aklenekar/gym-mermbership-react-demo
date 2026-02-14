@@ -1,10 +1,65 @@
+import { useEffect, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./UserProfile.css";
+import { profileService } from "../../services/Services";
+import LoadingIndicator from "../ui/LoadingIndicator";
+import ErrorPage from "../../routes/ErrorPage";
+import { formatDate } from "../../util/dateUtils";
+import PersonalInformation from "./PersonalInformation";
+import ProfileAddress from "./ProfileAddress";
+import EmergencyContact from "./EmergencyContact";
+import HealthInfo from "./HealthInfo";
+import { getInitials } from "../../util/dateUtils.js";
 
 export default function UserProfile() {
-  return (
-    <>
-      <PageHeader title="MY PROFILE" subTitle="Manage your account settings" />
+  const [data, setData] = useState();
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  function fetchProfile() {
+    profileService
+      .fetchProfile()
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => setError(error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchProfile();
+  }, []);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (payload) => {
+    setIsSubmitting(true);
+    console.log(payload);
+    try {
+      await profileService.updateProfile(payload);
+    } catch (error) {
+      console.error("Failed to log workout:", error);
+      alert("Could not save Profile. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  let content;
+
+  if (isLoading) {
+    content = <LoadingIndicator />;
+  }
+
+  if (error) {
+    content = <ErrorPage />;
+  }
+
+  if (data) {
+    content = (
       <section className="profile-content">
         <div className="container">
           <div className="profile-layout">
@@ -12,28 +67,43 @@ export default function UserProfile() {
             <div className="profile-sidebar">
               <div className="profile-card">
                 <div className="profile-avatar-section">
-                  <div className="profile-avatar-large">JD</div>
+                  <div className="profile-avatar-large">
+                    {getInitials(
+                      data.personalInfo.firstName,
+                      data.personalInfo.lastName,
+                    )}
+                  </div>
                   <button className="btn-change-photo">Change Photo</button>
                 </div>
                 <div className="profile-info">
-                  <h3 className="profile-name">John Doe</h3>
-                  <p className="profile-email">john.doe@email.com</p>
-                  <p className="profile-member-since">Member since Jan 2025</p>
+                  <h3 className="profile-name">
+                    {data.personalInfo.firstName} {data.personalInfo.lastName}
+                  </h3>
+                  <p className="profile-email">{data.personalInfo.email}</p>
+                  <p className="profile-member-since">
+                    Member since {data.membershipInfo.memberSince}
+                  </p>
                 </div>
                 <div className="profile-plan">
-                  <div className="plan-badge-large pro">PRO MEMBER</div>
+                  <div className="plan-badge-large pro">
+                    {data.membershipInfo.plan}
+                  </div>
                   <div className="plan-details">
                     <div className="plan-detail-row">
                       <span>Status</span>
-                      <span className="status-active">Active</span>
+                      <span className="status-active">
+                        {data.membershipInfo.status}
+                      </span>
                     </div>
                     <div className="plan-detail-row">
                       <span>Next Billing</span>
-                      <span>Feb 15, 2025</span>
+                      <span>
+                        {formatDate(data.membershipInfo.nextBillingDate)}
+                      </span>
                     </div>
                     <div className="plan-detail-row">
                       <span>Amount</span>
-                      <span>$49/month</span>
+                      <span>${data.membershipInfo.price}/month</span>
                     </div>
                   </div>
                   <button className="btn-upgrade">Upgrade Plan</button>
@@ -67,182 +137,28 @@ export default function UserProfile() {
             {/* Profile Content */}
             <div className="profile-main">
               {/* Personal Information */}
-              <div className="profile-section">
-                <div className="section-header">
-                  <h3 className="section-title">Personal Information</h3>
-                  <button className="btn-edit-section">Edit</button>
-                </div>
-                <div className="profile-grid">
-                  <div className="profile-field">
-                    <label className="field-label">First Name</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="John"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">Last Name</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="Doe"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">Email</label>
-                    <input
-                      type="email"
-                      className="field-input"
-                      value="john.doe@email.com"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">Phone Number</label>
-                    <input
-                      type="tel"
-                      className="field-input"
-                      value="+1 (555) 123-4567"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">Date of Birth</label>
-                    <input
-                      type="date"
-                      className="field-input"
-                      value="1990-05-15"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">Gender</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="Male"
-                      readonly
-                    />
-                  </div>
-                </div>
-              </div>
+              <PersonalInformation
+                personalInfo={data.personalInfo}
+                handleSubmit={handleSubmit}
+              />
 
               {/* Address */}
-              <div className="profile-section">
-                <div className="section-header">
-                  <h3 className="section-title">Address</h3>
-                  <button className="btn-edit-section">Edit</button>
-                </div>
-                <div className="profile-grid">
-                  <div className="profile-field full-width">
-                    <label className="field-label">Street Address</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="123 Main Street"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">City</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="Los Angeles"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">State</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="California"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">ZIP Code</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="90001"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">Country</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="United States"
-                      readonly
-                    />
-                  </div>
-                </div>
-              </div>
+              <ProfileAddress
+                address={data.address}
+                handleSubmit={handleSubmit}
+              />
 
               {/* Emergency Contact */}
-              <div className="profile-section">
-                <div className="section-header">
-                  <h3 className="section-title">Emergency Contact</h3>
-                  <button className="btn-edit-section">Edit</button>
-                </div>
-                <div className="profile-grid">
-                  <div className="profile-field">
-                    <label className="field-label">Contact Name</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="Jane Doe"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">Contact Phone</label>
-                    <input
-                      type="tel"
-                      className="field-input"
-                      value="+1 (555) 987-6543"
-                      readonly
-                    />
-                  </div>
-                  <div className="profile-field">
-                    <label className="field-label">Relationship</label>
-                    <input
-                      type="text"
-                      className="field-input"
-                      value="Spouse"
-                      readonly
-                    />
-                  </div>
-                </div>
-              </div>
+              <EmergencyContact
+                emergencyContact={data.emergencyContact}
+                handleSubmit={handleSubmit}
+              />
 
               {/* Health Information */}
-              <div className="profile-section">
-                <div className="section-header">
-                  <h3 className="section-title">Health Information</h3>
-                  <button className="btn-edit-section">Edit</button>
-                </div>
-                <div className="profile-grid">
-                  <div className="profile-field full-width">
-                    <label className="field-label">Medical Conditions</label>
-                    <textarea className="field-textarea" rows="3" readonly>
-                      No known medical conditions
-                    </textarea>
-                  </div>
-                  <div className="profile-field full-width">
-                    <label className="field-label">Fitness Goals</label>
-                    <textarea className="field-textarea" rows="3" readonly>
-                      Build muscle mass and improve cardiovascular endurance
-                    </textarea>
-                  </div>
-                </div>
-              </div>
+              <HealthInfo
+                healthInfo={data.healthInfo}
+                handleSubmit={handleSubmit}
+              />
 
               {/* Account Security */}
               <div className="profile-section">
@@ -394,6 +310,13 @@ export default function UserProfile() {
           </div>
         </div>
       </section>
+    );
+  }
+
+  return (
+    <>
+      <PageHeader title="MY PROFILE" subTitle="Manage your account settings" />
+      {content}
     </>
   );
 }
