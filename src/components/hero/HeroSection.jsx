@@ -20,7 +20,7 @@ export default function HeroSection() {
                 </h1>
                 <p className="hero-subtitle">Elite training facilities. World-class coaching. Unstoppable community.</p>
                 <div className="hero-cta">
-                    <Link to="/price" className="btn-hero-primary">Start Your Journey</Link>
+                    <Link to="/signUp" className="btn-hero-primary">Start Your Journey</Link>
                     <a href="#features" className="btn-hero-secondary">Explore More</a>
                 </div>
             </div>

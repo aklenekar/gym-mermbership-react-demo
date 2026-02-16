@@ -60,7 +60,7 @@ export default function LoginForm() {
 
         <div className="form-footer">
           <p>
-            Don't have an account? <a href="pricing.html">Sign Up</a>
+            Don't have an account? <Link to="/signUp">Sign Up</Link>
           </p>
           <Link to="/" className="back-home">
             ← Back to Home

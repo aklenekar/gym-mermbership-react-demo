@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./MembershipPlansCard.css";
 
 export default function MembershipPlansCard({
@@ -35,12 +36,12 @@ export default function MembershipPlansCard({
         </ul>
       </div>
       <div className="card-footer">
-        <a
-          href="dashboard.html"
+        <Link
+          to="/signUp"
           className={mostFeatured ? "btn-card btn-card-featured" : "btn-card"}
         >
           Get Started
-        </a>
+        </Link>
       </div>
     </div>
   );
