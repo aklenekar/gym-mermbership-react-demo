@@ -1,7 +1,44 @@
+import { useEffect, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./ManageClasses.css";
+import { adminService } from "../../services/Services";
 
 export default function ManageClasses() {
+  const [data, setData] = useState({
+    classes: [],
+  });
+
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [filters, setFilters] = useState({
+    search: "",
+    category: "",
+    day: "",
+  });
+
+  function fetchClasses() {
+    adminService
+      .fetchClasses(filters)
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => setError(error))
+      .finally(setIsLoading(false));
+  }
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetchClasses(filters);
+  }, [filters]);
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
   return (
     <>
       <PageHeader
@@ -15,24 +52,34 @@ export default function ManageClasses() {
             <div className="search-bar">
               <input
                 type="text"
+                name="search"
+                onChange={handleFilterChange}
                 placeholder="Search classes by name or instructor..."
                 className="search-input"
               />
             </div>
             <div className="filters">
-              <select className="filter-select">
-                <option>All Categories</option>
-                <option>Strength</option>
-                <option>Cardio</option>
-                <option>Yoga</option>
-                <option>HIIT</option>
-                <option>Boxing</option>
+              <select
+                name="category"
+                className="filter-select"
+                onChange={handleFilterChange}
+              >
+                <option value="All">All Specialties</option>
+                <option value="Strength">Strength</option>
+                <option value="Cardio">Cardio</option>
+                <option value="Yoga">Yoga</option>
+                <option value="HIIT"> HIIT</option>
+                <option value="Boxing">Boxing</option>
               </select>
-              <select className="filter-select">
-                <option>All Days</option>
-                <option>Today</option>
-                <option>Tomorrow</option>
-                <option>This Week</option>
+              <select
+                name="day"
+                className="filter-select"
+                onChange={handleFilterChange}
+              >
+                <option value="all">All Days</option>
+                <option value="Today">Today</option>
+                <option value="Tomorrow">Tomorrow</option>
+                <option value="This Week">This Week</option>
               </select>
               <button className="btn-add-class">+ Add Class</button>
             </div>
@@ -65,185 +112,45 @@ export default function ManageClasses() {
           </div>
 
           <div className="admin-classes-list">
-            <div className="admin-class-card">
-              <div className="admin-class-time-badge">6:00 AM</div>
-              <div className="admin-class-details">
-                <div className="admin-class-header-row">
-                  <div>
-                    <h3 className="admin-class-name">HIIT Bootcamp</h3>
-                    <div className="admin-class-category">HIIT</div>
+            {data.classes.map((cl) => {
+              return (
+                <div className="admin-class-card">
+                  <div className="admin-class-time-badge">6:00 AM</div>
+                  <div className="admin-class-details">
+                    <div className="admin-class-header-row">
+                      <div>
+                        <h3 className="admin-class-name">HIIT Bootcamp</h3>
+                        <div className="admin-class-category">HIIT</div>
+                      </div>
+                      <div className="admin-class-status full">FULL</div>
+                    </div>
+                    <div className="admin-class-info-row">
+                      <div className="info-item">
+                        <span className="info-icon">👤</span>
+                        <span>Coach Sarah Mitchell</span>
+                      </div>
+                      <div className="info-item">
+                        <span className="info-icon">📍</span>
+                        <span>Studio A</span>
+                      </div>
+                      <div className="info-item">
+                        <span className="info-icon">⏱️</span>
+                        <span>60 min</span>
+                      </div>
+                      <div className="info-item">
+                        <span className="info-icon">👥</span>
+                        <span className="capacity-full">20/20 booked</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="admin-class-status full">FULL</div>
-                </div>
-                <div className="admin-class-info-row">
-                  <div className="info-item">
-                    <span className="info-icon">👤</span>
-                    <span>Coach Sarah Mitchell</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">📍</span>
-                    <span>Studio A</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">⏱️</span>
-                    <span>60 min</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">👥</span>
-                    <span className="capacity-full">20/20 booked</span>
-                  </div>
-                </div>
-              </div>
-              <div className="admin-class-actions">
-                <button className="btn-action">View</button>
-                <button className="btn-action">Edit</button>
-                <button className="btn-action cancel">Cancel</button>
-              </div>
-            </div>
-
-            <div className="admin-class-card">
-              <div className="admin-class-time-badge">7:30 AM</div>
-              <div className="admin-class-details">
-                <div className="admin-class-header-row">
-                  <div>
-                    <h3 className="admin-class-name">Yoga Flow</h3>
-                    <div className="admin-class-category">Yoga</div>
-                  </div>
-                  <div className="admin-class-status available">AVAILABLE</div>
-                </div>
-                <div className="admin-class-info-row">
-                  <div className="info-item">
-                    <span className="info-icon">👤</span>
-                    <span>Coach Emma Chen</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">📍</span>
-                    <span>Studio B</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">⏱️</span>
-                    <span>60 min</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">👥</span>
-                    <span>8/15 booked</span>
+                  <div className="admin-class-actions">
+                    <button className="btn-action">View</button>
+                    <button className="btn-action">Edit</button>
+                    <button className="btn-action cancel">Cancel</button>
                   </div>
                 </div>
-              </div>
-              <div className="admin-class-actions">
-                <button className="btn-action">View</button>
-                <button className="btn-action">Edit</button>
-                <button className="btn-action cancel">Cancel</button>
-              </div>
-            </div>
-
-            <div className="admin-class-card">
-              <div className="admin-class-time-badge">9:00 AM</div>
-              <div className="admin-class-details">
-                <div className="admin-class-header-row">
-                  <div>
-                    <h3 className="admin-class-name">Strength Training</h3>
-                    <div className="admin-class-category">Strength</div>
-                  </div>
-                  <div className="admin-class-status available">AVAILABLE</div>
-                </div>
-                <div className="admin-class-info-row">
-                  <div className="info-item">
-                    <span className="info-icon">👤</span>
-                    <span>Coach Tom Jackson</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">📍</span>
-                    <span>Main Floor</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">⏱️</span>
-                    <span>75 min</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">👥</span>
-                    <span>5/12 booked</span>
-                  </div>
-                </div>
-              </div>
-              <div className="admin-class-actions">
-                <button className="btn-action">View</button>
-                <button className="btn-action">Edit</button>
-                <button className="btn-action cancel">Cancel</button>
-              </div>
-            </div>
-
-            <div className="admin-class-card">
-              <div className="admin-class-time-badge">5:30 PM</div>
-              <div className="admin-class-details">
-                <div className="admin-class-header-row">
-                  <div>
-                    <h3 className="admin-class-name">Cycling Endurance</h3>
-                    <div className="admin-class-category">Cardio</div>
-                  </div>
-                  <div className="admin-class-status almost-full">ALMOST FULL</div>
-                </div>
-                <div className="admin-class-info-row">
-                  <div className="info-item">
-                    <span className="info-icon">👤</span>
-                    <span>Coach Mike Rodriguez</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">📍</span>
-                    <span>Spin Studio</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">⏱️</span>
-                    <span>45 min</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">👥</span>
-                    <span className="capacity-high">18/20 booked</span>
-                  </div>
-                </div>
-              </div>
-              <div className="admin-class-actions">
-                <button className="btn-action">View</button>
-                <button className="btn-action">Edit</button>
-                <button className="btn-action cancel">Cancel</button>
-              </div>
-            </div>
-
-            <div className="admin-class-card">
-              <div className="admin-class-time-badge">7:00 PM</div>
-              <div className="admin-class-details">
-                <div className="admin-class-header-row">
-                  <div>
-                    <h3 className="admin-class-name">Boxing Fundamentals</h3>
-                    <div className="admin-class-category">Boxing</div>
-                  </div>
-                  <div className="admin-class-status available">AVAILABLE</div>
-                </div>
-                <div className="admin-class-info-row">
-                  <div className="info-item">
-                    <span className="info-icon">👤</span>
-                    <span>Coach David Kim</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">📍</span>
-                    <span>Combat Zone</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">⏱️</span>
-                    <span>60 min</span>
-                  </div>
-                  <div className="info-item">
-                    <span className="info-icon">👥</span>
-                    <span>10/15 booked</span>
-                  </div>
-                </div>
-              </div>
-              <div className="admin-class-actions">
-                <button className="btn-action">View</button>
-                <button className="btn-action">Edit</button>
-                <button className="btn-action cancel">Cancel</button>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>

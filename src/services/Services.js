@@ -211,3 +211,93 @@ export const progressService = {
     return response.json();
   },
 };
+
+export const adminService = {
+  fetchMembers: async (filters) => {
+    const token = getAuthToken();
+    const queryParams = new URLSearchParams(filters).toString();
+
+    const response = await fetch(
+      `${API_BASE_URL}/admin/members?${queryParams}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+    );
+    if (!response.ok) {
+      const error = new Error("An error occurred while fetching the events");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
+
+  fetchTrainers: async (filters) => {
+    const token = getAuthToken();
+    const queryParams = new URLSearchParams(filters).toString();
+
+    const response = await fetch(
+      `${API_BASE_URL}/admin/trainers?${queryParams}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+    );
+    if (!response.ok) {
+      const error = new Error("An error occurred while fetching the events");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
+
+  fetchClasses: async (filters) => {
+    const token = getAuthToken();
+    const queryParams = new URLSearchParams(filters).toString();
+
+    const response = await fetch(
+      `${API_BASE_URL}/admin/classes?${queryParams}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+    );
+    if (!response.ok) {
+      const error = new Error("An error occurred while fetching the events");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
+
+  fetchReports: async (filters) => {
+    const token = getAuthToken();
+    const queryParams = new URLSearchParams(filters).toString();
+
+    const response = await fetch(
+      `${API_BASE_URL}/admin/reports?${queryParams}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+    );
+    if (!response.ok) {
+      const error = new Error("An error occurred while fetching the events");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
+};
