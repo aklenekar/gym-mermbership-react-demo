@@ -3,246 +3,495 @@
 ============================================ */
 
 .classes-header {
-    padding: 120px 0 40px;
-    text-align: center;
-    background: var(--dark-gray);
+  padding: 120px 0 40px;
+  text-align: center;
+  background: var(--dark-gray);
 }
 
 .classes-filter {
-    padding: 2rem 0;
-    background: var(--mid-gray);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 0;
+  background: var(--mid-gray);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .filter-bar {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .filter-select {
-    flex: 1;
-    min-width: 200px;
-    padding: 0.875rem 1.25rem;
-    background: var(--dark-gray);
-    color: var(--white);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
+  flex: 1;
+  min-width: 200px;
+  padding: 0.875rem 1.25rem;
+  background: var(--dark-gray);
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 .filter-select:focus {
-    outline: none;
-    border-color: var(--primary);
+  outline: none;
+  border-color: var(--primary);
 }
 
 .classes-content {
-    padding: var(--spacing-xl) 0;
+  padding: var(--spacing-xl) 0;
 }
 
 .classes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
 }
 
 .class-card {
-    background: var(--mid-gray);
-    border-radius: 12px;
-    padding: 2rem;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    transition: var(--transition);
+  background: var(--mid-gray);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
 }
 
 .class-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .class-card.booked {
-    border-color: var(--success);
+  border-color: var(--success);
 }
 
 .class-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .class-category {
-    background: var(--primary);
-    color: var(--white);
-    padding: 0.4rem 0.875rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.4rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .class-spots {
-    color: var(--light-gray);
-    font-size: 0.85rem;
-    font-weight: 600;
+  color: var(--light-gray);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 .class-name {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    color: var(--white);
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .class-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
 .info-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--light-gray);
-    font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--light-gray);
+  font-size: 0.95rem;
 }
 
 .info-icon {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .btn-book,
 .btn-booked {
-    width: 100%;
-    padding: 1rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: var(--transition);
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 .btn-book {
-    background: var(--primary);
-    color: var(--white);
+  background: var(--primary);
+  color: var(--white);
 }
 
 .btn-book:hover {
-    background: var(--primary-light);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 77, 0, 0.4);
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 77, 0, 0.4);
 }
 
 .btn-booked {
-    background: var(--success);
-    color: var(--dark);
-    cursor: default;
+  background: var(--success);
+  color: var(--dark);
+  cursor: default;
 }
 
 @media (max-width: 768px) {
-    .filter-bar {
-        flex-direction: column;
-    }
-    
-    .filter-select {
-        width: 100%;
-    }
-    
-    .classes-grid {
-        grid-template-columns: 1fr;
-    }
+  .filter-bar {
+    flex-direction: column;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .classes-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*Modal for cancellation*/
 
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 .modal-content {
-    background: var(--mid-gray);
-    border-radius: 12px;
-    padding: 2rem;
-    max-width: 400px;
-    width: 90%;
-    border: 2px solid var(--primary);
+  background: var(--mid-gray);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  border: 2px solid var(--primary);
 }
 
 .modal-content h3 {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    color: var(--white);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .modal-content p {
-    color: var(--light-gray);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+  color: var(--light-gray);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .modal-content strong {
-    color: var(--primary);
+  color: var(--primary);
 }
 
 .modal-actions {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .btn-cancel-confirm,
 .btn-cancel-close {
-    flex: 1;
-    padding: 1rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: var(--transition);
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 .btn-cancel-confirm {
-    background: var(--danger);
-    color: var(--white);
+  background: var(--danger);
+  color: var(--white);
 }
 
 .btn-cancel-confirm:hover {
-    background: #cc0036;
-    transform: translateY(-2px);
+  background: #cc0036;
+  transform: translateY(-2px);
 }
 
 .btn-cancel-close {
-    background: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
 }
 
 .btn-cancel-close:hover {
-    background: var(--white);
-    color: var(--dark);
+  background: var(--white);
+  color: var(--dark);
+}
+
+/* AI Recommendations Banner */
+.ai-recommendations-banner {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+}
+
+.ai-banner-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.ai-banner-text h3 {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ai-banner-text p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+}
+
+.btn-get-recommendations {
+  padding: 1rem 2.5rem;
+  background: var(--white);
+  color: var(--primary);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-get-recommendations:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Recommendations Modal */
+.recommendations-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recommendations-content {
+  max-width: 900px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--mid-gray);
+  border-radius: 12px;
+  padding: 0;
+  border: 2px solid var(--primary);
+  position: relative;
+  z-index: 10000;
+}
+
+.recommendations-content .modal-header {
+  position: sticky;
+  top: 0;
+  background: var(--mid-gray);
+  padding: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.recommendations-loading {
+  padding: 4rem;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 77, 0, 0.2);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.recommendations-list {
+  padding: 2rem;
+}
+
+.recommendation-card {
+  background: var(--dark-gray);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
+}
+
+.recommendation-card:hover {
+  border-color: var(--primary);
+}
+
+.recommendation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.recommendation-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.recommendation-match {
+  background: var(--success);
+  color: var(--dark);
+  padding: 0.4rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.recommendation-details {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.recommendation-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--light-gray);
+  font-size: 0.95rem;
+}
+
+.recommendation-reasoning {
+  background: rgba(255, 77, 0, 0.1);
+  border-left: 3px solid var(--primary);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.recommendation-reasoning h4 {
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.recommendation-reasoning p {
+  color: var(--light-gray);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.recommendation-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-book-recommended {
+  flex: 1;
+  padding: 0.875rem;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-book-recommended:hover {
+  background: var(--primary-light);
+}
+
+.btn-view-details {
+  padding: 0.875rem 1.5rem;
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-view-details:hover {
+  background: var(--white);
+  color: var(--dark);
+}
+
+@media (max-width: 768px) {
+  .ai-banner-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .btn-get-recommendations {
+    width: 100%;
+  }
+
+  .recommendations-content {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .recommendation-details {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .recommendation-actions {
+    flex-direction: column;
+  }
 }

@@ -1,48 +1,32 @@
 import { useEffect, useState } from "react";
-import { getAuthToken } from "../../util/auth";
 import PageHeader from "../pageHeader/PageHeader";
 import "./ProgressSection.css";
-import { API_BASE_URL } from "../../util/constants";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import ErrorPage from "../../routes/ErrorPage";
+import { progressService } from "../../services/Services";
+import PersonalRecords from "./PersonalRecord";
+import MonthlySummary from "./MonthlySummary";
+import Achievements from "./Achievements";
+import PersonalGoals from "./PersonalGoals";
 
 export default function ProgressSection() {
-  const token = getAuthToken();
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  function fetchProgress() {
+    progressService
+      .fetchProgress()
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => setError(error))
+      .finally(setIsLoading(false));
+  }
+
   useEffect(() => {
     setIsLoading(true);
-    async function fetchProgress() {
-      const response = await fetch(`${API_BASE_URL}/progress`, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-
-      if (!response.ok) {
-        const error = new Error("An error occurred while fetching the events");
-        error.code = response.status;
-        error.info = await response.json();
-        throw error;
-      }
-
-      const details = await response.json();
-      return details;
-    }
-
-    fetchProgress()
-      .then((details) => {
-        setData(details);
-      })
-      .catch((error) => {
-        setError(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    fetchProgress();
   }, []);
 
   let content;
@@ -54,65 +38,15 @@ export default function ProgressSection() {
   if (error) {
     content = <ErrorPage />;
   }
-  return (
-    <>
-      <PageHeader title="MY PROGRESS" subTitle="Track your fitness journey" />
+
+  if (data) {
+    content = (
       <section className="progress-content">
         <div className="container">
           <div className="progress-grid">
-            <div className="progress-card goals-card">
-              <div className="card-header">
-                <h2>Monthly Goals</h2>
-                <select className="month-selector">
-                  <option>February 2025</option>
-                  <option>January 2025</option>
-                  <option>December 2024</option>
-                </select>
-              </div>
-              <div className="card-body">
-                <div className="goal-item">
-                  <div className="goal-header">
-                    <span className="goal-name">Workout Frequency</span>
-                    <span className="goal-progress">18/20</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: 90 }}></div>
-                  </div>
-                  <div className="goal-footer">
-                    <span className="goal-percent">90%</span>
-                    <span className="goal-status on-track">On Track</span>
-                  </div>
-                </div>
 
-                <div className="goal-item">
-                  <div className="goal-header">
-                    <span className="goal-name">Group Classes</span>
-                    <span className="goal-progress">12/15</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: 80 }}></div>
-                  </div>
-                  <div className="goal-footer">
-                    <span className="goal-percent">80%</span>
-                    <span className="goal-status on-track">On Track</span>
-                  </div>
-                </div>
-
-                <div className="goal-item">
-                  <div className="goal-header">
-                    <span className="goal-name">Recovery Sessions</span>
-                    <span className="goal-progress">6/8</span>
-                  </div>
-                  <div className="progress-bar">
-                    <div className="progress-fill" style={{ width: 75 }}></div>
-                  </div>
-                  <div className="goal-footer">
-                    <span className="goal-percent">75%</span>
-                    <span className="goal-status on-track">On Track</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Personal Goals */}
+            <PersonalGoals personalGoals={data.goals} />
 
             {/* Body Metrics */}
             <div className="progress-card metrics-card">
@@ -153,38 +87,7 @@ export default function ProgressSection() {
                 </a>
               </div>
               <div className="card-body">
-                <div className="pr-item">
-                  <div className="pr-exercise">
-                    <span className="pr-icon">🏋️</span>
-                    <span className="pr-name">Bench Press</span>
-                  </div>
-                  <div className="pr-value">225 lbs</div>
-                  <div className="pr-date">5 days ago</div>
-                </div>
-                <div className="pr-item">
-                  <div className="pr-exercise">
-                    <span className="pr-icon">🦵</span>
-                    <span className="pr-name">Squat</span>
-                  </div>
-                  <div className="pr-value">315 lbs</div>
-                  <div className="pr-date">1 week ago</div>
-                </div>
-                <div className="pr-item">
-                  <div className="pr-exercise">
-                    <span className="pr-icon">💪</span>
-                    <span className="pr-name">Deadlift</span>
-                  </div>
-                  <div className="pr-value">405 lbs</div>
-                  <div className="pr-date">2 weeks ago</div>
-                </div>
-                <div className="pr-item">
-                  <div className="pr-exercise">
-                    <span className="pr-icon">🏃</span>
-                    <span className="pr-name">5K Run</span>
-                  </div>
-                  <div className="pr-value">22:45</div>
-                  <div className="pr-date">1 month ago</div>
-                </div>
+                <PersonalRecords records={data.personalRecords} />
               </div>
             </div>
 
@@ -249,72 +152,21 @@ export default function ProgressSection() {
                   View All
                 </a>
               </div>
-              <div className="card-body">
-                <div className="achievement-item">
-                  <div className="achievement-badge">🏆</div>
-                  <div className="achievement-info">
-                    <div className="achievement-name">100 Workouts</div>
-                    <div className="achievement-date">Unlocked 2 days ago</div>
-                  </div>
-                </div>
-                <div className="achievement-item">
-                  <div className="achievement-badge">🔥</div>
-                  <div className="achievement-info">
-                    <div className="achievement-name">30 Day Streak</div>
-                    <div className="achievement-date">Unlocked 1 week ago</div>
-                  </div>
-                </div>
-                <div className="achievement-item">
-                  <div className="achievement-badge">💪</div>
-                  <div className="achievement-info">
-                    <div className="achievement-name">Strength Master</div>
-                    <div className="achievement-date">Unlocked 2 weeks ago</div>
-                  </div>
-                </div>
-              </div>
+              <Achievements achievements={data.achievements} />
             </div>
 
             {/* Monthly Summary */}
-            <div className="progress-card summary-card">
-              <div className="card-header">
-                <h2>This Month Summary</h2>
-              </div>
-              <div className="card-body">
-                <div className="summary-stats">
-                  <div className="summary-stat">
-                    <div className="stat-icon">💪</div>
-                    <div className="stat-info">
-                      <div className="stat-value">18</div>
-                      <div className="stat-label">Workouts</div>
-                    </div>
-                  </div>
-                  <div className="summary-stat">
-                    <div className="stat-icon">⏱️</div>
-                    <div className="stat-info">
-                      <div className="stat-value">24.5h</div>
-                      <div className="stat-label">Training Time</div>
-                    </div>
-                  </div>
-                  <div className="summary-stat">
-                    <div className="stat-icon">🔥</div>
-                    <div className="stat-info">
-                      <div className="stat-value">8,100</div>
-                      <div className="stat-label">Calories</div>
-                    </div>
-                  </div>
-                  <div className="summary-stat">
-                    <div className="stat-icon">📈</div>
-                    <div className="stat-info">
-                      <div className="stat-value">85%</div>
-                      <div className="stat-label">Goal Progress</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <MonthlySummary stats={data.monthlyStats} />
           </div>
         </div>
       </section>
+    );
+  }
+
+  return (
+    <>
+      <PageHeader title="MY PROGRESS" subTitle="Track your fitness journey" />
+      {content}
     </>
   );
 }

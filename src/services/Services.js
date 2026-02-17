@@ -132,6 +132,24 @@ export const classesService = {
     }
     return response.json();
   },
+
+  recommendedClasses: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/classes/recommendations`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    if (!response.ok) {
+      const error = new Error("An error occurred while fetching the events");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
 };
 
 export const workoutService = {
@@ -163,6 +181,26 @@ export const workoutService = {
         "Content-Type": "Application/JSON",
       },
       body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      const error = new Error("An error occurred while submitting the workout");
+      error.code = response.status;
+      error.info = await response.json();
+      throw error;
+    }
+    return response.json();
+  },
+};
+
+export const progressService = {
+  fetchProgress: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/progress`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "Application/JSON",
+      },
     });
     if (!response.ok) {
       const error = new Error("An error occurred while submitting the workout");
