@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function AdminTrainersCard() {
+export default function AdminTrainersCard({ topTrainers }) {
   return (
     <div className="admin-card">
       <div className="card-header">
@@ -11,33 +11,21 @@ export default function AdminTrainersCard() {
       </div>
       <div className="card-body">
         <div className="trainer-list">
-          <div className="trainer-item">
-            <div className="trainer-rank">1</div>
-            <div className="trainer-avatar">SM</div>
-            <div className="trainer-info">
-              <div className="trainer-name">Sarah Mitchell</div>
-              <div className="trainer-specialty">Strength</div>
-            </div>
-            <div className="trainer-rating">⭐ 4.9</div>
-          </div>
-          <div className="trainer-item">
-            <div className="trainer-rank">2</div>
-            <div className="trainer-avatar">MR</div>
-            <div className="trainer-info">
-              <div className="trainer-name">Mike Rodriguez</div>
-              <div className="trainer-specialty">HIIT</div>
-            </div>
-            <div className="trainer-rating">⭐ 4.8</div>
-          </div>
-          <div className="trainer-item">
-            <div className="trainer-rank">3</div>
-            <div className="trainer-avatar">EC</div>
-            <div className="trainer-info">
-              <div className="trainer-name">Emma Chen</div>
-              <div className="trainer-specialty">Yoga</div>
-            </div>
-            <div className="trainer-rating">⭐ 4.8</div>
-          </div>
+          {topTrainers.map((topTrainer) => {
+            return (
+              <div className="trainer-item">
+                <div className="trainer-rank">{topTrainer.rank}</div>
+                <div className="trainer-avatar">{topTrainer.initials}</div>
+                <div className="trainer-info">
+                  <div className="trainer-name">{topTrainer.name}</div>
+                  <div className="trainer-specialty">
+                    {topTrainer.specialty}
+                  </div>
+                </div>
+                <div className="trainer-rating">⭐ {topTrainer.rating}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
