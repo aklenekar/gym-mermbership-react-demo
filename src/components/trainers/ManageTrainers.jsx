@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./ManageTrainers.css";
 import { adminService } from "../../services/Services";
+import AddTrainer from "./AddTrainer";
 
 export default function ManageTrainers() {
   const [data, setData] = useState({
@@ -39,6 +40,44 @@ export default function ManageTrainers() {
       [name]: value,
     }));
   };
+
+  const dialogRef = useRef(null);
+
+  const openModal = () => dialogRef.current.showModal();
+  const closeModal = () => {
+    dialogRef.current.close();
+    setTrainer(trainerObj);
+    setIsView(false);
+  };
+
+  const trainerObj = {
+    fullName: "",
+    specialty: "",
+    bio: "",
+    certifications: "",
+    yearsExperience: "",
+    isHeadCoach: false,
+    email: "",
+    phone: "",
+  };
+
+  const [trainer, setTrainer] = useState(trainerObj);
+  const [isView, setIsView] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+
+  function handleViewDetails(viewTrainer) {
+    setTrainer(viewTrainer);
+    setIsView(true);
+    openModal();
+  }
+
+  function handleEditDetails(viewTrainer) {
+    setTrainer(viewTrainer);
+    setIsView(false);
+    setIsEdit(true);
+    openModal();
+  }
+
   return (
     <>
       <PageHeader
@@ -48,6 +87,14 @@ export default function ManageTrainers() {
 
       <section className="admin-content">
         <div className="container">
+          <dialog ref={dialogRef}>
+            <AddTrainer
+              closeModal={closeModal}
+              trainer={trainer}
+              isView={isView}
+              isEdit={isEdit}
+            />
+          </dialog>
           <div className="trainers-controls">
             <div className="search-bar">
               <input
@@ -80,7 +127,9 @@ export default function ManageTrainers() {
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
               </select>
-              <button className="btn-add-trainer">+ Add Trainer</button>
+              <button className="btn-add-trainer" onClick={openModal}>
+                + Add Trainer
+              </button>
             </div>
           </div>
 
@@ -130,11 +179,15 @@ export default function ManageTrainers() {
                   </div>
                   <div className="trainer-stats-row">
                     <div className="stat-item">
-                      <div className="stat-value">{trainer.clientsTrained}+</div>
+                      <div className="stat-value">
+                        {trainer.clientsTrained}+
+                      </div>
                       <div className="stat-name">Clients</div>
                     </div>
                     <div className="stat-item">
-                      <div className="stat-value">{trainer.yearsExperience}</div>
+                      <div className="stat-value">
+                        {trainer.yearsExperience}
+                      </div>
                       <div className="stat-name">Years</div>
                     </div>
                     <div className="stat-item">
@@ -143,8 +196,18 @@ export default function ManageTrainers() {
                     </div>
                   </div>
                   <div className="trainer-actions">
-                    <button className="btn-view">View Profile</button>
-                    <button className="btn-edit">Edit</button>
+                    <button
+                      className="btn-view"
+                      onClick={() => handleViewDetails(trainer)}
+                    >
+                      View Profile
+                    </button>
+                    <button
+                      className="btn-edit"
+                      onClick={() => handleEditDetails(trainer)}
+                    >
+                      Edit
+                    </button>
                     <button className="btn-delete">Delete</button>
                   </div>
                 </div>

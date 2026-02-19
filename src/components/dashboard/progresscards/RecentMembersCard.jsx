@@ -17,10 +17,10 @@ export default function RecentMembersCard({ recentMembers }) {
                 <div className="member-avatar">{member.initials}</div>
                 <div className="member-info">
                   <div className="member-name">{member.name}</div>
-                  <div className="member-email">{member.email}</div>
+                  {/* <div className="member-email">{member.email}</div> */}
                 </div>
                 <div className="member-plan">{member.plan}</div>
-                <div className="member-date">{member.joinedDate}</div>
+                {/* <div className="member-date">{member.joinedDate}</div> */}
               </div>
             );
           })}

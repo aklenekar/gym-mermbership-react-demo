@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./ManageMembers.css";
 import { adminService } from "../../services/Services";
 import Pagination from "../ui/Pagination.jsx";
+import AddMember from "./AddMember.jsx";
 
 export default function ManageMembers() {
   const [data, setData] = useState({
@@ -47,12 +48,19 @@ export default function ManageMembers() {
     }));
   };
 
+  const dialogRef = useRef(null);
+
+  const openModal = () => dialogRef.current.showModal();
+  const closeModal = () => dialogRef.current.close();
+
   return (
     <>
       <PageHeader
         title="MEMBERS MANAGEMENT"
         subTitle="Manage gym memberships"
       />
+
+      {/* <AddMember dialogRef={dialogRef}  closeModal={closeModal} /> */}
 
       <section className="admin-content">
         <div className="container">
@@ -87,7 +95,9 @@ export default function ManageMembers() {
                 <option value="Expired">Expired</option>
                 <option value="Suspended">Suspended</option>
               </select>
-              <button className="btn-add-member">+ Add Member</button>
+              {/* <button className="btn-add-member" onClick={openModal}>
+                + Add Member
+              </button> */}
             </div>
           </div>
 

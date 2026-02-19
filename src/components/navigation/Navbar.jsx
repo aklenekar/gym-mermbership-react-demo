@@ -23,6 +23,8 @@ export default function Navbar() {
         : guestNavBar
     : guestNavBar;
 
+  const isProfile = role === "USER";
+
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -44,15 +46,17 @@ export default function Navbar() {
 
           {token ? (
             <>
-              <li className="mobile-cta">
-                <NavLink
-                  to="/profile"
-                  className="btn-secondary"
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                >
-                  Profile
-                </NavLink>
-              </li>
+              {isProfile && (
+                <li className="mobile-cta">
+                  <NavLink
+                    to="/profile"
+                    className="btn-secondary"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+              )}
               <li className="mobile-cta">
                 <Form
                   action="/logout"
@@ -90,9 +94,11 @@ export default function Navbar() {
         <div className="desktop-cta">
           {token ? (
             <>
-              <NavLink to="/profile" className="btn-secondary">
-                Profile
-              </NavLink>
+              {isProfile && (
+                <NavLink to="/profile" className="btn-secondary">
+                  Profile
+                </NavLink>
+              )}
               <Form action="/logout" method="post" className="inline-form">
                 <button className="btn-primary">Logout</button>
               </Form>

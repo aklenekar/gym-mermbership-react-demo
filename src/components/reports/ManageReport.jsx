@@ -40,8 +40,11 @@ export default function ManageReport() {
     fetchReports(filters);
   }, [filters]);
 
+  const [filterButtonClass, setFilterButtonClass] = useState("Week");
+
   const handleOnClick = (e) => {
     const { name, value } = e.target;
+    setFilterButtonClass(value);
     setFilters((prev) => ({
       ...prev,
       [name]: value,
@@ -58,33 +61,33 @@ export default function ManageReport() {
           <div className="reports-controls">
             <div name="period" className="period-selector">
               <button
-                className="period-btn active"
+                className={`period-btn ${filterButtonClass === "MONTH" ? "active" : ""}`}
                 name="period"
-                value="today"
+                value="MONTH"
                 onClick={handleOnClick}
               >
                 Month
               </button>
               <button
-                className="period-btn"
+                className={`period-btn ${filterButtonClass === "WEEK" ? "active" : ""}`}
                 name="period"
-                value="Week"
+                value="WEEK"
                 onClick={handleOnClick}
               >
                 Week
               </button>
               <button
-                className="period-btn"
+                className={`period-btn ${filterButtonClass === "QUARTER" ? "active" : ""}`}
                 name="period"
-                value="Quarter"
+                value="QUARTER"
                 onClick={handleOnClick}
               >
                 Quarter
               </button>
               <button
-                className="period-btn"
+                className={`period-btn ${filterButtonClass === "YEAR" ? "active" : ""}`}
                 name="period"
-                value="Year"
+                value="YEAR"
                 onClick={handleOnClick}
               >
                 Year
@@ -120,12 +123,12 @@ export default function ManageReport() {
                 </div>
                 <div className="revenue-stat">
                   <div className="stat-label">Membership Revenue</div>
-                  <div className="stat-value">${data.membershipRevenue}</div>
+                  <div className="stat-value large">${data.membershipRevenue}</div>
                   <div className="stat-change positive">↑ 8.2%</div>
                 </div>
                 <div className="revenue-stat">
                   <div className="stat-label">Personal Training</div>
-                  <div className="stat-value">${data.trainingRevenue}</div>
+                  <div className="stat-value large">${data.trainingRevenue}</div>
                   <div className="stat-change positive">↑ 15.8%</div>
                 </div>
                 <div className="revenue-stat">
@@ -138,7 +141,7 @@ export default function ManageReport() {
                 <div className="revenue-chart">
                   {data.revenueChart.map((revenue) => {
                     return (
-                      <div className="chart-bar" style={{ height: `50%` }}>
+                      <div className="chart-bar" style={{ height: `${revenue.heightPercent}%` }}>
                         <span className="bar-value">${revenue.amount}</span>
                         <span className="bar-label">{revenue.label}</span>
                       </div>

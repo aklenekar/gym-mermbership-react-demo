@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./ManageClasses.css";
 import { adminService } from "../../services/Services";
+import AddClasses from "./AddClasses";
 
 export default function ManageClasses() {
   const [data, setData] = useState({
@@ -32,13 +33,53 @@ export default function ManageClasses() {
     fetchClasses(filters);
   }, [filters]);
 
+  const [filterButtonClass, setFilterButtonClass] = useState("TODAY");
+
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
+    if (name === "day") {
+      setFilterButtonClass(value);
+    }
     setFilters((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
+
+  const dialogRef = useRef(null);
+
+  const openModal = () => dialogRef.current.showModal();
+  const closeModal = () => {
+    dialogRef.current.close();
+    setFitnessClass(fitnessClassObj);
+    setIsView(false);
+  };
+
+  const fitnessClassObj = {
+    name: "",
+    category: "",
+    instructor: "",
+    location: "",
+    durationMinutes: "",
+    capacity: false
+  };
+
+  const [fitnessClass, setFitnessClass] = useState(fitnessClassObj);
+  const [isView, setIsView] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+
+  function handleViewDetails(viewFitnessClass) {
+    setFitnessClass(viewFitnessClass);
+    setIsView(true);
+    openModal();
+  }
+
+  function handleEditDetails(viewTrainer) {
+    setFitnessClass(viewTrainer);
+    setIsView(false);
+    setIsEdit(true);
+    openModal();
+  }
   return (
     <>
       <PageHeader
@@ -48,6 +89,15 @@ export default function ManageClasses() {
 
       <section className="admin-content">
         <div className="container">
+          <dialog ref={dialogRef}>
+            <AddClasses
+              closeModal={closeModal}
+              fitnessClasses={fitnessClass}
+              isView={isView}
+              isEdit={isEdit}
+            />
+          </dialog>
+
           <div className="admin-classes-controls">
             <div className="search-bar">
               <input
@@ -81,7 +131,9 @@ export default function ManageClasses() {
                 <option value="TOMORROW">Tomorrow</option>
                 <option value="WEEK">This Week</option>
               </select>
-              <button className="btn-add-class">+ Add Class</button>
+              <button className="btn-add-class" onClick={openModal}>
+                + Add Class
+              </button>
             </div>
           </div>
 
@@ -105,10 +157,38 @@ export default function ManageClasses() {
           </div>
 
           <div className="schedule-tabs">
-            <button className="tab-btn active">Today</button>
-            <button className="tab-btn">Tomorrow</button>
-            <button className="tab-btn">This Week</button>
-            <button className="tab-btn">Calendar View</button>
+            <button
+              className={`tab-btn ${filterButtonClass === "TODAY" ? "active" : ""}`}
+              name="day"
+              value="TODAY"
+              onClick={handleFilterChange}
+            >
+              Today
+            </button>
+            <button
+              className={`tab-btn ${filterButtonClass === "TOMORROW" ? "active" : ""}`}
+              name="day"
+              value="TOMORROW"
+              onClick={handleFilterChange}
+            >
+              Tomorrow
+            </button>
+            <button
+              className={`tab-btn ${filterButtonClass === "WEEK" ? "active" : ""}`}
+              name="day"
+              value="WEEK"
+              onClick={handleFilterChange}
+            >
+              This Week
+            </button>
+            <button
+              className={`tab-btn ${filterButtonClass === "Calendar View" ? "active" : ""}`}
+              name="day"
+              value="Calendar View"
+              onClick={handleFilterChange}
+            >
+              Calendar View
+            </button>
           </div>
 
           <div className="admin-classes-list">
@@ -150,8 +230,13 @@ export default function ManageClasses() {
                     </div>
                   </div>
                   <div className="admin-class-actions">
-                    <button className="btn-action">View</button>
-                    <button className="btn-action">Edit</button>
+                    <button
+                      className="btn-action"
+                      onClick={() => handleViewDetails(cl)}
+                    >
+                      View
+                    </button>
+                    <button className="btn-action" onClick={() => handleEditDetails(cl)}>Edit</button>
                     <button className="btn-action cancel">Cancel</button>
                   </div>
                 </div>

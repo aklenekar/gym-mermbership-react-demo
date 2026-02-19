@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import WorkoutForm from "./WorkoutForm";
 
 export default function WorkoutActions({ handleFilterChange, dialogRef, openModal, closeModal, handleSubmit, isSubmitting }) {
