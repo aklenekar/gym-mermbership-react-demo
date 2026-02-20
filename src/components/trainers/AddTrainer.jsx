@@ -140,12 +140,12 @@ export default function AddTrainer({ closeModal, trainer, isView, isEdit }) {
               <div class="form-actions">
                 <button
                   type="button"
-                  class="btn-secondary"
+                  class="form-btn-secondary"
                   onClick={closeModal}
                 >
                   Cancel
                 </button>
-                <button type="submit" class="btn-primary">
+                <button type="submit" class="form-btn-primary">
                   Save Trainer
                 </button>
               </div>

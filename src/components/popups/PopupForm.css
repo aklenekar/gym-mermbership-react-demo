@@ -168,8 +168,8 @@ textarea.form-control {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.btn-primary,
-.btn-secondary {
+.form-btn-primary,
+.form-btn-secondary {
   flex: 1;
   padding: 1rem;
   border: none;
@@ -182,24 +182,24 @@ textarea.form-control {
   transition: var(--transition);
 }
 
-.btn-primary {
+.form-btn-primary {
   background: var(--primary);
   color: var(--white);
 }
 
-.btn-primary:hover {
+.form-btn-primary:hover {
   background: var(--primary-light);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 77, 0, 0.4);
 }
 
-.btn-secondary {
+.form-btn-secondary {
   background: transparent;
   color: var(--white);
   border: 2px solid var(--white);
 }
 
-.btn-secondary:hover {
+.form-btn-secondary:hover {
   background: var(--white);
   color: var(--dark);
 }

@@ -95,6 +95,7 @@ export default function ManageClasses() {
               fitnessClasses={fitnessClass}
               isView={isView}
               isEdit={isEdit}
+              setFitnessClasses={setFitnessClass}
             />
           </dialog>
 
@@ -195,7 +196,7 @@ export default function ManageClasses() {
             {data.classes.map((cl) => {
               return (
                 <div className="admin-class-card">
-                  <div className="admin-class-time-badge">{cl.startTime}</div>
+                  <div className="admin-class-time-badge">{cl.fullStartTime}</div>
                   <div className="admin-class-details">
                     <div className="admin-class-header-row">
                       <div>

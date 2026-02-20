@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./SignUp.css";
 import { profileService } from "../../services/Services";
+import { redirect, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   // -----------------------------------------------------------------
@@ -35,6 +36,8 @@ export default function SignUp() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState();
   const [successMsg, setSuccessMsg] = useState();
+
+  const navigate = useNavigate()
 
   // -----------------------------------------------------------------
   // 2️⃣ Generic onChange handler for text/number/select/textarea
@@ -99,7 +102,7 @@ export default function SignUp() {
     try {
       const created = await profileService.createProfile(payload);
       setSuccessMsg("Your account has been created! 🎉");
-      redirect("/auth");
+      navigate("/auth");
     } catch (error) {
       console.error(err);
       // err.info may contain validation errors from the back‑end

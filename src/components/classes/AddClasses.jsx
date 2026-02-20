@@ -6,12 +6,25 @@ export default function AddClasses({
   fitnessClasses,
   isView,
   isEdit,
+  setFitnessClasses,
 }) {
   const title = isView
     ? `${fitnessClasses.name}`
     : isEdit
       ? "Edit Class"
       : "Add New Class";
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (isView) return;
+
+    setFitnessClasses((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <Form class="form-modal" id="classModal">
       <div class="modal-overlay" onClick={closeModal}></div>
@@ -37,6 +50,7 @@ export default function AddClasses({
                 required
                 value={fitnessClasses.name}
                 disabled={isView}
+                onChange={handleInputChange}
               />
             </div>
             <div class="form-field">
@@ -47,6 +61,7 @@ export default function AddClasses({
                 required
                 value={fitnessClasses.category}
                 disabled={isView}
+                onChange={handleInputChange}
               >
                 <option value="">Select category</option>
                 <option value="HIIT">HIIT</option>
@@ -67,6 +82,7 @@ export default function AddClasses({
                 required
                 value={fitnessClasses.instructor}
                 disabled={isView}
+                onChange={handleInputChange}
               >
                 <option value="">Select instructor</option>
                 <option value="Coach Sarah">Coach Sarah</option>
@@ -84,6 +100,7 @@ export default function AddClasses({
                 required
                 value={fitnessClasses.location}
                 disabled={isView}
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -91,11 +108,27 @@ export default function AddClasses({
           <div class="form-row">
             <div class="form-field">
               <label class="form-label">Date *</label>
-              <input type="date" class="form-control" name="date" required />
+              <input
+                type="date"
+                class="form-control"
+                name="date"
+                required
+                value={fitnessClasses.startDate}
+                disabled={isView}
+                onChange={handleInputChange}
+              />
             </div>
             <div class="form-field">
               <label class="form-label">Time *</label>
-              <input type="time" class="form-control" name="time" required />
+              <input
+                type="time"
+                class="form-control"
+                name="time"
+                required
+                value={fitnessClasses.startTime}
+                disabled={isView}
+                onChange={handleInputChange}
+              />
             </div>
           </div>
 
@@ -112,6 +145,7 @@ export default function AddClasses({
                 required
                 value={fitnessClasses.durationMinutes}
                 disabled={isView}
+                onChange={handleInputChange}
               />
             </div>
             <div class="form-field">
@@ -126,16 +160,21 @@ export default function AddClasses({
                 required
                 value={fitnessClasses.capacity}
                 disabled={isView}
+                onChange={handleInputChange}
               />
             </div>
           </div>
 
           {!isView && (
             <div class="form-actions">
-              <button type="button" class="btn-secondary" onClick={closeModal}>
+              <button
+                type="button"
+                class="form-btn-secondary"
+                onClick={closeModal}
+              >
                 Cancel
               </button>
-              <button type="submit" class="btn-primary">
+              <button type="submit" class="form-btn-primary">
                 Save Class
               </button>
             </div>
