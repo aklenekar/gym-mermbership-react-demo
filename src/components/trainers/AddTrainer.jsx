@@ -10,7 +10,7 @@ export default function AddTrainer({ closeModal, trainer, isView, isEdit }) {
 
   return (
     <>
-      <Form class="form-modal" id="trainerModal">
+      <div class="form-modal" id="trainerModal">
         <div class="modal-overlay" onClick={closeModal}></div>
         <div class="modal-container">
           <div class="modal-header">
@@ -22,7 +22,7 @@ export default function AddTrainer({ closeModal, trainer, isView, isEdit }) {
             </button>
           </div>
 
-          <form class="modal-form" id="trainerForm">
+          <Form class="modal-form" id="trainerForm">
             <div class="form-row">
               <div class="form-field">
                 <label class="form-label">Full Name *</label>
@@ -150,9 +150,9 @@ export default function AddTrainer({ closeModal, trainer, isView, isEdit }) {
                 </button>
               </div>
             )}
-          </form>
+          </Form>
         </div>
-      </Form>
+      </div>
     </>
   );
 }

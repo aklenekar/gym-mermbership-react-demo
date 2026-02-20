@@ -26,7 +26,7 @@ export default function AddClasses({
   };
 
   return (
-    <Form class="form-modal" id="classModal">
+    <div class="form-modal" id="classModal">
       <div class="modal-overlay" onClick={closeModal}></div>
       <div class="modal-container">
         <div class="modal-header">
@@ -38,7 +38,7 @@ export default function AddClasses({
           </button>
         </div>
 
-        <form class="modal-form" id="classForm">
+        <Form class="modal-form" id="classForm">
           <div class="form-row">
             <div class="form-field">
               <label class="form-label">Class Name *</label>
@@ -179,8 +179,8 @@ export default function AddClasses({
               </button>
             </div>
           )}
-        </form>
+        </Form>
       </div>
-    </Form>
+    </div>
   );
 }

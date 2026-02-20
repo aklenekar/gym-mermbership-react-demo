@@ -158,7 +158,22 @@ export default function ManageTrainers() {
                 <div className="trainer-card">
                   <div className="trainer-header">
                     <div className="trainer-avatar-large">
-                      {trainer.initials}
+                      {trainer.imageUrl ? (
+                        <img
+                          src={trainer.imageUrl}
+                          alt={trainer.fullName}
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                            e.target.nextSibling.style.display = "flex";
+                          }}
+                        />
+                      ) : null}
+                      <span
+                        className="avatar-fallback"
+                        style={{ display: trainer.imageUrl ? "none" : "flex" }}
+                      >
+                        {trainer.initials}
+                      </span>
                     </div>
                     {trainer.isHeadCoach && (
                       <div className="trainer-badge head-coach">HEAD COACH</div>
