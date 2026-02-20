@@ -1,6 +1,16 @@
 import { getAuthToken } from "../util/auth";
 import { API_BASE_URL } from "../util/constants";
 
+async function handleResponse(response) {
+  if (!response.ok) {
+    const error = new Error("An error occurred while fetching the events");
+    error.code = response.status;
+    error.info = await response.json();
+    throw error;
+  }
+  return response.json();
+}
+
 export const profileService = {
   fetchProfile: async () => {
     const token = getAuthToken();
@@ -10,13 +20,7 @@ export const profileService = {
         Authorization: "Bearer " + token,
       },
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   updateProfile: async (profile) => {
@@ -29,13 +33,7 @@ export const profileService = {
       },
       body: JSON.stringify(profile),
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while submitting the workout");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   /** CREATE a brand‑new profile (sign‑up) */
@@ -48,13 +46,7 @@ export const profileService = {
       body: JSON.stringify(profile),
     });
 
-    if (!response.ok) {
-      const error = new Error("Failed to create profile");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 };
 
@@ -67,13 +59,7 @@ export const dashboardService = {
         Authorization: "Bearer " + token,
       },
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 };
 
@@ -88,13 +74,7 @@ export const classesService = {
         Authorization: "Bearer " + token,
       },
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   bookClass: async (classId) => {
@@ -106,13 +86,7 @@ export const classesService = {
         Authorization: "Bearer " + token,
       },
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   cancelClass: async (bookingId) => {
@@ -124,13 +98,7 @@ export const classesService = {
         Authorization: "Bearer " + token,
       },
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   recommendedClasses: async () => {
@@ -142,13 +110,7 @@ export const classesService = {
         Authorization: "Bearer " + token,
       },
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 };
 
@@ -163,13 +125,7 @@ export const workoutService = {
         Authorization: "Bearer " + token,
       },
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   submitWorkout: async (payload) => {
@@ -182,13 +138,7 @@ export const workoutService = {
       },
       body: JSON.stringify(payload),
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while submitting the workout");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 };
 
@@ -202,13 +152,7 @@ export const progressService = {
         "Content-Type": "Application/JSON",
       },
     });
-    if (!response.ok) {
-      const error = new Error("An error occurred while submitting the workout");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 };
 
@@ -226,13 +170,7 @@ export const adminService = {
         },
       },
     );
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   fetchTrainers: async (filters) => {
@@ -248,13 +186,7 @@ export const adminService = {
         },
       },
     );
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   fetchClasses: async (filters) => {
@@ -270,13 +202,7 @@ export const adminService = {
         },
       },
     );
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   fetchReports: async (filters) => {
@@ -292,33 +218,18 @@ export const adminService = {
         },
       },
     );
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    return handleResponse(response);
   },
 
   fetchDashboard: async () => {
     const token = getAuthToken();
 
-    const response = await fetch(
-      `${API_BASE_URL}/admin/dashboard`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
+    const response = await fetch(`${API_BASE_URL}/admin/dashboard`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
       },
-    );
-    if (!response.ok) {
-      const error = new Error("An error occurred while fetching the events");
-      error.code = response.status;
-      error.info = await response.json();
-      throw error;
-    }
-    return response.json();
+    });
+    return handleResponse(response);
   },
 };
