@@ -3,7 +3,22 @@ export default function HeadCoaches({ headCoach }) {
     <div className="trainer-profile-card">
       <div className="trainer-profile-image">
         <div className="trainer-image-placeholder">
-          <span className="trainer-initials">{headCoach.initials}</span>
+          {headCoach.imageUrl ? (
+            <img
+              src={headCoach.imageUrl}
+              alt={headCoach.fullName}
+              onError={(e) => {
+                e.target.style.display = "none";
+                e.target.nextSibling.style.display = "flex";
+              }}
+            />
+          ) : null}
+          <span
+            className="trainer-initials"
+            style={{ display: headCoach.imageUrl ? "none" : "flex" }}
+          >
+            {headCoach.initials}
+          </span>
         </div>
         <div className="trainer-badge">HEAD COACH</div>
       </div>

@@ -189,6 +189,17 @@ export const adminService = {
     return handleResponse(response);
   },
 
+  fetchTrainersList: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/trainers/list`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
   fetchClasses: async (filters) => {
     const token = getAuthToken();
     const queryParams = new URLSearchParams(filters).toString();

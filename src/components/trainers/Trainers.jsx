@@ -3,7 +3,22 @@ export default function Trainers({ trainer }) {
     <div className="trainer-card">
       <div className="trainer-card-image">
         <div className="trainer-image-small">
-          <span className="trainer-initials-small">{trainer.initials}</span>
+          {trainer.imageUrl ? (
+            <img
+              src={trainer.imageUrl}
+              alt={trainer.fullName}
+              onError={(e) => {
+                e.target.style.display = "none";
+                e.target.nextSibling.style.display = "flex";
+              }}
+            />
+          ) : null}
+          <span
+            className="trainer-initials-small"
+            style={{ display: trainer.imageUrl ? "none" : "flex" }}
+          >
+            {trainer.initials}
+          </span>
         </div>
       </div>
       <div className="trainer-card-content">

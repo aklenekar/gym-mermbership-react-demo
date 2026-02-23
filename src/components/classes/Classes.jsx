@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./Classes.css";
 import ClassesFilter from "./ClassesFilter";
 import ClassesCard from "./ClassesCard";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import ErrorPage from "../../routes/ErrorPage";
-import { classesService } from "../../services/Services";
+import { adminService, classesService } from "../../services/Services";
 import RecommendedClasses from "./RecommendedClasses";
 
 const categories = [
@@ -30,24 +30,6 @@ const categories = [
     value: "hiit",
   },
 ];
-const instructors = [
-  {
-    name: "All Instructors",
-    value: "all",
-  },
-  {
-    name: "Coach Sarah",
-    value: "Coach Sarah",
-  },
-  {
-    name: "Coach Mike",
-    value: "Coach Mike",
-  },
-  {
-    name: "Coach Tom",
-    value: "Coach Tom",
-  },
-];
 const days = [
   {
     name: "All Days",
@@ -69,6 +51,7 @@ const days = [
 
 export default function Classes() {
   const [data, setData] = useState();
+  const [trainers, setTrainers] = useState([]);
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -91,6 +74,7 @@ export default function Classes() {
   useEffect(() => {
     setIsLoading(true);
     fetchClasses();
+    fetchTrainersList();
   }, [filters]);
 
   const handleBookAppointment = (classId) => {
@@ -131,6 +115,27 @@ export default function Classes() {
     content = <div>No records found</div>;
   }
 
+  function fetchTrainersList() {
+    adminService
+      .fetchTrainersList()
+      .then((data) => {
+        setTrainers(data);
+      })
+      .catch((error) => setError(error))
+      .finally(setIsLoading(false));
+  }
+
+  const formattedInstructors = useMemo(() => {
+    const base = [{ name: "All Instructors", value: "all" }];
+
+    const mapped = trainers.map((coach) => ({
+      name: `Coach ${coach.fullName.split(" ")[0]}`,
+      value: `Coach ${coach.fullName.split(" ")[0]}`,
+    }));
+
+    return [...base, ...mapped];
+  }, [trainers]);
+
   if (data) {
     content = (
       <div className="classes-grid">
@@ -168,7 +173,7 @@ export default function Classes() {
             />
             <ClassesFilter
               name="instructor"
-              filters={instructors}
+              filters={formattedInstructors}
               handleFilterChange={handleFilterChange}
             />
             <ClassesFilter
