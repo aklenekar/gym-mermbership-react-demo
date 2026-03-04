@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { classesService } from "../../services/Services";
+import RecommendationsModal from "../AICoach/RecommendedClassesCard";
 
 export default function RecommendedClasses() {
   const [data, setData] = useState([]);
@@ -43,36 +44,7 @@ export default function RecommendedClasses() {
 
       {/* Recommendations Modal */}
       <dialog ref={dialogRef}>
-        <div className="recommendations-modal" id="recommendationsModal">
-          <div className="modal-overlay" onClick={closeModal}></div>
-          <div className="modal-content recommendations-content">
-            <div className="modal-header">
-              <h3>AI Recommended Classes For You</h3>
-              <button className="modal-close" onClick={closeModal}>
-                &times;
-              </button>
-            </div>
-
-            {isLoading ? (
-              <div
-                className="recommendations-loading"
-                id="recommendationsLoading"
-              >
-                <div className="loading-spinner"></div>
-                <p>Analyzing your fitness profile...</p>
-              </div>
-            ) : (
-              <div className="recommendations-list" id="recommendationsList">
-                {data.map((fitnessClass, index) => (
-                  <div key={index} className="recommendation-item">
-                    <strong>{fitnessClass.name}</strong>
-                    <p>{fitnessClass.reasoning}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+        <RecommendationsModal isLoading={isLoading} isOpen={openModal} onClose={closeModal} recommendations={data} handleRegenerate={getRecommendations}/>
       </dialog>
     </>
   );

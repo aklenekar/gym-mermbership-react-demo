@@ -103,7 +103,7 @@ export const classesService = {
 
   recommendedClasses: async () => {
     const token = getAuthToken();
-    const response = await fetch(`${API_BASE_URL}/classes/recommendations`, {
+    const response = await fetch(`${API_BASE_URL}/classes/recommendations/v2`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -238,6 +238,42 @@ export const adminService = {
     const response = await fetch(`${API_BASE_URL}/admin/dashboard`, {
       method: "GET",
       headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+};
+
+export const aiService = {
+  recommendedClasses: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/ai/recommend/classes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+  recommendedWorkout: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/ai/workout/plan`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+  recommendedNutrition: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/ai/nutrition/plan`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
     });

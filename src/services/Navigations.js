@@ -38,6 +38,10 @@ export const userNavBar = [
     name: "Progress",
     link: "/progress",
   },
+  {
+    name: "Ai Coach",
+    link: "/aiCoach"
+  }
 ];
 
 export const adminNavBar = [

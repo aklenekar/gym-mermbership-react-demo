@@ -25,6 +25,7 @@ import ManageSettingsPage from "./routes/ManageSettingsPage.jsx";
 import ManageMemebersPage from "./routes/ManageMembersPage.jsx";
 import SignUpPage from "./routes/SignUpPage.jsx";
 import UserProfilePage from "./routes/UserProfilePage.jsx";
+import AiCoachPage from "./routes/AiCoachPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,8 @@ const router = createBrowserRouter([
           { path: "/classes", element: <ClassesPage /> },
           { path: "/workouts", element: <WorkoutsPage /> },
           { path: "/progress", element: <ProgressPage /> },
-          { path: '/profile', element: <UserProfilePage />}
+          { path: '/profile', element: <UserProfilePage />},
+          { path: '/aiCoach', element: <AiCoachPage />}
         ],
       },
       {
