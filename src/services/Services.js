@@ -279,4 +279,15 @@ export const aiService = {
     });
     return handleResponse(response);
   },
+  chat: async (payload) => {
+    const token = localStorage.getItem("token"); // Get your JWT
+    return await fetch(`${API_BASE_URL}/ai/chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+  },
 };

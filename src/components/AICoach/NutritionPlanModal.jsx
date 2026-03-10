@@ -98,7 +98,7 @@ export default function NutritionPlanModal({ isOpen, onClose }) {
               </div>
             </div>
 
-            <button className="btn-generate" onclick="generateNutritionPlan()">
+            <button className="btn-generate" onClick={handleRegenerate}>
               <span>✨</span>
               Generate My Nutrition Plan
             </button>
@@ -115,21 +115,88 @@ export default function NutritionPlanModal({ isOpen, onClose }) {
           )}
 
           {/* Results */}
-          {!isLoading && data && data.length > 0 && (
-            <div className="ai-results">
-              <div className="results-header">
-                <h3 className="results-title">
-                  Your Personalized Nutrition Plan
-                </h3>
-                <button className="btn-regenerate" onClick={handleRegenerate}>
-                  <span>🔄</span> Generate New Plan
-                </button>
+          {!isLoading && data && (
+            <>
+              <div className="modal-body-scroll">
+                {/* Calorie & Macros Summary */}
+                <div className="nutrition-summary">
+                  <div className="calorie-card">
+                    <div className="calorie-value">
+                      {data.dailyCalorieTarget}
+                    </div>
+                    <div className="calorie-label">Daily Calories</div>
+                  </div>
+                  <div className="macro-cards">
+                    <div className="macro-card protein">
+                      <div className="macro-value">
+                        {data.macroSplit.protein}g
+                      </div>
+                      <div className="macro-label">Protein</div>
+                    </div>
+                    <div className="macro-card carbs">
+                      <div className="macro-value">
+                        {data.macroSplit.carbs}g
+                      </div>
+                      <div className="macro-label">Carbs</div>
+                    </div>
+                    <div className="macro-card fats">
+                      <div className="macro-value">{data.macroSplit.fats}g</div>
+                      <div className="macro-label">Fats</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sample Meals */}
+                <div className="meal-plan-section">
+                  <h3 className="section-title">Daily Meal Plan</h3>
+                  <div className="meals-list">
+                    {data.sampleMeals.map((item, index) => (
+                      <div key={index} className="meal-item">
+                        <div className="meal-icon">
+                          {item.meal === "Breakfast"
+                            ? "🍳"
+                            : item.meal === "Lunch"
+                              ? "🍱"
+                              : item.meal === "Dinner"
+                                ? "🍽️"
+                                : item.meal === "Snack"
+                                  ? "🍎"
+                                  : "🥛"}
+                        </div>
+                        <div className="meal-content">
+                          <div className="meal-time">{item.meal}</div>
+                          <div className="meal-food">{item.food}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Supplements (if any) */}
+                {data.supplementSuggestions &&
+                  data.supplementSuggestions.length > 0 && (
+                    <div className="supplements-section">
+                      <h3 className="section-title">Recommended Supplements</h3>
+                      <div className="supplements-list">
+                        {data.supplementSuggestions.map((supplement, index) => (
+                          <div key={index} className="supplement-item">
+                            💊 {supplement}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
               </div>
 
-              <div className="nutrition-plan-content" id="nutritionPlanContent">
-                {/* AI response will be rendered here */}
-              </div>
-            </div>
+              {/* <div className="modal-footer">
+                <button className="btn-secondary" onClick={onClose}>
+                  Close
+                </button>
+                <button className="btn-primary" onClick={handleRegenerate}>
+                  🔄 Regenerate
+                </button>
+              </div> */}
+            </>
           )}
         </div>
       </div>

@@ -35,9 +35,9 @@ export default function WorkoutPlanModal({ isOpen, onClose }) {
           </button>
         </div>
 
-        <div className="ai-modal-body">
+        <div className="ai-split-layout">
           {/* Input Form */}
-          <div className="ai-input-section" id="workoutInputForm">
+          <div className="ai-form-panel">
             <h3 className="input-section-title">
               Tell us about your fitness goals
             </h3>
@@ -93,33 +93,64 @@ export default function WorkoutPlanModal({ isOpen, onClose }) {
             </button>
           </div>
 
-          {/* Loading State */}
-          {isLoading && (
-            <div className="loading-state">
-              <div className="loading-spinner"></div>
-              <p className="loading-text">
-                AI is creating your personalized workout plan...
-              </p>
-            </div>
-          )}
+          <div className="ai-results-panel">
+            {/* Loading State */}
+            {isLoading && (
+              <div className="loading-state">
+                <div className="loading-spinner"></div>
+                <p className="loading-text">
+                  AI is creating your personalized workout plan...
+                </p>
+              </div>
+            )}
 
-          {/* Results */}
-          {!isLoading && data && data.length > 0 && (
-            <div className="ai-results" id="workoutResults">
-              <div className="results-header">
-                <h3 className="results-title">
-                  Your Personalized Workout Plan
-                </h3>
-                <button className="btn-regenerate" onClick={handleRegenerate}>
-                  <span>🔄</span> Generate New Plan
+            {/* Results */}
+            {!isLoading && data && (
+              <>
+                <div className="modal-body-scroll">
+                  <div className="workout-plan-list">
+                    {data.map((day, index) => (
+                      <div key={index} className="workout-day-card">
+                        <div className="day-header">
+                          <span className="day-name">{day["day"]}</span>
+                          <span className="day-focus">{day["focus"]}</span>
+                        </div>
+
+                        {day.exercises && day.exercises.length > 0 ? (
+                          <div className="exercises-list">
+                            {day.exercises.map((exercise, idx) => (
+                              <div key={idx} className="exercise-item">
+                                <span className="exercise-name">
+                                  {exercise.name}
+                                </span>
+                                <span className="exercise-details">
+                                  {exercise.sets} × {exercise.reps}
+                                </span>
+                              </div>
+                            ))}
+                            <div className="rest-info">
+                              Rest: {day["Rest Periods"]}s between sets
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="rest-day">🛌 Recovery Day</div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* <div className="modal-footer">
+                <button className="btn-secondary" onClick={onClose}>
+                  Close
                 </button>
-              </div>
-
-              <div className="workout-plan-content">
-                {/* AI response will be rendered here */}
-              </div>
-            </div>
-          )}
+                <button className="btn-primary" onClick={handleRegenerate}>
+                  🔄 Regenerate
+                </button>
+              </div> */}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
