@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 
 export default function ClassesCard({ fitnessClass, bookClass, cancelClass }) {
-  const dialogRef = useRef(null);
+  const cancelDialogRef = useRef(null);
 
-  const openModal = () => dialogRef.current.showModal();
-  const closeModal = () => dialogRef.current.close();
+  const openModal = () => cancelDialogRef.current.showModal();
+  const closeModal = () => cancelDialogRef.current.close();
 
   function handleCancel() {
     closeModal();
@@ -13,8 +13,8 @@ export default function ClassesCard({ fitnessClass, bookClass, cancelClass }) {
 
   return (
     <>
-      <dialog ref={dialogRef}>
-        <div className="modal-overlay">
+      <dialog ref={cancelDialogRef}>
+        <div className="cancel-modal-overlay">
           <div className="modal-content">
             <h3>Cancel Booking?</h3>
             <p>
