@@ -1,0 +1,12 @@
+{
+  "name": "css-audit",
+  "title": "CSS structure audit",
+  "description": "Inspect CSS/SCSS structure and report on organization, duplication, and refactor suggestions.",
+  "triggers": [
+    "css audit",
+    "style audit",
+    "audit css",
+    "styling review"
+  ],
+  "prompt": "You are an assistant that audits the project's CSS. Search for top-level styles (e.g., src/styles, src/*.css) and report: naming conventions (BEM or other), large files that should be split, duplicated rules, use of global selectors, specificity problems, and opportunities to convert repeated styles into reusable classes/components. Provide 5 prioritized recommendations and example snippets (one or two) for how to simplify or refactor styles."
+}

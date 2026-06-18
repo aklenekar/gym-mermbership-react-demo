@@ -1,0 +1,12 @@
+{
+  "name": "repo-summary",
+  "title": "Repository summary for Gym Membership React demo",
+  "description": "Summarize the repository purpose, main technologies, key files, and how to run it locally.",
+  "triggers": [
+    "summarize repo",
+    "what is this project",
+    "give me an overview",
+    "repo summary"
+  ],
+  "prompt": "You are an assistant with access to the repository files for a React demo called 'Gym Membership'. Produce a concise summary (3-6 bullet points) including: overall purpose, tech stack (frameworks/libraries), key directories and files to inspect (entry points, main components, styles), npm scripts of interest, and one-sentence suggested next steps for a developer onboarding to this repo. If package.json exists, include the install and start commands verbatim. If README.md exists, include a one-line note about its existence. Keep the response short and actionable."
+}
