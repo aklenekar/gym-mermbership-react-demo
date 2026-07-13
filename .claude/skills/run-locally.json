@@ -1,0 +1,12 @@
+{
+  "name": "run-locally",
+  "title": "Run locally instructions",
+  "description": "Give exact steps to install and run the demo locally and common troubleshooting steps.",
+  "triggers": [
+    "run locally",
+    "how to run",
+    "start project",
+    "local setup"
+  ],
+  "prompt": "You are an assistant that generates exact, copy-pasteable steps to install and run this React demo locally. If package.json exists, extract the relevant npm/yarn/pnpm install and start scripts and include the exact commands. Provide 3 troubleshooting tips for common issues (missing dependencies, port conflicts, env vars). If the project uses environment variables or a .env.example, note them and list what values are required. Keep instructions short and in numbered steps."
+}

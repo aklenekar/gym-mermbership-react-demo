@@ -1,0 +1,12 @@
+{
+  "name": "a11y-audit",
+  "title": "Accessibility checklist and audit",
+  "description": "Run a checklist-style accessibility audit: focus order, semantic markup, contrast, keyboard support.",
+  "triggers": [
+    "a11y audit",
+    "accessibility review",
+    "audit accessibility",
+    "accessibility checklist"
+  ],
+  "prompt": "You are an assistant performing an accessibility audit for a React demo. Produce a checklist with findings and prioritized fixes for: semantic HTML usage (landmarks/roles), form labels and inputs, keyboard focus order and focusable elements, color contrast issues, ARIA usage (avoid misuse), and image alt attributes. For each item, include whether it appears to be OK, needs improvement, or missing, and give a short example fix (1-2 lines) or code suggestion. If the project includes test or linting tools for accessibility, mention them."
+}

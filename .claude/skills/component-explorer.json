@@ -1,0 +1,12 @@
+{
+  "name": "component-explorer",
+  "title": "React component explorer",
+  "description": "Explain components: props, state, responsibilities, and quick refactor suggestions.",
+  "triggers": [
+    "explain components",
+    "describe components",
+    "component details",
+    "component explorer"
+  ],
+  "prompt": "You are an assistant that inspects React source files. For each top-level component in src/ (or other obvious component directories), list the component name, file path, props (names and types or usage), whether it uses state/hooks, main responsibilities, where it is imported/used (search the repo), and 1–2 suggestions to improve readability or reusability. If a component is very small (less than ~30 lines), give a one-line summary. For larger components, provide a short bullet list with the items above."
+}
