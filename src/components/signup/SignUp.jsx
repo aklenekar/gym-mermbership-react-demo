@@ -31,13 +31,14 @@ export default function SignUp() {
     marketingOptIn: false,
     agreeTerms: false,
     waiveLiability: false,
+    plan: "pro",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState();
   const [successMsg, setSuccessMsg] = useState();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // -----------------------------------------------------------------
   // 2️⃣ Generic onChange handler for text/number/select/textarea
@@ -95,6 +96,7 @@ export default function SignUp() {
       relationship: form.emergencyContactRelationship,
       medicalConditions: form.medicalConditions,
       fitnessGoals: form.fitnessGoals,
+      plan: form.plan,
     };
 
     // ---- Call the API --------------------------------------------------
@@ -480,7 +482,13 @@ export default function SignUp() {
 
                 <div className="plan-options">
                   <label className="plan-option">
-                    <input type="radio" name="plan" value="starter" />
+                    <input
+                      type="radio"
+                      name="plan"
+                      value="starter"
+                      checked={form.plan === "starter"}
+                      onChange={handleChange}
+                    />
                     <div className="plan-card-select">
                       <div className="plan-header-select">
                         <div className="plan-name-select">STARTER</div>
@@ -502,7 +510,8 @@ export default function SignUp() {
                       type="radio"
                       name="plan"
                       value="pro"
-                      defaultChecked
+                      checked={form.plan === "pro"}
+                      onChange={handleChange}
                     />
                     <div className="plan-card-select recommended">
                       <div className="recommended-badge">MOST POPULAR</div>
@@ -522,7 +531,13 @@ export default function SignUp() {
                   </label>
 
                   <label className="plan-option">
-                    <input type="radio" name="plan" value="elite" />
+                    <input
+                      type="radio"
+                      name="plan"
+                      value="elite"
+                      checked={form.plan === "elite"}
+                      onChange={handleChange}
+                    />
                     <div className="plan-card-select">
                       <div className="plan-header-select">
                         <div className="plan-name-select">ELITE</div>

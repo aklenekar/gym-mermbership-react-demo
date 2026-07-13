@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import UpgradePlanModal from "../popups/UpgradePlanModal";
 import PageHeader from "../pageHeader/PageHeader";
 import "./UserProfile.css";
 import { profileService } from "../../services/Services";
@@ -15,6 +16,10 @@ export default function UserProfile() {
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const upgradeDialogRef = useRef(null);
+  const [isUpgrading, setIsUpgrading] = useState(false);
+  const openUpgradeModal = () => upgradeDialogRef.current.showModal();
+  const closeUpgradeModal = () => upgradeDialogRef.current.close();
 
   function fetchProfile() {
     profileService
@@ -45,6 +50,20 @@ export default function UserProfile() {
       alert("Could not save Profile. Please try again.");
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleUpgrade = async (plan) => {
+    setIsUpgrading(true);
+    try {
+      await profileService.upgradePlan(plan);
+      closeUpgradeModal();
+      fetchProfile();
+    } catch (error) {
+      console.error("Failed to upgrade plan:", error);
+      alert("Could not upgrade plan. Please try again.");
+    } finally {
+      setIsUpgrading(false);
     }
   };
 
@@ -106,8 +125,16 @@ export default function UserProfile() {
                       <span>${data.membershipInfo.price}/month</span>
                     </div>
                   </div>
-                  <button className="btn-upgrade">Upgrade Plan</button>
+                  <button className="btn-upgrade" onClick={openUpgradeModal}>Upgrade Plan</button>
                 </div>
+                <dialog ref={upgradeDialogRef}>
+                  <UpgradePlanModal
+                    currentPlan={data.membershipInfo.plan}
+                    closeModal={closeUpgradeModal}
+                    handleUpgrade={handleUpgrade}
+                    isSubmitting={isUpgrading}
+                  />
+                </dialog>
               </div>
 
               <div className="profile-nav">

@@ -7,7 +7,7 @@ export default function WorkoutForm({
   isSubmitting,
 }) {
   return (
-    <div className="modal-overlay">
+    <div className="cancel-modal-overlay">
       <div className="modal-content workout-modal">
         <div className="modal-header">
           <h3>Log New Workout</h3>

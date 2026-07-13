@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./DashboardContent.css";
 import GoalProgressCard from "./progresscards/GoalProgressCard";
 import MembershipCard from "./progresscards/MembershipCard";
@@ -8,12 +8,22 @@ import StatsCard from "./progresscards/StatsCard";
 import UpcomingClassesCard from "./progresscards/UpcomingClassesCard";
 import ErrorPage from "../../routes/ErrorPage";
 import LoadingIndicator from "../ui/LoadingIndicator";
-import { classesService, dashboardService } from "../../services/Services";
+import {
+  classesService,
+  dashboardService,
+  profileService,
+} from "../../services/Services";
+import UpgradePlanModal from "../popups/UpgradePlanModal";
 
 export default function DashboardContent() {
   const [data, setData] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
+
+  const upgradeDialogRef = useRef(null);
+  const [isUpgrading, setIsUpgrading] = useState(false);
+  const openUpgradeModal = () => upgradeDialogRef.current.showModal();
+  const closeUpgradeModal = () => upgradeDialogRef.current.close();
 
   function fetchDashboard() {
     dashboardService
@@ -46,6 +56,20 @@ export default function DashboardContent() {
       .finally(setIsLoading(false));
   };
 
+  const handleUpgrade = async (plan) => {
+    setIsUpgrading(true);
+    try {
+      await profileService.upgradePlan(plan);
+      closeUpgradeModal();
+      fetchDashboard();
+    } catch (error) {
+      console.error("Failed to upgrade plan:", error);
+      alert("Could not upgrade plan. Please try again.");
+    } finally {
+      setIsUpgrading(false);
+    }
+  };
+
   let content;
 
   if (isLoading) {
@@ -59,7 +83,18 @@ export default function DashboardContent() {
   if (data) {
     content = (
       <div className="dashboard-grid">
-        <MembershipCard memebership={data.membership} />
+        <dialog ref={upgradeDialogRef}>
+          <UpgradePlanModal
+            currentPlan={data.membership.plan}
+            closeModal={closeUpgradeModal}
+            handleUpgrade={handleUpgrade}
+            isSubmitting={isUpgrading}
+          />
+        </dialog>
+        <MembershipCard
+          memebership={data.membership}
+          onUpgrade={openUpgradeModal}
+        />
         <StatsCard stats={data.stats} />
         <UpcomingClassesCard
           upcomingClasses={data.upcomingClasses}

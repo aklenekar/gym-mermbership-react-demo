@@ -1,7 +1,7 @@
 import { formatDate } from "../../../util/dateUtils";
 import "./MembershipCard.css";
 
-export default function MembershipCard({ memebership }) {
+export default function MembershipCard({ memebership, onUpgrade }) {
   return (
     <div className="dash-card membership-info">
       <div className="dash-card-header">
@@ -32,12 +32,9 @@ export default function MembershipCard({ memebership }) {
           </div>
         </div>
         <div className="membership-actions">
-          <a href="pricing.html" className="btn-outline">
+          <button onClick={onUpgrade} className="btn-outline">
             Upgrade Plan
-          </a>
-          <a href="#" className="btn-link">
-            Manage Billing
-          </a>
+          </button>
         </div>
       </div>
     </div>

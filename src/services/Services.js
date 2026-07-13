@@ -48,6 +48,19 @@ export const profileService = {
 
     return handleResponse(response);
   },
+
+  upgradePlan: (plan) =>
+    fetch(`${API_BASE_URL}/membership/upgrade`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getAuthToken(),
+      },
+      body: JSON.stringify({ plan }),
+    }).then((res) => {
+      if (!res.ok) throw new Error("Failed to upgrade plan");
+      return res.json();
+    }),
 };
 
 export const dashboardService = {
