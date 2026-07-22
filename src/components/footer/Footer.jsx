@@ -41,7 +41,15 @@ export default function Footer() {
                 <Link to="/price">Pricing</Link>
               </li>
               <li>
-                <Link to={role === "ADMIN" ? "/adminDashboard" : "/dashboard"}>
+                <Link
+                  to={
+                    role === "ADMIN"
+                      ? "/adminDashboard"
+                      : role === "TRAINER"
+                        ? "/trainerDashboard"
+                        : "/dashboard"
+                  }
+                >
                   Dashboard
                 </Link>
               </li>

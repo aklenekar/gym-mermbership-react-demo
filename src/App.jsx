@@ -26,6 +26,9 @@ import ManageMemebersPage from "./routes/ManageMembersPage.jsx";
 import SignUpPage from "./routes/SignUpPage.jsx";
 import UserProfilePage from "./routes/UserProfilePage.jsx";
 import AiCoachPage from "./routes/AiCoachPage.jsx";
+import TrainerDashboardPage from "./routes/TrainerDashboardPage.jsx";
+import TrainerCandidatesPage from "./routes/TrainerCandidatesPage.jsx";
+import TrainerClassesPage from "./routes/TrainerClassesPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +61,15 @@ const router = createBrowserRouter([
           { path: "/manageClasses", element: <ManageClassesPage /> },
           { path: "/manageReports", element: <ManageReportPage /> },
           { path: "/manageSettings", element: <ManageSettingsPage /> },
+        ],
+      },
+      {
+        path: "",
+        loader: checkRoleLoader("TRAINER"),
+        children: [
+          { path: "/trainerDashboard", element: <TrainerDashboardPage /> },
+          { path: "/trainerCandidates", element: <TrainerCandidatesPage /> },
+          { path: "/trainerClasses", element: <TrainerClassesPage /> },
         ],
       },
       { path: "/features", element: <FeaturesPage /> },

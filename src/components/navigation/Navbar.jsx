@@ -5,6 +5,7 @@ import { useState } from "react";
 import {
   adminNavBar,
   guestNavBar,
+  trainerNavBar,
   userNavBar,
 } from "../../services/Navigations";
 import { getUserRole } from "../../util/auth";
@@ -18,9 +19,11 @@ export default function Navbar() {
   const navBar = token
     ? role === "ADMIN"
       ? adminNavBar
-      : role === "USER"
-        ? userNavBar
-        : guestNavBar
+      : role === "TRAINER"
+        ? trainerNavBar
+        : role === "USER"
+          ? userNavBar
+          : guestNavBar
     : guestNavBar;
 
   const isProfile = role === "USER";

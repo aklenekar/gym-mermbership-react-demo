@@ -44,6 +44,21 @@ export const userNavBar = [
   }
 ];
 
+export const trainerNavBar = [
+  {
+    name: "Dashboard",
+    link: "/trainerDashboard",
+  },
+  {
+    name: "Candidates",
+    link: "/trainerCandidates",
+  },
+  {
+    name: "Classes",
+    link: "/trainerClasses",
+  },
+];
+
 export const adminNavBar = [
   {
     name: "Dashboard",

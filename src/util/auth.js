@@ -25,7 +25,8 @@ export function getAuthToken() {
 }
 
 export function getUserRole() {
-  return localStorage.getItem("role");
+  const role = localStorage.getItem("role");
+  return role ? role.toUpperCase() : null;
 }
 
 export function tokenLoader() {
@@ -53,7 +54,7 @@ export function checkRoleLoader(requiredRole) {
     }
 
     // 2. Check if role matches
-    if (role !== requiredRole) {
+    if (role?.toUpperCase() !== requiredRole.toUpperCase()) {
       return redirect("/"); // Redirect unauthorized users to home
     }
 

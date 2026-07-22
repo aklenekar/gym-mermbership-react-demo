@@ -34,14 +34,21 @@ export async function action({ request }) {
 
   const responseData = await response.json();
   const token = responseData.token;
-  const role = responseData.role;
+  const role = (responseData.role || "USER").toUpperCase();
 
   localStorage.setItem("token", token);
   localStorage.setItem("role", role);
   const expirationDate = new Date();
   expirationDate.setHours(expirationDate.getHours() + 1);
   localStorage.setItem("expiration", expirationDate.toISOString());
-  return role === "ADMIN"
-    ? redirect("/adminDashboard")
-    : redirect("/dashboard");
+
+  if (role === "ADMIN") {
+    return redirect("/adminDashboard");
+  }
+
+  if (role === "TRAINER") {
+    return redirect("/trainerDashboard");
+  }
+
+  return redirect("/dashboard");
 }
