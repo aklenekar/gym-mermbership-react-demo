@@ -304,3 +304,27 @@ export const aiService = {
     });
   },
 };
+
+export const trainerService = {
+  fetchCandidates: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/trainers/candidates`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  fetchTrainerClasses: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/trainers/classes`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  }
+}

@@ -50,10 +50,6 @@ export const trainerNavBar = [
     link: "/trainerDashboard",
   },
   {
-    name: "Candidates",
-    link: "/trainerCandidates",
-  },
-  {
     name: "Classes",
     link: "/trainerClasses",
   },

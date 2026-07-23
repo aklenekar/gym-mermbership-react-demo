@@ -26,7 +26,7 @@ export default function Navbar() {
           : guestNavBar
     : guestNavBar;
 
-  const isProfile = role === "USER";
+  const isProfile = role === "USER" || role === "TRAINER";
 
   return (
     <nav className="navbar">

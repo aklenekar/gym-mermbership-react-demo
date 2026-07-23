@@ -27,7 +27,6 @@ import SignUpPage from "./routes/SignUpPage.jsx";
 import UserProfilePage from "./routes/UserProfilePage.jsx";
 import AiCoachPage from "./routes/AiCoachPage.jsx";
 import TrainerDashboardPage from "./routes/TrainerDashboardPage.jsx";
-import TrainerCandidatesPage from "./routes/TrainerCandidatesPage.jsx";
 import TrainerClassesPage from "./routes/TrainerClassesPage.jsx";
 
 const router = createBrowserRouter([
@@ -47,8 +46,8 @@ const router = createBrowserRouter([
           { path: "/classes", element: <ClassesPage /> },
           { path: "/workouts", element: <WorkoutsPage /> },
           { path: "/progress", element: <ProgressPage /> },
-          { path: '/profile', element: <UserProfilePage />},
-          { path: '/aiCoach', element: <AiCoachPage />}
+          { path: "/profile", element: <UserProfilePage /> },
+          { path: "/aiCoach", element: <AiCoachPage /> },
         ],
       },
       {
@@ -68,8 +67,8 @@ const router = createBrowserRouter([
         loader: checkRoleLoader("TRAINER"),
         children: [
           { path: "/trainerDashboard", element: <TrainerDashboardPage /> },
-          { path: "/trainerCandidates", element: <TrainerCandidatesPage /> },
           { path: "/trainerClasses", element: <TrainerClassesPage /> },
+          { path: "/profile", element: <UserProfilePage /> },
         ],
       },
       { path: "/features", element: <FeaturesPage /> },
