@@ -15,19 +15,19 @@ const categories = [
   },
   {
     name: "Strength",
-    value: "strength",
+    value: "Strength",
   },
   {
     name: "Cardio",
-    value: "cardio",
+    value: "Cardio",
   },
   {
     name: "Yoga",
-    value: "yoga",
+    value: "Yoga",
   },
   {
     name: "HIIT",
-    value: "hiit",
+    value: "HIIT",
   },
 ];
 const days = [
@@ -130,7 +130,7 @@ export default function Classes() {
 
     const mapped = trainers.map((coach) => ({
       name: `Coach ${coach.fullName.split(" ")[0]}`,
-      value: `Coach ${coach.fullName.split(" ")[0]}`,
+      value: `${coach.fullName}`,
     }));
 
     return [...base, ...mapped];

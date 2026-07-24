@@ -1,0 +1,169 @@
+.trainer-classes-content {
+  padding: var(--spacing-lg) 0;
+}
+
+.trainer-classes-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.trainer-classes-stats .stat-box {
+  background: var(--mid-gray);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trainer-classes-stats .stat-number {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.trainer-classes-stats .stat-label {
+  color: var(--light-gray);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+}
+
+.trainer-classes-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.trainer-classes-tabs .tab-btn {
+  padding: 0.875rem 1.75rem;
+  background: var(--mid-gray);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.trainer-classes-tabs .tab-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.trainer-classes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.trainer-class-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: var(--mid-gray);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
+}
+
+.trainer-class-card:hover {
+  border-color: var(--primary);
+}
+
+.tc-time-badge {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  min-width: 130px;
+  text-align: center;
+}
+
+.tc-details {
+  flex: 1;
+}
+
+.tc-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.tc-name {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--white);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.tc-category {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.tc-status {
+  padding: 0.4rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.tc-status.available {
+  background: var(--success);
+  color: var(--dark);
+}
+
+.tc-status.full {
+  background: var(--danger);
+  color: var(--white);
+}
+
+.tc-status.almost_full {
+  background: #ffd600;
+  color: var(--dark);
+}
+
+.tc-info-row {
+  display: flex;
+  gap: 2rem;
+  color: var(--light-gray);
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.empty-text {
+  color: var(--light-gray);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+@media (max-width: 1024px) {
+  .trainer-classes-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .trainer-class-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tc-time-badge {
+    text-align: left;
+  }
+}
