@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { formatInfoDate } from "../../util/dateUtils";
 
 export default function ClassesCard({ fitnessClass, bookClass, cancelClass }) {
   const cancelDialogRef = useRef(null);
@@ -50,7 +51,7 @@ export default function ClassesCard({ fitnessClass, bookClass, cancelClass }) {
           </div>
           <div className="info-item">
             <span className="info-icon">📅</span>
-            <span>Today, 6:00 PM</span>
+            <span>{formatInfoDate(fitnessClass.startTime)}</span>
           </div>
           <div className="info-item">
             <span className="info-icon">⏱️</span>
