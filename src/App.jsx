@@ -28,6 +28,9 @@ import UserProfilePage from "./routes/UserProfilePage.jsx";
 import AiCoachPage from "./routes/AiCoachPage.jsx";
 import TrainerDashboardPage from "./routes/TrainerDashboardPage.jsx";
 import TrainerClassesPage from "./routes/TrainerClassesPage.jsx";
+import ClassRecommendationsPage from "./components/AICoach/ClassRecommendationsPage.jsx";
+import WorkoutPlanPage from "./components/AICoach/WorkoutPlanPage.jsx";
+import NutritionPlanPage from "./components/AICoach/NutritionPlanPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +50,10 @@ const router = createBrowserRouter([
           { path: "/workouts", element: <WorkoutsPage /> },
           { path: "/progress", element: <ProgressPage /> },
           { path: "/profile", element: <UserProfilePage /> },
-          { path: "/aiCoach", element: <AiCoachPage /> },
+          { path: "/ai-coach", element: <AiCoachPage /> },
+          { path: "/ai-coach/classes", element: <ClassRecommendationsPage /> },
+          { path: "/ai-coach/workout", element: <WorkoutPlanPage /> },
+          { path: "/ai-coach/nutrition", element: <NutritionPlanPage /> },
         ],
       },
       {

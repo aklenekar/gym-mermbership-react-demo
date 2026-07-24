@@ -8,6 +8,7 @@ import Footer from "../components/footer/Footer";
 import { useEffect } from "react";
 import { getTokenDudation } from "../util/auth.js";
 import Navbar from "../components/navigation/Navbar.jsx";
+import FloatingAiChat from "../components/AICoach/FloatingAiChat.jsx";
 
 export default function RootLayout() {
   const token = useLoaderData();
@@ -35,6 +36,7 @@ export default function RootLayout() {
       <Navbar />
       <main>
         <Outlet />
+        <FloatingAiChat />
       </main>
       <Footer />
       <ScrollRestoration />

@@ -6,7 +6,6 @@ import ClassesCard from "./ClassesCard";
 import LoadingIndicator from "../ui/LoadingIndicator";
 import ErrorPage from "../../routes/ErrorPage";
 import { adminService, classesService } from "../../services/Services";
-import RecommendedClasses from "./RecommendedClasses";
 
 const categories = [
   {
@@ -167,8 +166,6 @@ export default function Classes() {
         title="AVAILABLE CLASSES"
         subTitle="Book your spot in upcoming sessions"
       />
-
-      <RecommendedClasses />
 
       {/* Filter Bar */}
       <section className="classes-filter">

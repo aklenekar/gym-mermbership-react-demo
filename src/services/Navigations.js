@@ -40,7 +40,7 @@ export const userNavBar = [
   },
   {
     name: "Ai Coach",
-    link: "/aiCoach"
+    link: "/ai-coach"
   }
 ];
 

@@ -1,0 +1,104 @@
+/* ============================================
+   AI FULL-PAGE LAYOUT & OVERRIDES
+============================================ */
+
+.ai-page-container {
+  min-height: 100vh;
+  background: var(--dark-gray);
+  /* CRITICAL: Pushes page content down below fixed/sticky site Header */
+  padding-top: 100px;
+  padding-bottom: 4rem;
+}
+
+.ai-page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --------------------------------------------
+   Reset Modal Wrappers to Normal Block Elements
+-------------------------------------------- */
+.ai-page-content .recommendations-modal,
+.ai-page-content .ai-modal-dialog,
+.ai-page-content div[class*="modal"] {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  z-index: 1 !important;
+  display: block !important;
+}
+
+/* Hide modal backdrop overlays and extra close buttons */
+.ai-page-content .modal-overlay,
+.ai-page-content .modal-close {
+  display: none !important;
+}
+
+/* Convert modal content boxes to page cards */
+.ai-page-content .modal-container,
+.ai-page-content .ai-modal-content {
+  background: var(--mid-gray) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+  width: 100% !important;
+}
+
+/* Allow forms & scroll areas to expand naturally on the page */
+.ai-page-content .modal-body-scroll,
+.ai-page-content .ai-modal-body,
+.ai-page-content .recommendations-list {
+  max-height: none !important;
+  overflow-y: visible !important;
+  padding: 2rem !important;
+}
+
+/* Form + Results Split Layout Adjustments */
+.ai-page-content .ai-split-layout {
+  display: grid !important;
+  grid-template-columns: 380px 1fr !important;
+  gap: 2rem !important;
+  min-height: auto !important;
+}
+
+.ai-page-content .ai-form-panel {
+  position: static !important;
+  max-height: none !important;
+}
+
+/* --------------------------------------------
+   Mobile & Tablet Responsive
+-------------------------------------------- */
+@media (max-width: 1024px) {
+  .ai-page-content .ai-split-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ai-page-container {
+    padding-top: 80px; /* Adjust if mobile header is shorter */
+  }
+
+  .ai-page-content {
+    padding: 0 1rem;
+  }
+
+  .ai-page-content .modal-body-scroll,
+  .ai-page-content .ai-modal-body,
+  .ai-page-content .recommendations-list {
+    padding: 1rem !important;
+  }
+}

@@ -1,0 +1,81 @@
+.page-nav-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers the title block */
+  padding: 1.5rem 2rem;
+  background: var(--mid-gray);
+  border-bottom: 2px solid rgba(255, 77, 0, 0.2);
+  margin-bottom: 2rem;
+  min-height: 80px;
+}
+
+.btn-back {
+  position: absolute; /* Anchors button to the left side */
+  left: 2rem;
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.btn-back:hover {
+  background: var(--primary);
+  color: var(--white);
+  transform: translateX(-4px);
+  box-shadow: 0 4px 12px rgba(255, 77, 0, 0.3);
+}
+
+.back-arrow {
+  font-size: 1.1rem;
+}
+
+/* Centered Title & Subtitle */
+.nav-header-title {
+  text-align: center;
+}
+
+.nav-header-title h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--white);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.nav-header-title p {
+  color: var(--light-gray);
+  font-size: 0.85rem;
+  margin: 0.25rem 0 0 0;
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+  .page-nav-header {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 1rem;
+    min-height: auto;
+  }
+
+  .btn-back {
+    position: static; /* Stack on top of title for mobile */
+  }
+
+  .nav-header-title {
+    text-align: left; /* Left align text when stacked on small screens */
+  }
+}
