@@ -23,7 +23,7 @@ export default function HeadCoaches({ headCoach }) {
         <div className="trainer-badge">HEAD COACH</div>
       </div>
       <div className="trainer-profile-info">
-        <h3>Sarah Mitchell</h3>
+        <h3>{headCoach.fullName}</h3>
         <p className="trainer-specialty">{headCoach.specialty}</p>
         <div className="trainer-credentials">
           <span className="credential">CSCS</span>
