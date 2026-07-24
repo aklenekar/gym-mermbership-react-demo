@@ -14,6 +14,14 @@ const categories = [
     value: "all",
   },
   {
+    name: "HIIT",
+    value: "HIIT",
+  },
+  {
+    name: "Yoga",
+    value: "Yoga",
+  },
+  {
     name: "Strength",
     value: "Strength",
   },
@@ -22,12 +30,12 @@ const categories = [
     value: "Cardio",
   },
   {
-    name: "Yoga",
-    value: "Yoga",
+    name: "Boxing",
+    value: "Boxing",
   },
   {
-    name: "HIIT",
-    value: "HIIT",
+    name: "Pilates",
+    value: "Pilates",
   },
 ];
 const days = [
