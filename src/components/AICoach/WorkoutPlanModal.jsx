@@ -6,13 +6,36 @@ export default function WorkoutPlanModal() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [formData, setFormData] = useState({
+    goals: "Build muscle",
+    experienceYears: 1,
+    daysPerWeek: 4,
+    equipment: "Full Gym",
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
   async function handleRegenerate() {
     setIsLoading(true);
     try {
-      const response = await aiService.recommendedWorkout();
+      // Format payload to match backend WorkoutPlanRequest DTO
+      const payload = {
+        goals: formData.goals,
+        daysPerWeek: parseInt(formData.daysPerWeek, 10) || 3,
+        experienceYears: parseInt(formData.experienceYears, 10) || 0,
+        availableEquipment: formData.equipment ? [formData.equipment] : [],
+      };
+
+      const response = await aiService.recommendedWorkout(payload);
       setData(response);
     } catch (error) {
-      console.error(error);
+      console.error("Failed to generate workout plan:", error);
     } finally {
       setIsLoading(false);
     }
@@ -30,8 +53,12 @@ export default function WorkoutPlanModal() {
           <div className="form-grid">
             <div className="form-group">
               <label>Primary Goal</label>
-              <select className="form-control" id="workoutGoal">
-                <option value="">Select your goal</option>
+              <select
+                className="form-control"
+                name="goals"
+                value={formData.goals}
+                onChange={handleChange}
+              >
                 <option value="Build muscle">Build Muscle</option>
                 <option value="Lose weight">Lose Weight</option>
                 <option value="Increase strength">Increase Strength</option>
@@ -42,7 +69,12 @@ export default function WorkoutPlanModal() {
 
             <div className="form-group">
               <label>Experience Level</label>
-              <select className="form-control" id="experienceYears">
+              <select
+                className="form-control"
+                name="experienceYears"
+                value={formData.experienceYears}
+                onChange={handleChange}
+              >
                 <option value="0">Beginner (0-1 yrs)</option>
                 <option value="2">Intermediate (2-3 yrs)</option>
                 <option value="4">Advanced (4+ yrs)</option>
@@ -51,7 +83,12 @@ export default function WorkoutPlanModal() {
 
             <div className="form-group">
               <label>Days Per Week</label>
-              <select className="form-control" id="daysPerWeek">
+              <select
+                className="form-control"
+                name="daysPerWeek"
+                value={formData.daysPerWeek}
+                onChange={handleChange}
+              >
                 <option value="3">3 days</option>
                 <option value="4">4 days</option>
                 <option value="5">5 days</option>
@@ -61,7 +98,12 @@ export default function WorkoutPlanModal() {
 
             <div className="form-group">
               <label>Equipment</label>
-              <select className="form-control" id="equipment">
+              <select
+                className="form-control"
+                name="equipment"
+                value={formData.equipment}
+                onChange={handleChange}
+              >
                 <option value="Full Gym">Full Gym Equipment</option>
                 <option value="Dumbbells Only">Dumbbells Only</option>
                 <option value="Bodyweight">Bodyweight Only</option>
@@ -69,7 +111,11 @@ export default function WorkoutPlanModal() {
             </div>
           </div>
 
-          <button className="btn-generate" onClick={handleRegenerate}>
+          <button
+            className="btn-generate"
+            onClick={handleRegenerate}
+            disabled={isLoading}
+          >
             <span>✨</span> Generate Workout Plan
           </button>
         </div>

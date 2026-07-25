@@ -270,7 +270,7 @@ export const aiService = {
     });
     return handleResponse(response);
   },
-  recommendedWorkout: async () => {
+  recommendedWorkout: async (plan) => {
     const token = getAuthToken();
     const response = await fetch(`${API_BASE_URL}/ai/workout/plan`, {
       method: "POST",
@@ -278,10 +278,11 @@ export const aiService = {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
+      body: JSON.stringify(plan),
     });
     return handleResponse(response);
   },
-  recommendedNutrition: async () => {
+  recommendedNutrition: async (plan) => {
     const token = getAuthToken();
     const response = await fetch(`${API_BASE_URL}/ai/nutrition/plan`, {
       method: "POST",
@@ -289,6 +290,7 @@ export const aiService = {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
+      body: JSON.stringify(plan),
     });
     return handleResponse(response);
   },

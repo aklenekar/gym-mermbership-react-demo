@@ -6,13 +6,40 @@ export default function NutritionPlanModal() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [formData, setFormData] = useState({
+    goals: "Build muscle",
+    weight: 75,
+    age: 30,
+    activityLevel: "Moderately active",
+    restrictions: "",
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
   async function handleRegenerate() {
     setIsLoading(true);
     try {
-      const response = await aiService.recommendedNutrition();
+      // Format payload to match backend NutritionRequest DTO
+      const payload = {
+        goal: formData.goals,
+        weight: parseFloat(formData.weight) || 0,
+        age: parseInt(formData.age, 10) || 0,
+        activityLevel: formData.activityLevel,
+        dietaryRestrictions: formData.restrictions
+          ? formData.restrictions.split(",").map((item) => item.trim()).filter(Boolean)
+          : [],
+      };
+
+      const response = await aiService.recommendedNutrition(payload);
       setData(response);
     } catch (error) {
-      console.error(error);
+      console.error("Failed to generate nutrition plan:", error);
     } finally {
       setIsLoading(false);
     }
@@ -30,7 +57,12 @@ export default function NutritionPlanModal() {
           <div className="form-grid">
             <div className="form-group">
               <label>Primary Goal</label>
-              <select className="form-control" id="nutritionGoal">
+              <select
+                className="form-control"
+                name="goals"
+                value={formData.goals}
+                onChange={handleChange}
+              >
                 <option value="Build muscle">Build Muscle</option>
                 <option value="Lose fat">Lose Fat</option>
                 <option value="Maintain weight">Maintain Weight</option>
@@ -43,7 +75,9 @@ export default function NutritionPlanModal() {
               <input
                 type="number"
                 className="form-control"
-                id="weight"
+                name="weight"
+                value={formData.weight}
+                onChange={handleChange}
                 placeholder="75"
               />
             </div>
@@ -53,14 +87,21 @@ export default function NutritionPlanModal() {
               <input
                 type="number"
                 className="form-control"
-                id="age"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
                 placeholder="30"
               />
             </div>
 
             <div className="form-group">
               <label>Activity Level</label>
-              <select className="form-control" id="activityLevel">
+              <select
+                className="form-control"
+                name="activityLevel"
+                value={formData.activityLevel}
+                onChange={handleChange}
+              >
                 <option value="Sedentary">Sedentary (desk job)</option>
                 <option value="Lightly active">Lightly Active (1-3 days/wk)</option>
                 <option value="Moderately active">Moderately Active (3-5 days/wk)</option>
@@ -73,13 +114,19 @@ export default function NutritionPlanModal() {
               <input
                 type="text"
                 className="form-control"
-                id="restrictions"
+                name="restrictions"
+                value={formData.restrictions}
+                onChange={handleChange}
                 placeholder="e.g., Vegetarian, No dairy, Gluten-free"
               />
             </div>
           </div>
 
-          <button className="btn-generate" onClick={handleRegenerate}>
+          <button
+            className="btn-generate"
+            onClick={handleRegenerate}
+            disabled={isLoading}
+          >
             <span>✨</span> Generate Nutrition Plan
           </button>
         </div>
@@ -129,7 +176,7 @@ export default function NutritionPlanModal() {
               <div className="meal-plan-section">
                 <h3 className="section-title">Daily Meal Breakdown</h3>
                 <div className="meals-list">
-                  {data.sampleMeals.map((item, index) => (
+                  {data.sampleMeals?.map((item, index) => (
                     <div key={index} className="meal-item">
                       <div className="meal-icon">
                         {item.meal === "Breakfast"
