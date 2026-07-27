@@ -1,6 +1,6 @@
-import NutritionPlanModal from "../../components/aiCoach/NutritionPlanModal";
 import BackButtonHeader from "../ui/BackButtonHeader";
 import "./AiPageLayout.css";
+import NutritionPlanModal from "./NutritionPlanModal";
 
 export default function NutritionPlanPage() {
   return (
