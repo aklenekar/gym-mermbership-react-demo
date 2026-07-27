@@ -1,6 +1,6 @@
 export default function AdminRevenueCard({ revenueChart }) {
   return (
-    <div className="admin-card chart-card">
+    <div className="admin-card chart-card section-card section-card--elevated">
       <div className="card-header">
         <h3>Revenue Overview</h3>
         <select className="period-select">

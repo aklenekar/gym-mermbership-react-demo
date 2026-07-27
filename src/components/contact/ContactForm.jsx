@@ -2,7 +2,7 @@ import "./ContactForm.css";
 
 export default function ContactForm() {
   return (
-    <div className="contact-form-wrapper">
+    <div className="contact-form-wrapper section-card section-card--interactive">
       <h2 className="form-title">Send us a Message</h2>
       <form className="contact-form" id="contactForm">
         <div className="form-row">
@@ -44,7 +44,7 @@ export default function ContactForm() {
           <textarea id="message" name="message" rows="6" required></textarea>
         </div>
 
-        <button type="submit" className="btn-submit">
+        <button type="submit" className="btn-submit btn-primary">
           Send Message
         </button>
       </form>

@@ -1,6 +1,6 @@
 export default function AdminMemebershipCard({ membershipDistribution }) {
   return (
-    <div className="admin-card">
+    <div className="admin-card section-card section-card--elevated">
       <div className="card-header">
         <h3>Membership Plans</h3>
       </div>

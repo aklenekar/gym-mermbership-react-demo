@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function AdminQuickActionCard() {
   return (
-    <div className="admin-card actions-card">
+    <div className="admin-card actions-card section-card section-card--elevated">
       <div className="card-header">
         <h3>Quick Actions</h3>
       </div>

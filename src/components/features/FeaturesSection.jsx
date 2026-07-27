@@ -13,7 +13,7 @@ export default function FeaturesSection() {
         <div className="container">
           <div className="features-main-grid">
             {/* Feature 1: Equipment */}
-            <div className="feature-main-card">
+            <div className="feature-main-card section-card section-card--interactive">
               <div className="feature-main-image">
                 <div className="feature-image-placeholder">
                   <span className="feature-placeholder-icon">🏋️</span>
@@ -36,7 +36,7 @@ export default function FeaturesSection() {
             </div>
 
             {/* Feature 2: Classes */}
-            <div className="feature-main-card reverse">
+            <div className="feature-main-card reverse section-card section-card--interactive">
               <div className="feature-main-content">
                 <h2>Expert-Led Classes</h2>
                 <p>
@@ -59,7 +59,7 @@ export default function FeaturesSection() {
             </div>
 
             {/* Feature 3: Personal Training */}
-            <div className="feature-main-card">
+            <div className="feature-main-card section-card section-card--interactive">
               <div className="feature-main-image">
                 <div className="feature-image-placeholder">
                   <span className="feature-placeholder-icon">👤</span>
@@ -82,7 +82,7 @@ export default function FeaturesSection() {
             </div>
 
             {/* Feature 4: Recovery */}
-            <div className="feature-main-card reverse">
+            <div className="feature-main-card reverse section-card section-card--interactive">
               <div className="feature-main-content">
                 <h2>Recovery Zone</h2>
                 <p>
@@ -113,7 +113,7 @@ export default function FeaturesSection() {
           <h2 className="section-title">MORE AMENITIES</h2>
 
           <div className="amenities-grid">
-            <div className="amenity-card">
+            <div className="amenity-card section-card section-card--interactive">
               <div className="amenity-icon">🔒</div>
               <h3>Secure Lockers</h3>
               <p>
@@ -172,7 +172,7 @@ export default function FeaturesSection() {
           </p>
 
           <div className="zones-grid">
-            <div className="zone-card">
+            <div className="zone-card section-card section-card--interactive">
               <div className="zone-number">01</div>
               <h3>Strength Zone</h3>
               <p>
@@ -235,10 +235,10 @@ export default function FeaturesSection() {
           <h2>Ready to Experience It Yourself?</h2>
           <p>Schedule a free tour and see our facilities in person</p>
           <div className="cta-buttons">
-            <a href="contact.html" className="btn-cta">
+            <a href="contact.html" className="btn-cta btn-primary">
               Book a Tour
             </a>
-            <Link to="/price" className="btn-cta-secondary">
+            <Link to="/price" className="btn-cta-secondary btn-secondary">
               View Membership Plans
             </Link>
           </div>

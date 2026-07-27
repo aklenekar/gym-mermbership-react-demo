@@ -11,7 +11,7 @@ export default function MembershipPlansCard({
   const falseCheck = <span className="cross">✗</span>;
   return (
     <div
-      className={mostFeatured ? `membership-card featured` : `membership-card`}
+      className={mostFeatured ? `membership-card featured section-card section-card--interactive` : `membership-card section-card section-card--interactive`}
     >
       {mostFeatured && <div className="featured-badge">MOST POPULAR</div>}
       <div className="card-header">
@@ -38,7 +38,7 @@ export default function MembershipPlansCard({
       <div className="card-footer">
         <Link
           to="/signUp"
-          className={mostFeatured ? "btn-card btn-card-featured" : "btn-card"}
+          className={mostFeatured ? "btn-card btn-card-featured btn-primary" : "btn-card btn-primary"}
         >
           Get Started
         </Link>

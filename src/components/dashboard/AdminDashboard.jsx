@@ -53,8 +53,8 @@ export default function AdminDashboard() {
         subTitle="Manage your gym operations"
         title="ADMIN DASHBOARD"
       />
-      <section className="admin-content">
-        <div className="container">
+      <section className="admin-content page-section">
+        <div className="container page-shell">
           {/* Quick Stats */}
           <AdminStatsCard quickStats={data.quickStats} />
 
