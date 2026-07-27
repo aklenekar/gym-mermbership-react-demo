@@ -1,6 +1,6 @@
-import WorkoutPlanModal from "../../components/aiCoach/WorkoutPlanModal";
 import BackButtonHeader from "../ui/BackButtonHeader";
 import "./AiPageLayout.css";
+import WorkoutPlanModal from "./WorkoutPlanModal";
 
 export default function WorkoutPlanPage() {
   return (
