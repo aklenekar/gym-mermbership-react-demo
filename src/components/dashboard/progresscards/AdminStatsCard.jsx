@@ -1,7 +1,7 @@
 export default function AdminStatsCard({ quickStats }) {
   return (
     <div className="stats-overview">
-      <div className="stat-card">
+      <div className="stat-card section-card section-card--elevated">
         <div className="stat-icon">👥</div>
         <div className="stat-details">
           <div className="stat-value">{quickStats.totalMembers}</div>

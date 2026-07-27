@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function RecentClassesCard({ todayClasses }) {
   return (
-    <div className="admin-card">
+    <div className="admin-card section-card section-card--elevated">
       <div className="card-header">
         <h3>Today's Classes</h3>
         <Link to="/manageClasses" className="view-link">

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function RecentMembersCard({ recentMembers }) {
   return (
-    <div className="admin-card">
+    <div className="admin-card section-card section-card--elevated">
       <div className="card-header">
         <h3>Recent Members</h3>
         <Link to="/manageMembers" className="view-link">
