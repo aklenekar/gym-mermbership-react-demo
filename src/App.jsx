@@ -31,6 +31,8 @@ import TrainerClassesPage from "./routes/TrainerClassesPage.jsx";
 import ClassRecommendationsPage from "./components/AICoach/ClassRecommendationsPage.jsx";
 import WorkoutPlanPage from "./components/AICoach/WorkoutPlanPage.jsx";
 import NutritionPlanPage from "./components/AICoach/NutritionPlanPage.jsx";
+import ManageEquipmentPage from "./routes/ManageEquipmentPage.jsx";
+import MaintenanceSchedule from "./components/equipment/MaintenanceSchedule.jsx";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +68,8 @@ const router = createBrowserRouter([
           { path: "/manageClasses", element: <ManageClassesPage /> },
           { path: "/manageReports", element: <ManageReportPage /> },
           { path: "/manageSettings", element: <ManageSettingsPage /> },
+          { path: "/manageEquipment", element: <ManageEquipmentPage /> },
+          { path: "/manageEquipment/maintenance", element: <MaintenanceSchedule /> },
         ],
       },
       {

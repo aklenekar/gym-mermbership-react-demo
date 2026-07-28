@@ -6,7 +6,7 @@
   min-height: 100vh;
   background: var(--dark-gray);
   /* CRITICAL: Pushes page content down below fixed/sticky site Header */
-  padding-top: 100px;
+  padding-top: 5rem;
   padding-bottom: 4rem;
 }
 

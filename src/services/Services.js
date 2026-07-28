@@ -330,3 +330,192 @@ export const trainerService = {
     return handleResponse(response);
   }
 }
+
+export const equipmentService = {
+  // Equipment Endpoints
+  fetchEquipment: async (filters = {}, page = 0, size = 10) => {
+    const token = getAuthToken();
+    const params = new URLSearchParams();
+
+    if (filters.category && filters.category !== "ALL") params.append("category", filters.category);
+    if (filters.status && filters.status !== "ALL") params.append("status", filters.status);
+    if (filters.location) params.append("location", filters.location);
+    if (filters.search) params.append("search", filters.search);
+    params.append("page", page);
+    params.append("size", size);
+
+    const response = await fetch(
+      `${API_BASE_URL}/admin/equipment?${params.toString()}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return handleResponse(response);
+  },
+
+  getEquipmentById: async (id) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/admin/equipment/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  createEquipment: async (data) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/admin/equipment`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return handleResponse(response);
+  },
+
+  updateEquipment: async (id, data) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/admin/equipment/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return handleResponse(response);
+  },
+
+  updateStatus: async (id, status) => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/admin/equipment/${id}/status?status=${encodeURIComponent(status)}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return handleResponse(response);
+  },
+
+  deleteEquipment: async (id) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/admin/equipment/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  fetchStats: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/admin/equipment/stats`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  // Maintenance Endpoints
+  fetchMaintenanceRecords: async (equipmentId = null) => {
+    const token = getAuthToken();
+    const url = equipmentId
+      ? `${API_BASE_URL}/admin/equipment/maintenance?equipmentId=${equipmentId}`
+      : `${API_BASE_URL}/admin/equipment/maintenance`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  scheduleMaintenance: async (data) => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/admin/equipment/maintenance/schedule`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    return handleResponse(response);
+  },
+
+  completeMaintenance: async (id, data) => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/admin/equipment/maintenance/${id}/complete`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    return handleResponse(response);
+  },
+
+  cancelMaintenance: async (id) => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/admin/equipment/maintenance/${id}/cancel`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return handleResponse(response);
+  },
+
+  fetchMaintenanceCalendar: async (startDate, endDate) => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/admin/equipment/maintenance/calendar?startDate=${startDate}&endDate=${endDate}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return handleResponse(response);
+  },
+
+  fetchOverdueMaintenance: async () => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/admin/equipment/maintenance/overdue`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return handleResponse(response);
+  },
+};

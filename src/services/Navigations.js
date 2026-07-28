@@ -73,11 +73,15 @@ export const adminNavBar = [
     link: "/manageClasses",
   },
   {
+    name: "Equipment",
+    link: "/manageEquipment",
+  },
+  {
     name: "Reports",
     link: "/manageReports",
   },
   {
     name: "Settings",
     link: "/manageSettings",
-  },
+  }
 ];

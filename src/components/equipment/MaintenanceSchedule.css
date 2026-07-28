@@ -1,0 +1,293 @@
+.maintenance-page-container {
+  min-height: 100vh;
+  background: var(--dark-gray);
+  padding-top: 5rem;
+}
+
+/* ============================================
+   MAINTENANCE SCHEDULE & LOG STYLES
+============================================ */
+
+.admin-content {
+  padding: 2rem 0 4rem;
+}
+
+.maintenance-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ============================================
+   CALENDAR CONTAINER & REACT-CALENDAR OVERRIDES
+============================================ */
+
+.maintenance-calendar-wrapper {
+  background: var(--mid-gray);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.maintenance-calendar-wrapper h3,
+.maintenance-tasks-list h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--white);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* React Calendar Dark Theme Integration */
+.maintenance-calendar-wrapper .react-calendar {
+  background: var(--mid-gray);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--white);
+  font-family: inherit;
+  width: 100%;
+}
+
+.maintenance-calendar-wrapper .react-calendar__navigation {
+  background: var(--dark-gray);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 0;
+}
+
+.maintenance-calendar-wrapper .react-calendar__navigation button {
+  color: var(--white);
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.maintenance-calendar-wrapper .react-calendar__navigation button:hover {
+  background: rgba(255, 77, 0, 0.2);
+  color: var(--primary);
+}
+
+.maintenance-calendar-wrapper .react-calendar__month-view__weekdays {
+  background: var(--dark-gray);
+  color: var(--light-gray);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.maintenance-calendar-wrapper .react-calendar__month-view__weekdays__weekday {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.maintenance-calendar-wrapper .react-calendar__tile {
+  background: transparent;
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.maintenance-calendar-wrapper .react-calendar__tile:hover {
+  background: rgba(255, 77, 0, 0.3);
+  color: var(--white);
+}
+
+.maintenance-calendar-wrapper .react-calendar__tile--active {
+  background: var(--primary) !important;
+  color: var(--white) !important;
+  font-weight: 700;
+}
+
+.maintenance-calendar-wrapper .react-calendar__tile--now {
+  background: rgba(255, 77, 0, 0.2);
+  color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.maintenance-calendar-wrapper .react-calendar__month-view__days__day--neighboringMonth {
+  color: var(--light-gray);
+  opacity: 0.4;
+}
+
+/* ============================================
+   TASK CARDS & QUEUE LIST
+============================================ */
+
+.maintenance-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.task-card {
+  background: var(--mid-gray);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  transition: var(--transition);
+}
+
+.task-card:hover {
+  border-color: var(--primary);
+}
+
+.task-card.overdue {
+  border-color: var(--danger);
+  background: rgba(255, 0, 68, 0.05);
+}
+
+.task-main {
+  flex: 1;
+}
+
+.task-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.task-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.maint-type-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--dark-gray);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.task-meta {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--light-gray);
+  font-size: 0.88rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.task-notes {
+  font-size: 0.85rem;
+  color: #ccc;
+  font-style: italic;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+
+/* Status Badges */
+.maint-status {
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.maint-status.SCHEDULED {
+  background: var(--secondary);
+  color: var(--dark);
+}
+
+.maint-status.IN_PROGRESS {
+  background: var(--warning);
+  color: var(--dark);
+}
+
+.maint-status.COMPLETED {
+  background: var(--success);
+  color: var(--dark);
+}
+
+.maint-status.CANCELLED {
+  background: #666;
+  color: var(--white);
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-action {
+  padding: 0.6rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: var(--transition);
+  background: var(--primary);
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.btn-action:hover {
+  background: var(--primary-light);
+}
+
+.btn-action.cancel {
+  background: transparent;
+  color: var(--danger);
+  border: 2px solid var(--danger);
+}
+
+.btn-action.cancel:hover {
+  background: var(--danger);
+  color: var(--white);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+============================================ */
+
+@media (max-width: 1024px) {
+  .maintenance-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .task-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .action-buttons {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .btn-action {
+    flex: 1;
+    text-align: center;
+  }
+}
