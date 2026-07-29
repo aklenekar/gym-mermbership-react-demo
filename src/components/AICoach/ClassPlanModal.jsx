@@ -82,10 +82,10 @@ export default function ClassPlanModal({
                               width: `${rec.matchPercentage}%`,
                               background:
                                 rec.matchPercentage >= 95
-                                  ? "linear-gradient(90deg, #00d084, #00f2b8)"
+                                  ? "linear-gradient(90deg, var(--success), var(--success-light))"
                                   : rec.matchPercentage >= 85
                                     ? "linear-gradient(90deg, var(--primary), var(--primary-light))"
-                                    : "linear-gradient(90deg, #ffd600, #ffed4e)",
+                                    : "linear-gradient(90deg, var(--accent), var(--accent-light))",
                             }}
                           ></div>
                         </div>

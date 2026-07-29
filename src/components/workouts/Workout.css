@@ -74,7 +74,7 @@
 .btn-log-workout:hover {
     background: var(--primary-light);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 77, 0, 0.4);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.4);
 }
 
 .workouts-filters {
@@ -151,12 +151,12 @@
 }
 
 .type-badge.cardio {
-    background: #00d9ff;
+    background: var(--secondary);
     color: var(--dark);
 }
 
 .type-badge.hiit {
-    background: #ffd600;
+    background: var(--accent);
     color: var(--dark);
 }
 

@@ -12,7 +12,9 @@ export default function ClassesPlanModal({
         <div className="loading-state">
           <div className="loading-spinner"></div>
           <p className="loading-text">Analyzing your fitness profile...</p>
-          <p className="loading-subtext">Searching for the best class matches...</p>
+          <p className="loading-subtext">
+            Searching for the best class matches...
+          </p>
         </div>
       )}
 
@@ -29,8 +31,8 @@ export default function ClassesPlanModal({
               {Math.round(
                 recommendations.reduce(
                   (acc, rec) => acc + rec.matchPercentage,
-                  0
-                ) / recommendations.length
+                  0,
+                ) / recommendations.length,
               )}
               %
             </div>
@@ -62,10 +64,10 @@ export default function ClassesPlanModal({
                             width: `${rec.matchPercentage}%`,
                             background:
                               rec.matchPercentage >= 95
-                                ? "linear-gradient(90deg, #00d084, #00f2b8)"
+                                ? "linear-gradient(90deg, var(--success), var(--success-light))"
                                 : rec.matchPercentage >= 85
-                                ? "linear-gradient(90deg, var(--primary), var(--primary-light))"
-                                : "linear-gradient(90deg, #ffd600, #ffed4e)",
+                                  ? "linear-gradient(90deg, var(--primary), var(--primary-light))"
+                                  : "linear-gradient(90deg, var(--accent), var(--accent-light))",
                           }}
                         ></div>
                       </div>

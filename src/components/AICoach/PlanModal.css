@@ -101,7 +101,7 @@ select.form-control option {
 
 .btn-generate:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 77, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
 }
 
 /* --------------------------------------------
@@ -162,9 +162,9 @@ select.form-control option {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.macro-card.protein { border-left: 3px solid #4caf50; }
-.macro-card.carbs { border-left: 3px solid #2196f3; }
-.macro-card.fats { border-left: 3px solid #ff9800; }
+.macro-card.protein { border-left: 3px solid var(--macro-protein); }
+.macro-card.carbs { border-left: 3px solid var(--macro-carbs); }
+.macro-card.fats { border-left: 3px solid var(--macro-fats); }
 
 .macro-value {
   font-family: var(--font-heading);

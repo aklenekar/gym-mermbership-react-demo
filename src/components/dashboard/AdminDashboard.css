@@ -316,7 +316,7 @@
 }
 
 .plan-fill.starter {
-  background: #00d9ff;
+  background: var(--secondary);
 }
 
 .plan-fill.pro {
@@ -324,7 +324,7 @@
 }
 
 .plan-fill.elite {
-  background: #ffd600;
+  background: var(--accent);
 }
 
 .plan-percentage {

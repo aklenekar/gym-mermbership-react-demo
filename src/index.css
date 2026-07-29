@@ -18,6 +18,7 @@
   --success: #00ff88;
   --warning: #ffd600;
   --danger: #ff0044;
+  --danger-dark: #cc0036;
 
   /* Typography */
   --font-display: "Bebas Neue", sans-serif;
@@ -37,6 +38,18 @@
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
   --shadow-glow: 0 0 40px rgba(255, 77, 0, 0.3);
+
+  /* Macro Colors */
+  --macro-protein: #4caf50;
+  --macro-carbs: #2196f3;
+  --macro-fats: #ff9800;
+
+  /* Additional Colors */
+  --success-light: #00f2b8;
+  --accent-light: #ffed4e;
+
+  /* index.css :root addition */
+  --primary-rgb: 255, 77, 0;
 }
 
 * {

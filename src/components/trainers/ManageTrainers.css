@@ -85,7 +85,7 @@
 }
 
 .trainer-badge.head-coach {
-  background: #ffd600;
+  background: var(--accent);
   color: var(--dark);
 }
 

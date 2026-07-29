@@ -296,11 +296,11 @@
 }
 
 .legend-color.cardio {
-    background: #00d9ff;
+    background: var(--secondary);
 }
 
 .legend-color.hiit {
-    background: #ffd600;
+    background: var(--accent);
 }
 
 /* Achievements */
