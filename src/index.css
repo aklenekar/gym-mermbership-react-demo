@@ -47,6 +47,7 @@
   /* Additional Colors */
   --success-light: #00f2b8;
   --accent-light: #ffed4e;
+  --dark-rgb: 10, 10, 10;
 
   /* index.css :root addition */
   --primary-rgb: 255, 77, 0;
@@ -173,4 +174,38 @@ body {
   .section-title {
     font-size: 1.5rem;
   }
+}
+
+[data-theme="light"] {
+  --dark: #f5f5f7;
+  --dark-gray: #ffffff;
+  --mid-gray: #eef0f3;
+  --light-gray: #5a5f6a;
+  --white: #12141a;
+  --off-white: #12141a;
+
+  --primary: #e8460e;
+  --primary-dark: #b8350a;
+  --primary-light: #ff6a35;
+  --primary-rgb: 232, 70, 14;
+  --secondary: #0091b3;
+  --accent: #cc9900;
+
+  --success: #12a552;
+  --success-light: #00b894;
+  --warning: #cc9900;
+  --danger: #d10036;
+  --danger-dark: #a30029;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 40px rgba(255, 77, 0, 0.15);
+
+  --dark-rgb: 245, 245, 247;
+}
+
+[data-theme="light"] body {
+  background: var(--dark);
+  color: var(--white);
 }

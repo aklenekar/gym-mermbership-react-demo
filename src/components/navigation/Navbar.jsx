@@ -9,6 +9,7 @@ import {
   userNavBar,
 } from "../../services/Navigations";
 import { getUserRole } from "../../util/auth";
+import ThemeToggle from "../ui/ThemeToggle";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -95,6 +96,7 @@ export default function Navbar() {
           )}
         </ul>
         <div className="desktop-cta">
+          <ThemeToggle />
           {token ? (
             <>
               {isProfile && (

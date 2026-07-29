@@ -27,18 +27,20 @@
     font-size: clamp(2.5rem, 5vw, 4rem);
     letter-spacing: 3px;
     margin-bottom: 1rem;
+    color: #ffffff;
 }
 
 .cta-section p {
     font-size: 1.25rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    color: #ffffff;
 }
 
 .btn-cta {
     display: inline-block;
     padding: 1.25rem 3rem;
-    background: var(--white);
+    background: #ffffff;
     color: var(--primary);
     text-decoration: none;
     font-weight: 700;
@@ -51,7 +53,7 @@
 
 .btn-cta:hover {
     background: var(--dark);
-    color: var(--white);
+    color: #ffffff;
     transform: translateY(-4px) scale(1.05);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
