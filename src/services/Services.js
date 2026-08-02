@@ -519,3 +519,76 @@ export const equipmentService = {
     return handleResponse(response);
   },
 };
+
+export const chatService = {
+  fetchConversations: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/messages/conversations`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  startConversation: async (targetUserId) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/messages/conversations/start`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ targetUserId }),
+    });
+    return handleResponse(response);
+  },
+
+  fetchMessageHistory: async (conversationId, page = 0, size = 30) => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/messages/conversations/${conversationId}/messages?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return handleResponse(response);
+  },
+
+  markAsRead: async (conversationId) => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/messages/conversations/${conversationId}/read`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    if (!response.ok) {
+      const error = new Error("Failed to mark conversation as read");
+      error.code = response.status;
+      throw error;
+    }
+    return true;
+  },
+
+  fetchUnreadCount: async () => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/messages/conversations/unread-count`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return handleResponse(response);
+  },
+};

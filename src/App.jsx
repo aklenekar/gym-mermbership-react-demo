@@ -33,6 +33,7 @@ import WorkoutPlanPage from "./components/AICoach/WorkoutPlanPage.jsx";
 import NutritionPlanPage from "./components/AICoach/NutritionPlanPage.jsx";
 import ManageEquipmentPage from "./routes/ManageEquipmentPage.jsx";
 import MaintenanceSchedule from "./components/equipment/MaintenanceSchedule.jsx";
+import ChatPage from "./routes/ChatPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
           { path: "/ai-coach/classes", element: <ClassRecommendationsPage /> },
           { path: "/ai-coach/workout", element: <WorkoutPlanPage /> },
           { path: "/ai-coach/nutrition", element: <NutritionPlanPage /> },
+          { path: "/messages", element: <ChatPage /> },
         ],
       },
       {
@@ -79,6 +81,7 @@ const router = createBrowserRouter([
           { path: "/trainerDashboard", element: <TrainerDashboardPage /> },
           { path: "/trainerClasses", element: <TrainerClassesPage /> },
           { path: "/profile", element: <UserProfilePage /> },
+          { path: "/messages", element: <ChatPage /> },
         ],
       },
       { path: "/features", element: <FeaturesPage /> },

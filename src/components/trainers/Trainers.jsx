@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Trainers({ trainer }) {
   return (
     <div className="trainer-card">
@@ -29,9 +31,9 @@ export default function Trainers({ trainer }) {
           <span>{trainer.yearsExperience} Years</span>
         </div>
         <p className="trainer-description">{trainer.bio}</p>
-        <a href="#" className="btn-book-compact">
+        <Link to="/auth" className="btn-book-compact">
           Book Session
-        </a>
+        </Link>
       </div>
     </div>
   );

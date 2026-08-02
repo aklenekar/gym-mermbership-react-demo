@@ -53,35 +53,45 @@ export default function TrainerDashboard() {
             <div className="trainer-stat-card">
               <div className="stat-icon">👥</div>
               <div className="stat-info">
-                <div className="stat-value">{candidates?.totalCandidates ?? 0}</div>
+                <div className="stat-value">
+                  {candidates?.totalCandidates ?? 0}
+                </div>
                 <div className="stat-label">Total Candidates</div>
               </div>
             </div>
             <div className="trainer-stat-card">
               <div className="stat-icon">✅</div>
               <div className="stat-info">
-                <div className="stat-value">{candidates?.activeCandidates ?? 0}</div>
+                <div className="stat-value">
+                  {candidates?.activeCandidates ?? 0}
+                </div>
                 <div className="stat-label">Active Candidates</div>
               </div>
             </div>
             <div className="trainer-stat-card">
               <div className="stat-icon">📅</div>
               <div className="stat-info">
-                <div className="stat-value">{classes?.upcomingClasses ?? 0}</div>
+                <div className="stat-value">
+                  {classes?.upcomingClasses ?? 0}
+                </div>
                 <div className="stat-label">Upcoming Classes</div>
               </div>
             </div>
             <div className="trainer-stat-card">
               <div className="stat-icon">🏁</div>
               <div className="stat-info">
-                <div className="stat-value">{classes?.completedClasses ?? 0}</div>
+                <div className="stat-value">
+                  {classes?.completedClasses ?? 0}
+                </div>
                 <div className="stat-label">Completed Classes</div>
               </div>
             </div>
             <div className="trainer-stat-card">
               <div className="stat-icon">📊</div>
               <div className="stat-info">
-                <div className="stat-value">{classes?.avgCapacityUtilization ?? 0}%</div>
+                <div className="stat-value">
+                  {classes?.avgCapacityUtilization ?? 0}%
+                </div>
                 <div className="stat-label">Avg Capacity</div>
               </div>
             </div>
@@ -91,18 +101,26 @@ export default function TrainerDashboard() {
             <div className="trainer-card">
               <div className="trainer-card-header">
                 <h3>Upcoming Classes</h3>
-                <Link to="/trainerClasses" className="view-link">View All</Link>
+                <Link to="/trainerClasses" className="view-link">
+                  View All
+                </Link>
               </div>
               <div className="trainer-card-body">
-                {upcoming.length === 0 && <p className="empty-text">No upcoming classes.</p>}
+                {upcoming.length === 0 && (
+                  <p className="empty-text">No upcoming classes.</p>
+                )}
                 {upcoming.map((c) => (
                   <div className="upcoming-class-item" key={c.id}>
                     <div className="uc-time">{c.fullStartTime}</div>
                     <div className="uc-info">
                       <div className="uc-name">{c.name}</div>
-                      <div className="uc-meta">{c.category} • {c.location}</div>
+                      <div className="uc-meta">
+                        {c.category} • {c.location}
+                      </div>
                     </div>
-                    <div className="uc-capacity">{c.bookedCount}/{c.capacity}</div>
+                    <div className="uc-capacity">
+                      {c.bookedCount}/{c.capacity}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -121,6 +139,10 @@ export default function TrainerDashboard() {
                   <Link to="/trainerCandidates" className="trainer-action-btn">
                     <span className="action-icon">👥</span>
                     <span>My Candidates</span>
+                  </Link>
+                  <Link to="/messages" className="trainer-action-btn">
+                    <span className="action-icon">💬</span>
+                    <span>Messages</span>
                   </Link>
                 </div>
               </div>

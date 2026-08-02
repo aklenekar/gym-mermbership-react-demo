@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./QuickActionCard.css";
+import StartChatButton from "../../chat/StartChatButton";
 
 export default function QuickActionCard() {
   return (
@@ -17,10 +18,10 @@ export default function QuickActionCard() {
             <span className="action-icon">🎟️</span>
             <span className="action-text">Guest Pass</span>
           </a>
-          <a href="#" className="action-btn">
+          <Link to="/messages" className="action-btn">
             <span className="action-icon">💬</span>
             <span className="action-text">Message Trainer</span>
-          </a>
+          </Link>
           <Link to="/progress" className="action-btn">
             <span className="action-icon">🏆</span>
             <span className="action-text">View Progress</span>
