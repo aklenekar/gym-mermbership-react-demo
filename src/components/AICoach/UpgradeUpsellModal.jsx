@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import "../popups/PopupForm.css";
 
 export default function UpgradeUpsellModal({ onClose }) {
+  const navigate = useNavigate();
   return (
     <>
       <div className="form-modal" id="planUsellModal">
@@ -26,7 +28,7 @@ export default function UpgradeUpsellModal({ onClose }) {
 
             <div className="form-actions">
               <button
-                onClick={() => (window.location.href = "/membership/upgrade")}
+                onClick={() => navigate("/profile")}
                 className="form-btn-primary"
               >
                 Upgrade Plan
