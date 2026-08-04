@@ -53,6 +53,10 @@ export const trainerNavBar = [
     name: "Classes",
     link: "/trainerClasses",
   },
+  {
+    name: "Payroll",
+    link: "/trainerPayroll",
+  }
 ];
 
 export const adminNavBar = [
@@ -63,6 +67,10 @@ export const adminNavBar = [
   {
     name: "Members",
     link: "/manageMembers",
+  },
+  {
+    name: "Payroll",
+    link: "/managePayroll",
   },
   {
     name: "Trainers",

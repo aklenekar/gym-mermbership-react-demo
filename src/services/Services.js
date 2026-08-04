@@ -533,6 +533,105 @@ export const equipmentService = {
   },
 };
 
+export const payrollService = {
+  fetchSummary: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/payroll/summary`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  fetchAllRuns: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/payroll/runs`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  fetchMyPayroll: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/payroll/me`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  fetchConfig: async (trainerId) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/payroll/config/${trainerId}`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  saveConfig: async (trainerId, configData) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/payroll/config/${trainerId}`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(configData),
+    });
+    return handleResponse(response);
+  },
+
+  generateRun: async (requestData) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/payroll/generate`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    });
+    return handleResponse(response);
+  },
+
+  updateStatus: async (runId, status) => {
+    const token = getAuthToken();
+    const response = await fetch(
+      `${API_BASE_URL}/payroll/runs/${runId}/status?status=${encodeURIComponent(status)}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+    );
+    return handleResponse(response);
+  },
+
+  logCommission: async (commissionData) => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/payroll/commissions`, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(commissionData),
+    });
+    return handleResponse(response);
+  },
+};
+
 export const chatService = {
   fetchConversations: async () => {
     const token = getAuthToken();

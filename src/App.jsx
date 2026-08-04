@@ -33,6 +33,8 @@ import WorkoutPlanPage from "./components/AICoach/WorkoutPlanPage.jsx";
 import NutritionPlanPage from "./components/AICoach/NutritionPlanPage.jsx";
 import ManageEquipmentPage from "./routes/ManageEquipmentPage.jsx";
 import MaintenanceSchedule from "./components/equipment/MaintenanceSchedule.jsx";
+import ManagePayrollPage from "./routes/ManagePayrollPage.jsx";
+import TrainerPayrollPage from "./routes/TrainerPayrollPage.jsx";
 import ChatPage from "./routes/ChatPage.jsx";
 
 const router = createBrowserRouter([
@@ -79,10 +81,8 @@ const router = createBrowserRouter([
           { path: "/manageReports", element: <ManageReportPage /> },
           { path: "/manageSettings", element: <ManageSettingsPage /> },
           { path: "/manageEquipment", element: <ManageEquipmentPage /> },
-          {
-            path: "/manageEquipment/maintenance",
-            element: <MaintenanceSchedule />,
-          },
+          { path: "/manageEquipment/maintenance", element: <MaintenanceSchedule /> },
+          { path: "/managePayroll", element: <ManagePayrollPage /> },
         ],
       },
       {
@@ -91,6 +91,7 @@ const router = createBrowserRouter([
         children: [
           { path: "/trainerDashboard", element: <TrainerDashboardPage /> },
           { path: "/trainerClasses", element: <TrainerClassesPage /> },
+          { path: "/trainerPayroll", element: <TrainerPayrollPage /> },
           { path: "/profile", element: <UserProfilePage /> },
         ],
       },

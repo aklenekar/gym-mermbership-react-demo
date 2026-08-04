@@ -24,6 +24,10 @@ export default function AdminQuickActionCard() {
             <span className="action-icon">📊</span>
             <span className="action-text">View Reports</span>
           </Link>
+          <Link className="action-btn" to="/managePayroll">
+            <span className="action-icon">💰</span>
+            <span className="action-text">Manage Payroll</span>
+          </Link>
         </div>
       </div>
     </div>
