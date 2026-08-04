@@ -114,15 +114,6 @@ export default function Chat() {
     });
   }
 
-  function sendMessage(content) {
-    if (!activeConversation || !content.trim()) return;
-
-    webSocketService.sendMessage({
-      conversationId: activeConversation.id,
-      content: content.trim(),
-    });
-  }
-
   function sendTyping() {
     if (!activeConversation) return;
     webSocketService.sendTyping(activeConversation.id);
@@ -135,6 +126,26 @@ export default function Chat() {
     });
     selectConversation(conversation);
   }
+
+  function sendMessage(content) {
+  if (!activeConversation || !content.trim()) return;
+
+  const optimisticMessage = {
+    id: `temp-${Date.now()}`,
+    conversationId: activeConversation.id,
+    content: content.trim(),
+    sentAt: new Date().toISOString(),
+    status: "SENT",
+    isOwnMessage: true,
+  };
+
+  setMessages((prev) => [...prev, optimisticMessage]);
+
+  webSocketService.sendMessage({
+    conversationId: activeConversation.id,
+    content: content.trim(),
+  });
+}
 
   return (
     <>

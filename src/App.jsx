@@ -10,7 +10,7 @@ import PricePage from "./routes/PricePage.jsx";
 import ContactPage from "./routes/ContactPage.jsx";
 import ErrorPage from "./routes/ErrorPage.jsx";
 import LoginPage, { action as authAction } from "./routes/LoginPage.jsx";
-import { tokenLoader, checkRoleLoader } from "./util/auth.js";
+import { tokenLoader, checkRoleLoader, getUserRole } from "./util/auth.js";
 import { action as logoutAction } from "./routes/Logout.js";
 import FeaturesPage from "./routes/Features.jsx";
 import TrainersPage, { trainersLoader } from "./routes/TrainersPage.jsx";
@@ -45,6 +45,15 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/auth", element: <LoginPage />, action: authAction },
       {
+        path: "/messages",
+        element: <ChatPage />,
+        loader: () => {
+          const role = getUserRole();
+          if (role !== "USER" && role !== "TRAINER") return redirect("/");
+          return null;
+        },
+      },
+      {
         path: "",
         loader: checkRoleLoader("USER"),
         children: [
@@ -57,7 +66,6 @@ const router = createBrowserRouter([
           { path: "/ai-coach/classes", element: <ClassRecommendationsPage /> },
           { path: "/ai-coach/workout", element: <WorkoutPlanPage /> },
           { path: "/ai-coach/nutrition", element: <NutritionPlanPage /> },
-          { path: "/messages", element: <ChatPage /> },
         ],
       },
       {
@@ -71,7 +79,10 @@ const router = createBrowserRouter([
           { path: "/manageReports", element: <ManageReportPage /> },
           { path: "/manageSettings", element: <ManageSettingsPage /> },
           { path: "/manageEquipment", element: <ManageEquipmentPage /> },
-          { path: "/manageEquipment/maintenance", element: <MaintenanceSchedule /> },
+          {
+            path: "/manageEquipment/maintenance",
+            element: <MaintenanceSchedule />,
+          },
         ],
       },
       {
@@ -81,7 +92,6 @@ const router = createBrowserRouter([
           { path: "/trainerDashboard", element: <TrainerDashboardPage /> },
           { path: "/trainerClasses", element: <TrainerClassesPage /> },
           { path: "/profile", element: <UserProfilePage /> },
-          { path: "/messages", element: <ChatPage /> },
         ],
       },
       { path: "/features", element: <FeaturesPage /> },

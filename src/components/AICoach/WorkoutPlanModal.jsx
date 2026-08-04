@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { aiService } from "../../services/Services";
+import { useRef, useState } from "react";
+import { AiAccessDeniedError, aiService } from "../../services/Services";
 import "./PlanModal.css";
+import UpgradeUpsellModal from "./UpgradeUpsellModal";
 
-export default function WorkoutPlanModal() {
+export default function WorkoutPlanModal({openModal}) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,7 +36,11 @@ export default function WorkoutPlanModal() {
       const response = await aiService.recommendedWorkout(payload);
       setData(response);
     } catch (error) {
-      console.error("Failed to generate workout plan:", error);
+      if (error instanceof AiAccessDeniedError) {
+        openModal();
+      } else {
+        console.error("Failed to generate workout plan:", error);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -135,7 +140,10 @@ export default function WorkoutPlanModal() {
             <div className="empty-state">
               <span className="empty-icon">🏋️</span>
               <h3 className="empty-title">Build Your Weekly Routine</h3>
-              <p className="empty-text">Select your target goal and training frequency to generate a structured workout split.</p>
+              <p className="empty-text">
+                Select your target goal and training frequency to generate a
+                structured workout split.
+              </p>
             </div>
           )}
 

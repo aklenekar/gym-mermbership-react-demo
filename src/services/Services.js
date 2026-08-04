@@ -258,54 +258,65 @@ export const adminService = {
   },
 };
 
+class AiAccessDeniedError extends Error {
+  constructor() {
+    super("AI_ACCESS_DENIED");
+    this.name = "AiAccessDeniedError";
+  }
+}
+
+async function aiFetch(url, options = {}) {
+  const res = await fetch(url, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${getAuthToken()}`,
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+  });
+
+  if (res.status === 403) {
+    throw new AiAccessDeniedError();
+  }
+  if (!res.ok) {
+    throw new Error(`Request failed: ${res.status}`);
+  }
+  return res.json();
+}
+
 export const aiService = {
-  recommendedClasses: async () => {
-    const token = getAuthToken();
-    const response = await fetch(`${API_BASE_URL}/ai/recommend/classes`, {
+  recommendedWorkout: (payload) =>
+    aiFetch(`${API_BASE_URL}/ai/workout/plan`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+
+  recommendedNutrition: (payload) =>
+    aiFetch(`${API_BASE_URL}/ai/nutrition/plan`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+
+  recommendedClasses: () =>
+    aiFetch(`${API_BASE_URL}/ai/recommend/classes`, { method: "POST" }),
+
+  chat: (payload) => {
+    // streaming endpoint - keep raw fetch, but still check status
+    return fetch(`${API_BASE_URL}/ai/chat`, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    });
-    return handleResponse(response);
-  },
-  recommendedWorkout: async (plan) => {
-    const token = getAuthToken();
-    const response = await fetch(`${API_BASE_URL}/ai/workout/plan`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(plan),
-    });
-    return handleResponse(response);
-  },
-  recommendedNutrition: async (plan) => {
-    const token = getAuthToken();
-    const response = await fetch(`${API_BASE_URL}/ai/nutrition/plan`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify(plan),
-    });
-    return handleResponse(response);
-  },
-  chat: async (payload) => {
-    const token = localStorage.getItem("token"); // Get your JWT
-    return await fetch(`${API_BASE_URL}/ai/chat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(payload),
+    }).then((res) => {
+      if (res.status === 403) throw new AiAccessDeniedError();
+      return res;
     });
   },
 };
+
+export { AiAccessDeniedError };
 
 export const trainerService = {
   fetchCandidates: async () => {
@@ -328,8 +339,8 @@ export const trainerService = {
       },
     });
     return handleResponse(response);
-  }
-}
+  },
+};
 
 export const equipmentService = {
   // Equipment Endpoints
@@ -337,8 +348,10 @@ export const equipmentService = {
     const token = getAuthToken();
     const params = new URLSearchParams();
 
-    if (filters.category && filters.category !== "ALL") params.append("category", filters.category);
-    if (filters.status && filters.status !== "ALL") params.append("status", filters.status);
+    if (filters.category && filters.category !== "ALL")
+      params.append("category", filters.category);
+    if (filters.status && filters.status !== "ALL")
+      params.append("status", filters.status);
     if (filters.location) params.append("location", filters.location);
     if (filters.search) params.append("search", filters.search);
     params.append("page", page);
@@ -351,7 +364,7 @@ export const equipmentService = {
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
+      },
     );
     return handleResponse(response);
   },
@@ -402,7 +415,7 @@ export const equipmentService = {
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
+      },
     );
     return handleResponse(response);
   },
@@ -456,7 +469,7 @@ export const equipmentService = {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }
+      },
     );
     return handleResponse(response);
   },
@@ -472,7 +485,7 @@ export const equipmentService = {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }
+      },
     );
     return handleResponse(response);
   },
@@ -486,7 +499,7 @@ export const equipmentService = {
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
+      },
     );
     return handleResponse(response);
   },
@@ -500,7 +513,7 @@ export const equipmentService = {
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
+      },
     );
     return handleResponse(response);
   },
@@ -514,7 +527,7 @@ export const equipmentService = {
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
+      },
     );
     return handleResponse(response);
   },
@@ -534,14 +547,17 @@ export const chatService = {
 
   startConversation: async (targetUserId) => {
     const token = getAuthToken();
-    const response = await fetch(`${API_BASE_URL}/messages/conversations/start`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${API_BASE_URL}/messages/conversations/start`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ targetUserId }),
       },
-      body: JSON.stringify({ targetUserId }),
-    });
+    );
     return handleResponse(response);
   },
 
@@ -554,7 +570,7 @@ export const chatService = {
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
+      },
     );
     return handleResponse(response);
   },
@@ -568,7 +584,7 @@ export const chatService = {
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
+      },
     );
     if (!response.ok) {
       const error = new Error("Failed to mark conversation as read");
@@ -587,7 +603,7 @@ export const chatService = {
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
+      },
     );
     return handleResponse(response);
   },

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { aiService } from "../../services/Services";
 import "./PlanModal.css";
 
-export default function NutritionPlanModal() {
+export default function NutritionPlanModal({ openModal }) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,6 +40,7 @@ export default function NutritionPlanModal() {
       setData(response);
     } catch (error) {
       console.error("Failed to generate nutrition plan:", error);
+      openModal();
     } finally {
       setIsLoading(false);
     }
