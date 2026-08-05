@@ -259,12 +259,8 @@ export const adminService = {
 
   fetchPricingPlans: async () => {
     const token = getAuthToken();
-
-<<<<<<< HEAD
+    
     const response = await fetch(`${API_BASE_URL}/membership/pricing`, {
-=======
-    const response = await fetch(`${API_BASE_URL}/admin/pricing`, {
->>>>>>> 186b2f1d4147282a235210dcc05dcf961274e75a
       method: "GET"
     });
     return handleResponse(response);
