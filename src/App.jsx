@@ -36,6 +36,7 @@ import MaintenanceSchedule from "./components/equipment/MaintenanceSchedule.jsx"
 import ManagePayrollPage from "./routes/ManagePayrollPage.jsx";
 import TrainerPayrollPage from "./routes/TrainerPayrollPage.jsx";
 import ChatPage from "./routes/ChatPage.jsx";
+import AdminLayout from "./routes/AdminLayout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,7 @@ const router = createBrowserRouter([
       {
         path: "",
         loader: checkRoleLoader("ADMIN"),
+        element: <AdminLayout />,
         children: [
           { path: "/adminDashboard", element: <AdminDashboardPage /> },
           { path: "/manageMembers", element: <ManageMemebersPage /> },

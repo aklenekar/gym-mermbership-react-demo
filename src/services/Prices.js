@@ -30,6 +30,8 @@ export const starterFeatures = {
   ],
 };
 
+starterFeatures.annualPrice = starterFeatures.price * 12;
+
 export const proFeatures = {
   name: "PRO",
   price: 59,
@@ -62,6 +64,8 @@ export const proFeatures = {
   ],
 };
 
+proFeatures.annualPrice = proFeatures.price * 12;
+
 export const eliteFeatures = {
   name: "ELITE",
   price: 99,
@@ -93,3 +97,5 @@ export const eliteFeatures = {
     },
   ],
 };
+
+eliteFeatures.annualPrice = eliteFeatures.price * 12;
