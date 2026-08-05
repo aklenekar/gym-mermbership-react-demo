@@ -1,37 +1,34 @@
-import { useState } from "react";
-import {
-  eliteFeatures,
-  proFeatures,
-  starterFeatures,
-} from "../../services/Prices";
+import { useEffect, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import MembershipPlansCard from "./membershipcards/MembershipPlansCard";
 import "./PricingSection.css";
+import { adminService } from "../../services/Services";
 
 export default function PricingSection() {
-  const [plans, setPlans] = useState({
-    starter: starterFeatures,
-    pro: proFeatures,
-    elite: eliteFeatures,
-  });
+  const [plans, setPlans] = useState([]);
 
-  const handlePlanChange = (index) => {
-    if (plans.index === index) {
-      return;
-    }
-    setPlans({ ...plans, index });
-  };
+  useEffect(() => {
+    const fetchPricingPlans = async () => {
+      try {
+        const response = await adminService.fetchPricingPlans();
+        setPlans(response.pricing);
+      } catch (error) {
+        console.error("Error fetching pricing plans:", error);
+      }
+    };
+
+    fetchPricingPlans();
+  }, []);
 
   let content = (
     <div className="pricing-grid">
-      {Object.keys(plans).map((planName) => (
+      {plans.map((plan) => (
         <MembershipPlansCard
-          key={planName}
-          title={plans[planName].name}
-          price={plans[planName].price}
-          features={plans[planName].features}
-          handlePlanChange={handlePlanChange}
-          mostFeatured={plans[planName].mostFeatured}
+          key={plan.name}
+          title={plan.name}
+          price={plan.price}
+          features={plan.features}
+          mostFeatured={plan.mostFeatured}
         />
       ))}
     </div>

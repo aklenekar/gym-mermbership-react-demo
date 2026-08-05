@@ -40,8 +40,8 @@ export const userNavBar = [
   },
   {
     name: "Ai Coach",
-    link: "/ai-coach"
-  }
+    link: "/ai-coach",
+  },
 ];
 
 export const trainerNavBar = [
@@ -56,40 +56,16 @@ export const trainerNavBar = [
   {
     name: "Payroll",
     link: "/trainerPayroll",
-  }
+  },
 ];
 
 export const adminNavBar = [
-  {
-    name: "Dashboard",
-    link: "/adminDashboard",
-  },
-  {
-    name: "Members",
-    link: "/manageMembers",
-  },
-  {
-    name: "Payroll",
-    link: "/managePayroll",
-  },
-  {
-    name: "Trainers",
-    link: "/manageTrainers",
-  },
-  {
-    name: "Classes",
-    link: "/manageClasses",
-  },
-  {
-    name: "Equipment",
-    link: "/manageEquipment",
-  },
-  {
-    name: "Reports",
-    link: "/manageReports",
-  },
-  {
-    name: "Settings",
-    link: "/manageSettings",
-  }
+  { name: "Dashboard", link: "/adminDashboard", icon: "📊" },
+  { name: "Members", link: "/manageMembers", icon: "👥" },
+  { name: "Trainers", link: "/manageTrainers", icon: "🏋️" },
+  { name: "Classes", link: "/manageClasses", icon: "📅" },
+  { name: "Equipment", link: "/manageEquipment", icon: "⚙️" },
+  { name: "Payroll", link: "/managePayroll", icon: "💰" },
+  { name: "Reports", link: "/manageReports", icon: "📈" },
+  { name: "Settings", link: "/manageSettings", icon: "🔧" },
 ];

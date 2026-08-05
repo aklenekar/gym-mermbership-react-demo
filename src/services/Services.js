@@ -256,6 +256,15 @@ export const adminService = {
     });
     return handleResponse(response);
   },
+
+  fetchPricingPlans: async () => {
+    const token = getAuthToken();
+
+    const response = await fetch(`${API_BASE_URL}/membership/pricing`, {
+      method: "GET"
+    });
+    return handleResponse(response);
+  }
 };
 
 class AiAccessDeniedError extends Error {
