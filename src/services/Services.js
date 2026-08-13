@@ -716,3 +716,27 @@ export const chatService = {
     return handleResponse(response);
   },
 };
+
+export const notificationService = {
+  fetchNotifications: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/notifications`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  },
+
+  fetchNotificationCount: async () => {
+    const token = getAuthToken();
+    const response = await fetch(`${API_BASE_URL}/notifications/unread-count`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return handleResponse(response);
+  }
+} 
