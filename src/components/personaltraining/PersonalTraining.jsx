@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./PersonalTraining.css";
 import { adminService, personalTrainingUserService } from "../../services/Services";
@@ -11,7 +11,24 @@ export default function PersonalTraining() {
   const [mySessions, setMySessions] = useState([]);
   const [selectedTrainer, setSelectedTrainer] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [accessDenied, setAccessDenied] = useState(false);
+
+  const bookingDialogRef = useRef(null);
+  const upsellDialogRef = useRef(null);
+
+  const openBookingModal = (trainer) => {
+    setSelectedTrainer(trainer);
+    bookingDialogRef.current.showModal();
+  };
+  const closeBookingModal = () => {
+    bookingDialogRef.current.close();
+    setSelectedTrainer(null);
+  };
+
+  const openUpsellModal = () => {
+    closeBookingModal();
+    upsellDialogRef.current.showModal();
+  };
+  const closeUpsellModal = () => upsellDialogRef.current.close();
 
   function fetchTrainers() {
     adminService
@@ -35,7 +52,7 @@ export default function PersonalTraining() {
   }, []);
 
   const handleBooked = () => {
-    setSelectedTrainer(null);
+    closeBookingModal();
     fetchMySessions();
   };
 
@@ -85,7 +102,7 @@ export default function PersonalTraining() {
                   </div>
                   <button
                     className="btn-book-pt"
-                    onClick={() => setSelectedTrainer(trainer)}
+                    onClick={() => openBookingModal(trainer)}
                   >
                     View Availability
                   </button>
@@ -94,25 +111,20 @@ export default function PersonalTraining() {
             </div>
           )}
 
-          {selectedTrainer && (
-            <dialog open className="pt-booking-dialog">
+          <dialog ref={bookingDialogRef} className="pt-booking-dialog">
+            {selectedTrainer && (
               <TrainerBookingCard
                 trainer={selectedTrainer}
-                onClose={() => setSelectedTrainer(null)}
+                onClose={closeBookingModal}
                 onBooked={handleBooked}
-                onAccessDenied={() => {
-                  setSelectedTrainer(null);
-                  setAccessDenied(true);
-                }}
+                onAccessDenied={openUpsellModal}
               />
-            </dialog>
-          )}
+            )}
+          </dialog>
 
-          {accessDenied && (
-            <dialog open>
-              <UpgradeUpsellModal onClose={() => setAccessDenied(false)} />
-            </dialog>
-          )}
+          <dialog ref={upsellDialogRef}>
+            <UpgradeUpsellModal onClose={closeUpsellModal} />
+          </dialog>
         </div>
       </section>
     </>
