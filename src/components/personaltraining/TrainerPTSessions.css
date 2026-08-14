@@ -1,0 +1,73 @@
+.pt-sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pt-session-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--mid-gray);
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.pt-session-time {
+  font-family: var(--font-heading);
+  min-width: 180px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.pt-session-details {
+  flex: 1;
+}
+
+.pt-session-client {
+  font-weight: 700;
+  color: var(--white);
+}
+
+.pt-session-goal {
+  font-size: 0.85rem;
+  color: var(--light-gray);
+}
+
+.pt-session-status {
+  padding: 0.4rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pt-session-status.scheduled { background: var(--secondary); color: var(--dark); }
+.pt-session-status.completed { background: var(--success); color: var(--dark); }
+.pt-session-status.cancelled { background: var(--danger); color: var(--white); }
+
+.pt-session-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-notes, .btn-complete {
+  padding: 0.6rem 1.1rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-notes {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+}
+
+.btn-complete {
+  background: var(--primary);
+  color: var(--white);
+}

@@ -259,12 +259,12 @@ export const adminService = {
 
   fetchPricingPlans: async () => {
     const token = getAuthToken();
-    
+
     const response = await fetch(`${API_BASE_URL}/membership/pricing`, {
-      method: "GET"
+      method: "GET",
     });
     return handleResponse(response);
-  }
+  },
 };
 
 class AiAccessDeniedError extends Error {
@@ -578,25 +578,31 @@ export const payrollService = {
 
   fetchConfig: async (trainerId) => {
     const token = getAuthToken();
-    const response = await fetch(`${API_BASE_URL}/payroll/config/${trainerId}`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + token,
+    const response = await fetch(
+      `${API_BASE_URL}/payroll/config/${trainerId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
       },
-    });
+    );
     return handleResponse(response);
   },
 
   saveConfig: async (trainerId, configData) => {
     const token = getAuthToken();
-    const response = await fetch(`${API_BASE_URL}/payroll/config/${trainerId}`, {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${API_BASE_URL}/payroll/config/${trainerId}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(configData),
       },
-      body: JSON.stringify(configData),
-    });
+    );
     return handleResponse(response);
   },
 
@@ -738,5 +744,93 @@ export const notificationService = {
       },
     });
     return handleResponse(response);
-  }
-} 
+  },
+};
+
+export const personalTrainingService = {
+  fetchMySlots: () =>
+    fetch(`${API_BASE_URL}/personal-training/availability/me`, {
+      headers: { Authorization: "Bearer " + getAuthToken() },
+    }).then((r) => r.json()),
+
+  addSlot: (payload) =>
+    fetch(`${API_BASE_URL}/personal-training/availability`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getAuthToken(),
+      },
+      body: JSON.stringify(payload),
+    }).then((r) => r.json()),
+
+  deleteSlot: (slotId) =>
+    fetch(`${API_BASE_URL}/personal-training/availability/${slotId}`, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + getAuthToken() },
+    }),
+
+  fetchTrainerSessions: () =>
+    fetch(`${API_BASE_URL}/personal-training/sessions/trainer`, {
+      headers: { Authorization: "Bearer " + getAuthToken() },
+    }).then((r) => r.json()),
+
+  completeSession: (sessionId) =>
+    fetch(`${API_BASE_URL}/personal-training/sessions/${sessionId}/complete`, {
+      method: "PUT",
+      headers: { Authorization: "Bearer " + getAuthToken() },
+    }).then((r) => r.json()),
+
+  fetchSessionNotes: (sessionId) =>
+    fetch(`${API_BASE_URL}/personal-training/sessions/${sessionId}/notes`, {
+      headers: { Authorization: "Bearer " + getAuthToken() },
+    }).then((r) => r.json()),
+
+  addSessionNote: (sessionId, content) =>
+    fetch(`${API_BASE_URL}/personal-training/sessions/${sessionId}/notes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getAuthToken(),
+      },
+      body: JSON.stringify({ content }),
+    }).then((r) => r.json()),
+};
+
+export const personalTrainingUserService = {
+  fetchOpenSlots: (trainerId, date) =>
+    fetch(
+      `${API_BASE_URL}/personal-training/availability/${trainerId}/open-slots?date=${date}`,
+      {
+        headers: { Authorization: "Bearer " + getAuthToken() },
+      },
+    ).then((r) => r.json()),
+
+  bookSession: (payload) =>
+    fetch(`${API_BASE_URL}/personal-training/sessions/book`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getAuthToken(),
+      },
+      body: JSON.stringify(payload),
+    }).then(async (r) => {
+      if (!r.ok) {
+        const error = new Error("Booking failed");
+        error.info = await r.json().catch(() => null);
+        error.status = r.status;
+        throw error;
+      }
+      return r.json();
+    }),
+
+  cancelSession: (sessionId) =>
+    fetch(`${API_BASE_URL}/personal-training/sessions/${sessionId}`, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + getAuthToken() },
+    }),
+
+  fetchMySessions: () =>
+    fetch(`${API_BASE_URL}/personal-training/sessions/me`, {
+      headers: { Authorization: "Bearer " + getAuthToken() },
+    }).then((r) => r.json()),
+};

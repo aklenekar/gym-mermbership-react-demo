@@ -140,9 +140,13 @@ export default function TrainerDashboard() {
                     <span className="action-icon">👥</span>
                     <span>My Candidates</span>
                   </Link>
-                  <Link to="/messages" className="trainer-action-btn">
-                    <span className="action-icon">💬</span>
-                    <span>Messages</span>
+                  <Link to="/trainerAvailability" className="trainer-action-btn">
+                    <span className="action-icon">🗓️</span>
+                    <span>My Availability</span>
+                  </Link>
+                  <Link to="/trainerPTSessions" className="trainer-action-btn">
+                    <span className="action-icon">🤝</span>
+                    <span>PT Sessions</span>
                   </Link>
                   <Link to="/trainerPayroll" className="trainer-action-btn">
                     <span className="action-icon">💰</span>

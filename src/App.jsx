@@ -37,6 +37,9 @@ import ManagePayrollPage from "./routes/ManagePayrollPage.jsx";
 import TrainerPayrollPage from "./routes/TrainerPayrollPage.jsx";
 import ChatPage from "./routes/ChatPage.jsx";
 import AdminLayout from "./routes/AdminLayout.jsx";
+import TrainerAvailabilityPage from "./routes/TrainerAvailabilityPage.jsx";
+import TrainerPTSessionsPage from "./routes/TrainerPTSessionsPage.jsx";
+import PersonalTrainingPage from "./routes/PersonalTrainingPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +72,7 @@ const router = createBrowserRouter([
           { path: "/ai-coach/classes", element: <ClassRecommendationsPage /> },
           { path: "/ai-coach/workout", element: <WorkoutPlanPage /> },
           { path: "/ai-coach/nutrition", element: <NutritionPlanPage /> },
+          { path: "/personal-training", element: <PersonalTrainingPage /> },
         ],
       },
       {
@@ -95,6 +99,8 @@ const router = createBrowserRouter([
           { path: "/trainerClasses", element: <TrainerClassesPage /> },
           { path: "/trainerPayroll", element: <TrainerPayrollPage /> },
           { path: "/profile", element: <UserProfilePage /> },
+          { path: "/trainerAvailability", element: <TrainerAvailabilityPage /> },
+          { path: "/trainerPTSessions", element: <TrainerPTSessionsPage /> },
         ],
       },
       { path: "/features", element: <FeaturesPage /> },

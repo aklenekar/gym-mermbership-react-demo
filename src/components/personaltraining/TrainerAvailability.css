@@ -1,0 +1,71 @@
+.availability-form {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-end;
+  background: var(--mid-gray);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.availability-form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.availability-form .form-control {
+  padding: 0.75rem 1rem;
+  background: var(--dark-gray);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: var(--white);
+}
+
+.btn-add-slot {
+  padding: 0.85rem 1.5rem;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.availability-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.availability-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background: var(--mid-gray);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.slot-day {
+  font-weight: 700;
+  color: var(--primary);
+  min-width: 100px;
+}
+
+.slot-time {
+  flex: 1;
+  color: var(--white);
+}
+
+.btn-delete-slot {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: var(--danger);
+  border: 2px solid var(--danger);
+  border-radius: 6px;
+  cursor: pointer;
+}

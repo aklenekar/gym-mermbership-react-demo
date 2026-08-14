@@ -26,6 +26,10 @@ export default function QuickActionCard() {
             <span className="action-icon">🏆</span>
             <span className="action-text">View Progress</span>
           </Link>
+          <Link to="/personal-training" className="action-btn">
+            <span className="action-icon">🤝</span>
+            <span className="action-text">Personal Training</span>
+          </Link>
         </div>
       </div>
     </div>
