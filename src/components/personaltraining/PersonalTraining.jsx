@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import PageHeader from "../pageHeader/PageHeader";
 import "./PersonalTraining.css";
-import { adminService, personalTrainingUserService } from "../../services/Services";
+import {
+  adminService,
+  personalTrainingUserService,
+} from "../../services/Services";
 import TrainerBookingCard from "./TrainerBookingCard";
 import MySessionsList from "./MySessionsList";
 import UpgradeUpsellModal from "../AICoach/UpgradeUpsellModal";
@@ -69,7 +72,7 @@ export default function PersonalTraining() {
   const bookedThisMonth = mySessions.filter(
     (s) =>
       (s.status === "SCHEDULED" || s.status === "COMPLETED") &&
-      new Date(s.scheduledAt).getMonth() === new Date().getMonth()
+      new Date(s.scheduledAt).getMonth() === new Date().getMonth(),
   ).length;
 
   return (
@@ -95,7 +98,27 @@ export default function PersonalTraining() {
             <div className="trainers-booking-grid">
               {trainers.map((trainer) => (
                 <div key={trainer.id} className="pt-trainer-card">
-                  <div className="pt-trainer-avatar">{trainer.initials}</div>
+                  <div className="trainer-image-small">
+                    {trainer.imageUrl ? (
+                      <img
+                        src={trainer.imageUrl}
+                        alt={trainer.fullName}
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                          e.target.nextSibling.style.display = "flex";
+                        }}
+                      />
+                    ) : (
+                      <span
+                        className="trainer-initials"
+                        style={{
+                          display: trainer.imageUrl ? "none" : "flex",
+                        }}
+                      >
+                        {trainer.initials}
+                      </span>
+                    )}
+                  </div>
                   <div className="pt-trainer-info">
                     <h4>{trainer.fullName}</h4>
                     <p>{trainer.specialty}</p>
